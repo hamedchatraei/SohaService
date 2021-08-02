@@ -1,0 +1,72 @@
+﻿@using SohaService.Core.Convertor
+@using SohaService.Core.DTOs.User
+@using SohaService.Core.Services.Interfaces
+@using SohaService.DataLayer.Entities.User
+@inject IUserService _userService
+
+@{
+    SideBarUserPanelViewModel user = _userService.GetSideBarUserPanelData(User.Identity.Name);
+    User myUser = _userService.GetUserByUserName(user.UserName);
+    List<int> userRoles = _userService.GetUserRoles(myUser.UserId);
+}
+
+
+<!DOCTYPE html>
+<html class="no-js" dir="rtl" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="googlebot" content="index,follow">
+    <meta name="robots" content="noodp,noydir">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/style.css">
+    <script src="/UserPanel/js/jquery.min.js"></script>
+</head>
+<body>
+    <script src="/UserPanel/js/modernizr-custom.js"></script>
+
+
+    <div class="col-md-3 col-sm-4 col-xs-12">
+        <aside>
+
+            <div class="avatar-layer">
+                <div class="img-layer">
+                    <a href="" class="change-image"><i class="zmdi zmdi-edit"></i></a>
+                    <img src="/UserAvatar/@user.ImageName">
+                </div>
+                <div class="detail">
+                    <span> @user.UserName </span>
+                    <span> عضویت : @user.RegisterDate.ToShamsi() </span>
+                </div>
+            </div>
+
+            <section>
+                <header><h3> میز کار </h3></header>
+                <div class="inner">
+                    <ul>
+                        <li><a href="/ManageUser"> مشاهده حساب کابری </a></li>
+                        <li><a href="/EditProfile"> ویرایش حساب کابری </a></li>
+                        <li><a href="/ChangePassword"> تغییر رمز عبور </a></li>
+                        @foreach (var item in userRoles)
+                        {
+                            if (item == 1)
+                            {
+                                <li><a href="/AdminPanel"> پنل مدیریت </a></li>
+                            }
+                        }
+                        <li><a href="/Logout"> خروج از حساب کاربری </a></li>
+                    </ul>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+
+    <script src="/UserPanel/js/bootstrap.min.js"></script>
+    <script src="/UserPanel/js/script.js"></script>
+</body>
+</html>

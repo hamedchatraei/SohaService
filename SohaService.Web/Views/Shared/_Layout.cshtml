@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html class="no-js" dir="rtl" lang="fa-IR">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title> SohaService | @ViewData["Title"] </title>
+    <partial name="_MetaTags" />
+    <partial name="_Styles" />
+    <script src="/js/jquery.min.js"></script>
+</head>
+<body>
+    <script src="/js/modernizr-custom.js"></script>
+
+    <div class="landing-layer">
+        <div class="container">
+            <partial name="_MenuBar" />
+        </div>
+    </div>
+
+    <!-- main manu -->
+        <partial name="_MainMenu"/>
+<!-- /main manu -->
+        <!-- content -->
+        <main id="home-page">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </main>
+        <!-- /content -->
+        <!-- footer -->
+        <footer>
+            <div class="top-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <section class="list">
+                                <header><h4> دسترسی سریع</h4></header>
+                                <ul>
+                                    <li><a href="">مشاهده تمامی دوره ها</a></li>
+                                </ul>
+                            </section>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <section class="list">
+                                <header><h4> دسترسی سریع</h4></header>
+                                <ul>
+                                    <li><a href="">مشاهده تمامی دوره ها</a></li>
+                                </ul>
+                            </section>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <section class="list">
+                                <header><h4> دسترسی سریع</h4></header>
+                                <ul>
+                                    <li><a href="">مشاهده تمامی دوره ها</a></li>
+                                </ul>
+                            </section>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <section class="list">
+                                <header><h4> دسترسی سریع</h4></header>
+                                <ul>
+                                    <li><a href="">مشاهده تمامی دوره ها</a></li>
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-footer">
+                <div class="container">
+                    <p>
+                        برنامه نویس : حامد چترایی _ اینستاگرام : <a href="https://www.instagram.com/hamed_chatraei" target="_blank">hamed_chatraei</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        <!-- /footer -->
+
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/script.js"></script>
+    </body>
+</html>

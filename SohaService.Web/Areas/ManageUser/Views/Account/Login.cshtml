@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html class="no-js" dir="rtl" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="googlebot" content="index,follow">
+    <meta name="robots" content="noodp,noydir">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/style.css">
+    <script src="/UserPanel/js/jquery.min.js"></script>
+</head>
+<body>
+    <script src="/UserPanel/js/modernizr-custom.js"></script>
+
+    @model SohaService.Core.DTOs.User.LoginViewModel
+
+    @{
+        ViewData["Title"] = "  ورود به سایت";
+    }
+
+    <main class="client-page">
+        <div class="container-content">
+            @if (ViewBag.IsSuccess != null)
+            {
+                <div class="alert alert-success text-center">
+                    ورود با موفقیت انجام شد
+                </div>
+
+                <script>
+                    // Your delay in milliseconds
+                    var delay = 3000;
+                    setTimeout(function () { window.location = "/"; }, delay);
+                </script>
+            }
+
+            @if (ViewBag.EditProfile == true)
+            {
+                <div class="alert alert-warning">
+                    بدلیل ویرایش پروفایل و بارگزاری مجدد اطلاعات لطفا دوباره لاگین کنید
+                </div>
+            }
+            <header><h2> ورود به سایت </h2></header>
+
+            <div class="form-layer">
+
+                <form asp-action="Login" method="post">
+                    <input type="hidden" asp-for="ReturnUrl" />
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-account"></i></span>
+                        <input asp-for="UserName" type="text" class="form-control" placeholder="نام کاربری" aria-describedby="email-address">
+
+                    </div>
+                    <span asp-validation-for="UserName"></span>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="password"><i class="zmdi zmdi-lock"></i></span>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="رمز عبور " aria-describedby="password">
+
+                    </div>
+                    <span asp-validation-for="Password"></span>
+                    <div class="remember-me">
+                        <label><input asp-for="RememberMe" type="checkbox" name=""> مرا بخاطر بسپار </label>
+                    </div>
+
+                    <button class="btn btn-success"> ورود به سایت </button>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+
+    <script src="/UserPanel/js/bootstrap.min.js"></script>
+    <script src="/UserPanel/js/script.js"></script>
+</body>
+</html>

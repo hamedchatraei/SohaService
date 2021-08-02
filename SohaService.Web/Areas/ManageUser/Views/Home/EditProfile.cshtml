@@ -1,0 +1,102 @@
+﻿@model SohaService.Core.DTOs.User.EditProfileViewModel
+
+@{
+    ViewData["Title"] = "ویرایش حساب کاربری";
+}
+
+<!DOCTYPE html>
+<html class="no-js" dir="rtl" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="googlebot" content="index,follow">
+    <meta name="robots" content="noodp,noydir">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/UserPanel/css/style.css">
+    <script src="/UserPanel/js/jquery.min.js"></script>
+</head>
+<body>
+    <script src="/UserPanel/js/modernizr-custom.js"></script>
+
+
+    <main>
+        <div class="container">
+            <div class="user-account">
+                <div class="row">
+                    <partial name="_SideBar" />
+                    <div class="col-md-9 col-sm-8 col-xs-12">
+                        <section class="user-account-content">
+                            <header><h1> ویرایش حساب کاربری </h1></header>
+                            <div class="inner form-layer">
+                                <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+                                    @if (ViewBag.IsSuccess != null)
+                                    {
+                                        <div class="alert alert-success">
+                                            اطلاعات کاربری شما با موفقیت ویرایش شد
+                                        </div>
+                                    }
+
+                                    <input type="hidden" asp-for="AvatarName" />
+                                    <div class="row">
+                                        <div class="col-md-7 col-sm-8 col-xs-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
+                                                <input type="text" class="form-control" asp-for="UserName" placeholder="نام کاربری" aria-describedby="username">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-8 col-xs-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-email"></i></span>
+                                                <input type="text" class="form-control" asp-for="Mobile" placeholder="موبایل" aria-describedby="email-address">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-8 col-xs-12">
+                                            <p class="help-block">
+                                                آواتار
+                                            </p>
+                                            <input type="file" asp-for="UserAvatar" />
+                                            <p>لطفا فقط تصویر انتخاب کنید</p>
+                                            <img id="imgAvatar" class="thumbnail" src="/UserAvatar/@Model.AvatarName" style="max-width: 150px" />
+                                        </div>
+                                        <div class="col-md-7 col-sm-8 col-xs-12">
+                                            <button class="btn btn-success"> ویرایش اطلاعات </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/UserPanel/js/bootstrap.min.js"></script>
+    <script src="/UserPanel/js/script.js"></script>
+
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgAvatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#UserAvatar").change(function () {
+            readURL(this);
+        });
+    </script>
+</body>
+</html>
+
