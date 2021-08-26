@@ -1,0 +1,44 @@
+﻿@model SohaService.DataLayer.Entities.Unit.Unit
+
+@{
+    ViewData["Title"] = "افزودن قطعه جدید";
+}
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header>
+                            <h1> قطعه جدید </h1>
+                        </header>
+                        <div class="inner form-layer">
+                            <form asp-action="AddUnit" method="post">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">نام قطعه</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" asp-for="UnitName" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success"> ذخیره اطلاعات </button>
+                                        <a href="/Units" class="btn btn-outline btn-info"> انصراف </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

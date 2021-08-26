@@ -1,0 +1,57 @@
+﻿@using SohaService.Core.Convertor
+@model SohaService.DataLayer.Entities.Orders.SendToCompany
+
+@{
+    ViewData["Title"] = "ارسال به شرکت";
+}
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header>
+                            <h1> ارسال به شرکت </h1>
+                        </header>
+                        <div class="inner form-layer">
+                            <form asp-action="AddSendToCompany" method="post">
+                                <input type="hidden" asp-for="OrderId" value="@ViewData["OrderId"]"/>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تاریخ ارسال به شرکت</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
+                                            <input type="datetime" asp-for="SetDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">شرکت</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <select class="form-control" asp-for="CompanyId" asp-items="@(ViewData["company"] as SelectList)"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success" id="btnSave"> ذخیره اطلاعات </button>
+                                        <a href="/Orders" class="btn btn-outline btn-info"> انصراف </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

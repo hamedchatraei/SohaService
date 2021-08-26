@@ -1,0 +1,80 @@
+﻿@using SohaService.Core.Convertor
+@using SohaService.Core.DTOs.Order
+@using SohaService.Core.Services.Interfaces
+@model SohaService.DataLayer.Entities.Orders.SendToCompany
+@inject IOrderService _orderService;
+
+@{
+    ViewData["Title"] = "ویرایش ارسال به شرکت";
+
+    InformationSendToCompanyViewModel sendToCompanyView = _orderService.ShowInformationSendToCompanyById(@Model.SendToCompanyId);
+}
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <button class="header">صفحه ی سفارش @sendToCompanyView.CustomerNameFamily ارسال شده به شرکت @sendToCompanyView.CompanyName در تاریخ @sendToCompanyView.SetDate.ToShamsi()</button>
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <aside>
+                        <section>
+                            <div class="inner">
+                                <ul>
+                                    <li><button class="button-a"><a href="/InformationSendToCompany/@Model.SendToCompanyId"> مشخصات </a></button></li>
+                                    @if (Model.IsDelete == false)
+                                    {
+                                        <li><button class="button-a button-a-Active"><a href="/EditSendToCompany/@Model.SendToCompanyId"> ویرایش </a></button></li>
+                                        <li><button class="button-a"><a href="/DeleteSendToCompany/@Model.SendToCompanyId"> حذف </a></button></li>
+                                    }
+                                    <li><button class="button-a"> گزارش </button></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header>
+                            <h1>ویرایش سفارش</h1>
+                        </header>
+                        <div class="inner form-layer">
+                            <form asp-action="EditSendToCompany" method="post">
+                                <input type="hidden" asp-for="SendToCompanyId" />
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">شرکت</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <select class="form-control" asp-for="CompanyId" asp-items="@(ViewData["company"] as SelectList)"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تاریخ ارسال به شرکت</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
+                                            <input type="datetime" asp-for="SetDate" value="@Model.SetDate.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success" id="btnSave"> ویرایش اطلاعات </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+

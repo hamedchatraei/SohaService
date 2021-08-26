@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SohaService.Core.Convertor;
 using SohaService.Core.Services.Interfaces;
 using SohaService.Core.Services.Services;
 using SohaService.DataLayer.Context;
@@ -28,6 +30,10 @@ namespace SohaService.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            CultureInfo.DefaultThreadCurrentCulture
+                = CultureInfo.DefaultThreadCurrentUICulture
+                    = PersianDateExtensionMethods.GetPersianCulture();
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddRazorPages();
 
@@ -67,6 +73,7 @@ namespace SohaService.Web
             services.AddTransient<IExpertService, ExpertService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IUnitService, UnitService>();
+            services.AddTransient<IPayService, PayService>();
 
             #endregion
 

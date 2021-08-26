@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SohaService.Core.DTOs.Company;
 using SohaService.Core.Services.Interfaces;
@@ -22,8 +23,8 @@ namespace SohaService.Core.Services.Services
 
         public int AddCompany(Company company)
         {
-            _context.Companies.AddAsync(company);
-            _context.SaveChangesAsync();
+            _context.Companies.Add(company);
+            _context.SaveChanges();
             return company.CompanyId;
         }
 
@@ -46,7 +47,7 @@ namespace SohaService.Core.Services.Services
 
         public CompanyViewModel GetCompanies(int pageId = 1, string filterName = "", string filterPhone = "")
         {
-            IQueryable<Company> result = _context.Companies;
+            IQueryable<Company> result = _context.Companies.Where(c=>c.IsDelete==false);
 
             if (!string.IsNullOrEmpty(filterName))
             {
@@ -87,7 +88,7 @@ namespace SohaService.Core.Services.Services
 
         public CompanyViewModel GetDeletedCompanies(int pageId = 1, string filterName = "", string filterPhone = "")
         {
-            IQueryable<Company> result = _context.Companies.IgnoreQueryFilters().Where(a => a.IsDelete);
+            IQueryable<Company> result = _context.Companies.Where(c=>c.IsDelete);
 
             if (!string.IsNullOrEmpty(filterName))
             {
@@ -113,7 +114,17 @@ namespace SohaService.Core.Services.Services
         public void UpdateCompany(Company company)
         {
             _context.Companies.Update(company);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
+        }
+
+        public List<SelectListItem> GetCompanyListItem()
+        {
+            return _context.Companies.Where(u => u.IsDelete == false).Select(s => new SelectListItem()
+            {
+                Text = s.CompanyName,
+                Value = s.CompanyId.ToString()
+
+            }).ToList();
         }
     }
 }

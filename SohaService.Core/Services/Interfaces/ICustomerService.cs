@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SohaService.Core.DTOs.Customer;
 using SohaService.DataLayer.Entities.Customer;
 
@@ -18,5 +19,6 @@ namespace SohaService.Core.Services.Interfaces
         Customer GetDataForEditCustomer(int customerId);
         Customer GetCustomerById(int customerId);
         void UpdateCustomer(Customer customer);
+        List<SelectListItem> GetCustomerListItem();
     }
 }

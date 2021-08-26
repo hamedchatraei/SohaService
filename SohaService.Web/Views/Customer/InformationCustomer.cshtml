@@ -1,0 +1,101 @@
+﻿@model SohaService.DataLayer.Entities.Customer.Customer
+
+@{
+    ViewData["Title"] = "مشخصات مشتری";
+}
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <button class="header">صفحه ی @Model.CustomerName @Model.CustomerFamily</button>
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <aside>
+                        <section>
+                            <div class="inner">
+                                <ul>
+                                    <li><button class="button-a button-a-Active"><a href="/InformationCustomer/@Model.CustomerId"> مشخصات </a></button></li>
+                                    @if (Model.IsDelete == false)
+                                    {
+                                        <li><button class="button-a"><a href="/EditCustomer/@Model.CustomerId"> ویرایش </a></button></li>
+                                        <li><button class="button-a"><a href="/DeleteCustomer/@Model.CustomerId"> حذف </a></button></li>
+                                    }
+                                    <li><button class="button-a"><a href="/CustomersOrder/@Model.CustomerId"> سفارشات </a></button></li>
+                                    <li><button class="button-a"><a href="/CustomersPay/@Model.CustomerId"> پرداخت ها </a></button></li>
+                                    <li><button class="button-a"> گزارش </button></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header>
+                            <h1> اطلاعات کامل </h1>
+                        </header>
+                        <div class="inner form-layer">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">نام</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <input type="text" class="form-control" asp-for="CustomerName" disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">نام خانوادگی</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <input type="text" class="form-control" asp-for="CustomerFamily" disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">موبایل</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <input type="text" class="form-control" asp-for="CustomerMobile" disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">آدرس</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <input type="text" class="form-control" asp-for="CustomerAddress" disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">کد مشتری</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <input type="text" class="form-control" asp-for="CustomerUNumber" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

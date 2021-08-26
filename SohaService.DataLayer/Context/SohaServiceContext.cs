@@ -7,6 +7,7 @@ using SohaService.DataLayer.Entities.Company;
 using SohaService.DataLayer.Entities.Customer;
 using SohaService.DataLayer.Entities.Expert;
 using SohaService.DataLayer.Entities.Orders;
+using SohaService.DataLayer.Entities.Pay;
 using SohaService.DataLayer.Entities.Permission;
 using SohaService.DataLayer.Entities.Unit;
 using SohaService.DataLayer.Entities.User;
@@ -68,6 +69,12 @@ namespace SohaService.DataLayer.Context
 
         #endregion
 
+        #region Pay
+
+        public DbSet<Pay> Pay { get; set; }
+
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var cascadeFKs = modelBuilder.Model.GetEntityTypes()
@@ -76,14 +83,6 @@ namespace SohaService.DataLayer.Context
 
             foreach (var fk in cascadeFKs)
                 fk.DeleteBehavior = DeleteBehavior.Restrict;
-
-            modelBuilder.Entity<Company>().HasQueryFilter(s => !s.IsDelete);
-            modelBuilder.Entity<Customer>().HasQueryFilter(s => !s.IsDelete);
-            modelBuilder.Entity<Expert>().HasQueryFilter(s => !s.IsDelete);
-            modelBuilder.Entity<Order>().HasQueryFilter(s => !s.IsDelete);
-            modelBuilder.Entity<SendToCompany>().HasQueryFilter(s => !s.IsDelete);
-            modelBuilder.Entity<Unit>().HasQueryFilter(s => !s.IsDelete);
-            modelBuilder.Entity<UnitStatus>().HasQueryFilter(s => !s.IsDelete);
 
 
             base.OnModelCreating(modelBuilder);

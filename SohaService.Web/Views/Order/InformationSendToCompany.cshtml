@@ -1,0 +1,152 @@
+﻿@using SohaService.Core.Convertor
+@model SohaService.Core.DTOs.Order.InformationSendToCompanyViewModel
+
+@{
+    ViewData["Title"] = "مشخصات سفارش";
+}
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            @if (Model.OrderLevelId == 2)
+            {
+                <button class="header">صفحه ی سفارش @Model.CustomerNameFamily ارسال شده به شرکت @Model.CompanyName در تاریخ @Model.SetDate.ToShamsi()</button>
+            }
+            else if (Model.OrderLevelId == 3)
+            {
+                <button class="header">صفحه ی سفارش @Model.CustomerNameFamily برگشت شده از شرکت @Model.CompanyName در تاریخ @Model.ReturnDate.ToShamsi()</button>
+            }
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <aside>
+                        <section>
+                            <div class="inner">
+                                <ul>
+                                    <li><button class="button-a button-a-Active"><a href="/InformationSendToCompany/@Model.SendToCompanyId"> مشخصات </a></button></li>
+                                    @if (Model.IsDelete == false)
+                                    {
+                                        @if (Model.OrderLevelId == 2)
+                                        {
+                                            <li><button class="button-a"><a href="/EditSendToCompany/@Model.SendToCompanyId"> ویرایش </a></button></li>
+                                        }
+                                        else if (Model.OrderLevelId == 3)
+                                        {
+                                            <li><button class="button-a"><a href="/EditBackFromCompany/@Model.SendToCompanyId"> ویرایش </a></button></li>
+                                        }
+                                        @if (Model.OrderLevelId == 2)
+                                        {
+                                            <li><button class="button-a"><a href="/DeleteSendToCompany/@Model.SendToCompanyId"> حذف </a></button></li>
+                                        }
+                                        else if (Model.OrderLevelId == 3)
+                                        {
+                                            <li><button class="button-a"><a href="/DeleteBackFromCompany/@Model.SendToCompanyId"> حذف </a></button></li>
+                                        }
+                                    }
+                                    <li><button class="button-a"> گزارش </button></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header>
+                            <h1> اطلاعات کامل </h1>
+                        </header>
+                        <div class="inner form-layer">
+                            <div class="row">
+                                @if (Model.OrderLevelId == 2)
+                                {
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تاریخ ارسال به شرکت</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.SetDate.ToShamsi()" disabled="disabled">
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.OrderLevelId == 3)
+                                {
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تاریخ برگشت از شرکت</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.ReturnDate.ToShamsi()" disabled="disabled">
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">وضعیت سفارش</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <input type="text" class="form-control" asp-for="OrderLevelTitle" disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">شرکت</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <input type="text" class="form-control" value="@Model.CompanyName" disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">قطعه</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <input type="text" class="form-control" value="@Model.UnitName" disabled="disabled">
+                                    </div>
+                                </div>
+                                @if (Model.OrderLevelId == 3)
+                                {
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">وضعیت قطعه</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.UnitStatusTitle" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">زمان نصب مجدد</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.AssemblingDate.ToShamsi()" disabled="disabled">
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

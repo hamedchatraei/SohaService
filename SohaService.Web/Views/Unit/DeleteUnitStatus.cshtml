@@ -1,0 +1,50 @@
+﻿@model SohaService.DataLayer.Entities.Unit.UnitStatus
+
+@{
+    ViewData["Title"] = "حذف وضعیت";
+}
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <button class="header">صفحه ی @Model.UnitStatusTitle</button>
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <aside>
+                        <section>
+                            <div class="inner">
+                                <ul>
+                                    <li><button class="button-a"><a href="/InformationUnitStatus/@Model.UnitStatusId"> مشخصات </a></button></li>
+                                    @if (Model.IsDelete == false)
+                                    {
+                                        <li><button class="button-a"><a href="/EditUnitStatus/@Model.UnitStatusId"> ویرایش </a></button></li>
+                                        <li><button class="button-a button-a-Active"><a href="/DeleteUnitStatus/@Model.UnitStatusId"> حذف </a></button></li>
+                                    }
+                                    <li><button class="button-a"> گزارش </button></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header>
+                            <h1>حذف وضعیت</h1>
+                        </header>
+                        <div class="container alert alert-danger text-center" style="width: 50%; margin:10px 25% 10px">
+
+                            <form method="post">
+                                <input type="hidden" asp-for="UnitStatusId" />
+                                <h2>آیا از حذف @Model.UnitStatusTitle مطمئن هستید ؟! </h2>
+                                <p style="margin:10px 0 0">
+                                    <input type="submit" value=" حذف کن " class="btn btn-outline btn-danger" />
+                                </p>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

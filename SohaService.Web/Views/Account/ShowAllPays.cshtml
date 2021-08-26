@@ -1,0 +1,166 @@
+﻿@using SohaService.Core.Convertor
+@model SohaService.Core.DTOs.Pay.PayViewModel
+
+@{
+    ViewData["Title"] = "همه ی پرداخت ها";
+}
+
+<div class="row">
+    <form>
+        <div class="col-sm-5 col-md-5">
+            <input type="datetime" id="pcal1" name="fromDate" class="form-control" style="text-align: right" placeholder="از تاریخ ..." autocomplete="off">
+        </div>
+        <div class="col-sm-5 col-md-5">
+            <input type="datetime" id="pcal2" name="toDate" class="form-control" style="text-align: right" placeholder="تا تاریخ ..." autocomplete="off">
+        </div>
+        <div class="col-sm-5 col-md-5" style="margin: 10px 0 0">
+            <select id="sCustomer" class="form-control" name="customerId" asp-items="@(ViewData["customers"] as SelectList)"></select>
+        </div>
+        <div class="col-sm-2 col-md-2" style="margin: 10px 0 0">
+            <a id="btnEmpty" class="btn btn-default btn-sm" href="/DoneOrders">برو به امروز</a>
+        </div>
+        <div class="col-sm-2 col-md-2" style="margin: 10px 0 0">
+            <a id="btnRefresh" class="btn btn-default btn-sm" href="/DoneOrders">بازنشانی</a>
+        </div>
+    </form>
+</div>
+
+<table class="table table-bordered table-condensed table-hover table-responsive table-striped text-center">
+    <thead>
+        <tr class="success">
+            <th class="text-center">مشتری</th>
+            <th class="text-center">موبایل</th>
+            <th class="text-center">آدرس</th>
+            <th class="text-center">قطعه</th>
+            <th class="text-center">شرح خرابی</th>
+            <th class="text-center">تاریخ انجام شدن</th>
+            <th class="text-center">هزینه ی برآورد شده</th>
+            <th class="text-center">مبلغ پرداختی</th>
+            <th class="text-center">تاریخ پرداخت</th>
+            <th class="text-center">دستورات</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.InformationPayViewModels)
+
+        {
+        <tr>
+            <td>@item.CustomerNameFamily</td>
+            <td>@item.CustomerMobile</td>
+            <td>@item.CustomerAddress</td>
+            <td>@item.UnitName</td>
+            <td>@item.DamageDescription</td>
+            <td>@item.OrderChangeLevelDate.ToShamsi()</td>
+            <td>@item.EstimatedAmount.ToRial()</td>
+            <td>@item.Amount.ToRial()</td>
+            <td>@item.PayDate.ToShamsi()</td>
+            <td>
+                <a href="/CustomersPay/@item.CustomerId" class="btn btn-primary btn-sm">
+                    صفحه پرداخت های مشتری
+                </a>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+            <ul class="pagination">
+
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
+                        <a href="/ShowAllPays?PageId=@i">@i</a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        function soha_ajax(rd = "") {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ShowAllPays")",
+                dataType: "text",
+                data:
+                {
+                    filterCustomerId : $('#sCustomer').val(),
+                    filterPayDate: rd,
+                    fromDate: $('#pcal1').val(),
+                    toDate: $('#pcal2').val(),
+                },
+                success: function (msg) {
+                    var q = $(msg).find('tbody');
+                    $('tbody').replaceWith(q);
+                    console.log(q);
+                },
+                error: function (req, status, error) {
+                    console.log(msg);
+                }
+            });
+        }
+
+        $('.form-control').on('input',function() {
+
+            soha_ajax();
+
+        });
+
+
+
+        $('body').on('click','a.weekday',function() {
+
+            soha_ajax();
+
+        });
+
+        $("#btnEmpty").click(function (e) {
+
+            e.preventDefault();
+
+            $('.form-control').val('');
+            $(".button-dayOfweek").removeClass("button-dayOfweek-active");
+            $(".today").addClass("button-dayOfweek-active");
+            soha_ajax('today');
+
+        });
+
+        $("#btnRefresh").click(function (e) {
+
+            e.preventDefault();
+
+            $('.form-control').val('');
+            $(".button-dayOfweek").removeClass("button-dayOfweek-active");
+            $(".today").addClass("button-dayOfweek-active");
+            soha_ajax();
+
+        });
+
+        $(".button-dayOfweek").click(function() {
+
+            $(".button-dayOfweek").removeClass("button-dayOfweek-active");
+            $(this).addClass("button-dayOfweek-active");
+            var date = $(this).find('.ready-date').text();
+            console.log(date);
+            soha_ajax(date);
+
+        });
+
+
+    });
+
+
+</script>
+

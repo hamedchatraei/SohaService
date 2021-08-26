@@ -31,7 +31,10 @@ namespace SohaService.DataLayer.Entities.Customer
         [MaxLength(500, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
         public string CustomerAddress { get; set; }
 
-        public int CustomerUNumber { get; set; }
+        [Display(Name = "آدرس")]
+        [MaxLength(20, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
+        public string CustomerUNumber { get; set; }
+
         public bool IsDelete { get; set; }
 
         #region Relations

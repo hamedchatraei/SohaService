@@ -1,0 +1,72 @@
+﻿@using SohaService.Core.Convertor
+@using SohaService.Core.Services.Interfaces
+@model SohaService.DataLayer.Entities.Orders.SendToCompany
+
+@{
+    ViewData["Title"] = "برگشت از شرکت";
+}
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header>
+                            <h1> برگشت از شرکت </h1>
+                        </header>
+                        <div class="inner form-layer">
+                            <form asp-action="SetBackFromCompany" method="post">
+                                <input type="hidden" asp-for="SendToCompanyId"/>
+                                <input type="hidden" asp-for="OrderId"/>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تاریخ برگشت از شرکت</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
+                                            <input type="datetime" asp-for="ReturnDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">وضعیت قطعه</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <select class="form-control" asp-for="UnitStatusId" asp-items="@(ViewData["unitStatus"] as SelectList)"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تاریخ نصب مجدد</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
+                                            <input type="datetime" asp-for="AssemblingDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success" id="btnSave"> ذخیره اطلاعات </button>
+                                        <a href="/SendToCompanies" class="btn btn-outline btn-info"> انصراف </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+

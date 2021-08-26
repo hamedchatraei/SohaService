@@ -30,6 +30,7 @@ namespace SohaService.DataLayer.Entities.Orders
         public DateTime AssemblingDate { get; set; }
         public bool IsDelete { get; set; }
         public bool IsSend { get; set; }
+        public bool IsReturn { get; set; }
 
         #region Relations
 

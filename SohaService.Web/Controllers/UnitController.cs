@@ -160,9 +160,16 @@ namespace SohaService.Web.Controllers
         [Route("InformationUnitStatus/{id}")]
         public IActionResult InformationUnitStatus(int id)
         {
-            UnitStatus unitStatus = _unitService.GetUnitStatusById(id);
+            if (id!=1)
+            {
+                UnitStatus unitStatus = _unitService.GetUnitStatusById(id);
 
-            return View(unitStatus);
+                return View(unitStatus);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         #endregion

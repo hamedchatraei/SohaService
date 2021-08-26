@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SohaService.Core.DTOs.Company;
 using SohaService.DataLayer.Entities.Company;
 
@@ -18,5 +19,6 @@ namespace SohaService.Core.Services.Interfaces
         Company GetDataFoeEditCompany(int companyId);
         Company GetCompanyById(int companyId);
         void UpdateCompany(Company company);
+        List<SelectListItem> GetCompanyListItem();
     }
 }

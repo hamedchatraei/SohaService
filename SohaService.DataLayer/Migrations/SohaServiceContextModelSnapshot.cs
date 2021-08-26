@@ -76,8 +76,9 @@ namespace SohaService.DataLayer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("CustomerUNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerUNumber")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
@@ -209,6 +210,9 @@ namespace SohaService.DataLayer.Migrations
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsReturn")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsSend")
                         .HasColumnType("bit");
 
@@ -239,6 +243,29 @@ namespace SohaService.DataLayer.Migrations
                     b.HasIndex("UnitStatusId");
 
                     b.ToTable("SendToCompanies");
+                });
+
+            modelBuilder.Entity("SohaService.DataLayer.Entities.Pay.Pay", b =>
+                {
+                    b.Property<int>("PayId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PayDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PayId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Pay");
                 });
 
             modelBuilder.Entity("SohaService.DataLayer.Entities.Permission.Permission", b =>
@@ -477,6 +504,17 @@ namespace SohaService.DataLayer.Migrations
                     b.Navigation("UnitStatus");
                 });
 
+            modelBuilder.Entity("SohaService.DataLayer.Entities.Pay.Pay", b =>
+                {
+                    b.HasOne("SohaService.DataLayer.Entities.Orders.Order", "Order")
+                        .WithMany("Pays")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("SohaService.DataLayer.Entities.Permission.Permission", b =>
                 {
                     b.HasOne("SohaService.DataLayer.Entities.Permission.Permission", null)
@@ -539,6 +577,8 @@ namespace SohaService.DataLayer.Migrations
 
             modelBuilder.Entity("SohaService.DataLayer.Entities.Orders.Order", b =>
                 {
+                    b.Navigation("Pays");
+
                     b.Navigation("SendToCompany");
                 });
 

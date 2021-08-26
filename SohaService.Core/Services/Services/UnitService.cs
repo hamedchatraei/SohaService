@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SohaService.Core.DTOs.Unit;
 using SohaService.Core.Services.Interfaces;
@@ -25,8 +26,8 @@ namespace SohaService.Core.Services.Services
 
         public int AddUnit(Unit unit)
         {
-            _context.Units.AddAsync(unit);
-            _context.SaveChangesAsync();
+            _context.Units.Add(unit);
+            _context.SaveChanges();
             return unit.UnitId;
         }
 
@@ -55,7 +56,7 @@ namespace SohaService.Core.Services.Services
 
         public UnitViewModel GetDeletedUnit(int pageId = 1, string filterName = "")
         {
-            IQueryable<Unit> result = _context.Units.IgnoreQueryFilters().Where(e => e.IsDelete);
+            IQueryable<Unit> result = _context.Units.Where(u=>u.IsDelete);
 
             if (!string.IsNullOrEmpty(filterName))
             {
@@ -75,7 +76,7 @@ namespace SohaService.Core.Services.Services
 
         public UnitViewModel GetUnit(int pageId = 1, string filterName = "")
         {
-            IQueryable<Unit> result = _context.Units;
+            IQueryable<Unit> result = _context.Units.Where(u=>u.IsDelete==false);
 
             if (!string.IsNullOrEmpty(filterName))
             {
@@ -101,7 +102,17 @@ namespace SohaService.Core.Services.Services
         public void UpdateUnit(Unit unit)
         {
             _context.Units.Update(unit);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
+        }
+
+        public List<SelectListItem> GetUnitListItem()
+        {
+            return _context.Units.Where(u=>u.IsDelete==false).Select(s => new SelectListItem()
+            {
+                Text = s.UnitName,
+                Value = s.UnitId.ToString()
+
+            }).ToList();
         }
 
         #endregion
@@ -110,8 +121,8 @@ namespace SohaService.Core.Services.Services
 
         public int AddUnitStatus(UnitStatus unit)
         {
-            _context.UnitStatus.AddAsync(unit);
-            _context.SaveChangesAsync();
+            _context.UnitStatus.Add(unit);
+            _context.SaveChanges();
             return unit.UnitStatusId;
         }
 
@@ -161,7 +172,7 @@ namespace SohaService.Core.Services.Services
 
         public UnitStatusViewModel GetUnitStatus(int pageId = 1, string filterTitle = "")
         {
-            IQueryable<UnitStatus> result = _context.UnitStatus;
+            IQueryable<UnitStatus> result = _context.UnitStatus.Where(u=>u.UnitStatusId!=1);
 
             if (!string.IsNullOrEmpty(filterTitle))
             {
@@ -187,7 +198,17 @@ namespace SohaService.Core.Services.Services
         public void UpdateUnitStatus(UnitStatus unit)
         {
             _context.UnitStatus.Update(unit);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
+        }
+
+        public List<SelectListItem> GetUnitStatusListItem()
+        {
+            return _context.UnitStatus.Where(u => u.IsDelete == false && u.UnitStatusId != 1).Select(s => new SelectListItem()
+            {
+                Text = s.UnitStatusTitle,
+                Value = s.UnitStatusId.ToString()
+
+            }).ToList();
         }
 
         #endregion

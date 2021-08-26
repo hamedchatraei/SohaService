@@ -47,9 +47,16 @@ namespace SohaService.Web.Controllers
         [Route("InformationExpert/{id}")]
         public IActionResult InformationExpert(int id)
         {
-            Expert expert = _expertService.GetExpertById(id);
+            if (id!=3)
+            {
+                Expert expert = _expertService.GetExpertById(id);
 
-            return View(expert);
+                return View(expert);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         #endregion

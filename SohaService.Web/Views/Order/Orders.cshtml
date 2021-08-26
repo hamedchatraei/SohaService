@@ -1,0 +1,304 @@
+﻿@using System.Globalization
+@using SohaService.Core.Convertor
+@using SohaService.Core.DTOs.Order
+@using SohaService.Core.Services.Interfaces
+@model SohaService.Core.DTOs.Order.OrderViewModel
+
+@{
+    ViewData["Title"] = "سفارشات";
+
+    PersianCalendar pc = new PersianCalendar();
+
+    DayOfWeek nowDay = pc.GetDayOfWeek(DateTime.Now);
+    DateTime nowTime = DateTime.Now;
+    bool isSa = false;
+    bool isSu = false;
+    bool isMo = false;
+    bool isTu = false;
+    bool isWe = false;
+    bool isTh = false;
+    bool isFri = false;
+
+    string sa = "";
+    string su = "";
+    string mo = "";
+    string tu = "";
+    string we = "";
+    string th = "";
+    string fri = "";
+
+    switch (nowDay)
+    {
+        case DayOfWeek.Saturday:
+            {
+                sa = nowTime.ToShamsi();
+                su = nowTime.AddDays(1).ToShamsi();
+                mo = nowTime.AddDays(2).ToShamsi();
+                tu = nowTime.AddDays(3).ToShamsi();
+                we = nowTime.AddDays(4).ToShamsi();
+                th = nowTime.AddDays(5).ToShamsi();
+                fri = nowTime.AddDays(6).ToShamsi();
+                isSa = true;
+                break;
+            }
+        case DayOfWeek.Sunday:
+            {
+                sa = nowTime.AddDays(-1).ToShamsi();
+                su = nowTime.ToShamsi();
+                mo = nowTime.AddDays(1).ToShamsi();
+                tu = nowTime.AddDays(2).ToShamsi();
+                we = nowTime.AddDays(3).ToShamsi();
+                th = nowTime.AddDays(4).ToShamsi();
+                fri = nowTime.AddDays(5).ToShamsi();
+                isSu = true;
+                break;
+            }
+        case DayOfWeek.Monday:
+            {
+                sa = nowTime.AddDays(-2).ToShamsi();
+                su = nowTime.AddDays(-1).ToShamsi();
+                mo = nowTime.ToShamsi();
+                tu = nowTime.AddDays(1).ToShamsi();
+                we = nowTime.AddDays(2).ToShamsi();
+                th = nowTime.AddDays(3).ToShamsi();
+                fri = nowTime.AddDays(4).ToShamsi();
+                isMo = true;
+                break;
+            }
+        case DayOfWeek.Tuesday:
+            {
+                sa = nowTime.AddDays(-3).ToShamsi();
+                su = nowTime.AddDays(-2).ToShamsi();
+                mo = nowTime.AddDays(-1).ToShamsi();
+                tu = nowTime.ToShamsi();
+                we = nowTime.AddDays(1).ToShamsi();
+                th = nowTime.AddDays(2).ToShamsi();
+                fri = nowTime.AddDays(3).ToShamsi();
+                isTu = true;
+                break;
+            }
+        case DayOfWeek.Wednesday:
+            {
+                sa = nowTime.AddDays(-4).ToShamsi();
+                su = nowTime.AddDays(-3).ToShamsi();
+                mo = nowTime.AddDays(-2).ToShamsi();
+                tu = nowTime.AddDays(-1).ToShamsi();
+                we = nowTime.ToShamsi();
+                th = nowTime.AddDays(1).ToShamsi();
+                fri = nowTime.AddDays(2).ToShamsi();
+                isWe = true;
+                break;
+            }
+        case DayOfWeek.Thursday:
+            {
+                sa = nowTime.AddDays(-5).ToShamsi();
+                su = nowTime.AddDays(-4).ToShamsi();
+                mo = nowTime.AddDays(-3).ToShamsi();
+                tu = nowTime.AddDays(-2).ToShamsi();
+                we = nowTime.AddDays(-1).ToShamsi();
+                th = nowTime.ToShamsi();
+                fri = nowTime.AddDays(1).ToShamsi();
+                isTh = true;
+                break;
+            }
+        case DayOfWeek.Friday:
+            {
+                sa = nowTime.AddDays(-6).ToShamsi();
+                su = nowTime.AddDays(-5).ToShamsi();
+                mo = nowTime.AddDays(-4).ToShamsi();
+                tu = nowTime.AddDays(-3).ToShamsi();
+                we = nowTime.AddDays(-2).ToShamsi();
+                th = nowTime.AddDays(-1).ToShamsi();
+                fri = nowTime.ToShamsi();
+                isFri = true;
+                break;
+            }
+    }
+    string today = "button-dayOfweek-active today";
+   
+}
+
+<div>
+    <button class="button-dayOfweek @if(isSa) {@today;}">شنبه <br />    <span class="ready-date"> @sa </span> </button>
+    <button class="button-dayOfweek @if(isSu) {@today;}">یکشنبه <br />  <span class="ready-date"> @su </span> </button>
+    <button class="button-dayOfweek @if(isMo) {@today;}">دوشنبه <br />  <span class="ready-date"> @mo </span> </button>
+    <button class="button-dayOfweek @if(isTu) {@today;}">سه شنبه <br /> <span class="ready-date">  @tu</span>  </button>
+    <button class="button-dayOfweek @if(isWe) {@today;}">چهارشنبه <br /><span class="ready-date"> @we </span> </button>
+    <button class="button-dayOfweek @if(isTh) {@today;}">پنجشنبه <br /> <span class="ready-date">  @th</span> </button>
+    <button class="button-dayOfweek @if(isFri){@today;}">جمعه <br />    <span class="ready-date"> @fri</span> </button>
+</div>
+
+<div class="row">
+    <form>
+        <div class="col-sm-5 col-md-5">
+            <input id="txtDmg" type="text" name="filterDamageDescription" class="form-control" placeholder="شرح خرابی" />
+        </div>
+        <div class="col-sm-5 col-md-5" style="margin: 10px 0 0">
+            <select id="sCustomer" class="form-control" name="customerId" asp-items="@(ViewData["customers"] as SelectList)"></select>
+        </div>
+        <div class="col-sm-5 col-md-5" style="margin: 10px 0 0">
+            <select id="sUnit" class="form-control" name="unitId" asp-items="@(ViewData["units"] as SelectList)"></select>
+        </div>
+        <div class="col-sm-5 col-md-5">
+            <input type="datetime" id="pcal1" class="form-control" style="text-align: right" placeholder="انتخاب تاریخ ..." autocomplete="off">
+        </div>
+        <div class="col-sm-2 col-md-2" style="margin: 10px 0 0">
+            <a id="btnEmpty" class="btn btn-default btn-sm" href="/Orders">پیش فرض امروز</a>
+        </div>
+    </form>
+</div>
+<div class="col-md-12" style="margin: 10px 0;">
+
+    <a href="/AddOrder" class="btn btn-outline btn-success">افزودن سفارش جدید</a>
+
+</div>
+
+<div class="main-content">
+
+    <table class="table table-bordered table-condensed table-hover table-responsive table-striped text-center">
+        <thead>
+            <tr class="success">
+                <th class="text-center">مشتری</th>
+                <th class="text-center">موبایل</th>
+                <th class="text-center">آدرس</th>
+                <th class="text-center">قطعه</th>
+                <th class="text-center">شرح خرابی</th>
+                <th class="text-center">مرحله سفارش</th>
+                <th class="text-center">دستورات</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        @foreach (var item in Model.InformationOrder)
+
+        {
+            <tr>
+                <td>@item.CustomerNameFamily</td>
+                <td>@item.CustomerMobile</td>
+                <td>@item.CustomerAddress</td>
+                <td>@item.UnitName</td>
+                <td>@item.DamageDescription</td>
+                @if (item.OrderLevelId == 1)
+                {
+                    <td>
+                        <a href="" class="btn btn-primary btn-sm">
+                            آماده برای تعمیر
+                        </a>
+                    </td>
+                }
+                else
+                {
+            <td>
+                <a href="" class="btn btn-danger btn-sm">
+                    برگشت شده از شرکت
+                </a>
+            </td>
+                }
+                <td>
+                    <a href="/InformationOrder/@item.OrderId" class="btn btn-primary btn-sm">
+                        صفحه مشخصات
+                    </a>
+                    @if (item.OrderLevelId == 1)
+                    {
+                        <a href="/AddSendToCompany/@item.OrderId" class="btn btn-success btn-sm">
+                            ارسال به شرکت
+                        </a>
+                    }
+                    <a href="/SetOrderDone/@item.OrderId" class="btn btn-default btn-sm">
+                        انجام شده
+                    </a>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                <ul class="pagination">
+
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
+                            <a id="aPage"  href="/Orders?PageId=@i">@i</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        function soha_ajax(rd = "",pageId=1)
+        {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Orders")",
+                dataType: "text",
+                data:
+                {
+                    filterDamageDescription: $('#txtDmg').val(),
+                    customerId: $('#sCustomer').val(),
+                    unitId: $('#sUnit').val(),
+                    estimatedTime: rd,
+                    pageId : pageId,
+        },
+                success: function (msg) {
+                    var q = $(msg).find('.main-content');
+                    $('.main-content').replaceWith(q);
+                    console.log(q);
+                },
+                error: function (req, status, error) {
+                    console.log(msg);
+                }
+            });
+        }
+
+        $('.form-control').on('input',function() {
+
+            var date = $(".button-dayOfweek-active .ready-date").text();
+            soha_ajax(date);
+
+        });
+
+        $("#btnEmpty").click(function (e) {
+
+            e.preventDefault();
+
+            $('.form-control').val('');
+            $(".button-dayOfweek").removeClass("button-dayOfweek-active");
+            $(".today").addClass("button-dayOfweek-active");
+            soha_ajax($(".today .ready-date").text());
+
+        });
+
+        $(".button-dayOfweek").click(function() {
+
+            $(".button-dayOfweek").removeClass("button-dayOfweek-active");
+            $(this).addClass("button-dayOfweek-active");
+            var date = $(this).find('.ready-date').text();
+            console.log(date);
+            soha_ajax(date);
+
+        });
+
+        $("body").on('click','.pagination a',function (e) {
+            e.preventDefault();
+
+            var date = $(".button-dayOfweek-active .ready-date").text();
+            var pageId = $(this).text();
+            console.log(date, pageId);
+            soha_ajax(date,pageId);
+            
+
+        });
+
+    });
+</script>

@@ -1,0 +1,204 @@
+﻿@using SohaService.Core.Convertor
+@using SohaService.Core.Services.Interfaces
+@using SohaService.DataLayer.Entities.Customer
+@model SohaService.Core.DTOs.Pay.PayViewModel
+@inject ICustomerService _customerService;
+
+@{
+    ViewData["Title"] = "پرداخت های مشتری";
+
+    int customerId = (int)ViewData["customerId"];
+
+    Customer customer = _customerService.GetCustomerById(customerId);
+}
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <button class="header">صفحه ی @customer.CustomerName @customer.CustomerFamily</button>
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <aside>
+                        <section>
+                            <div class="inner">
+                                <ul>
+                                    <li><button class="button-a"><a href="/InformationCustomer/@customerId"> مشخصات </a></button></li>
+                                    @if (customer.IsDelete == false)
+                                    {
+                                        <li><button class="button-a"><a href="/EditCustomer/@customerId"> ویرایش </a></button></li>
+                                        <li><button class="button-a"><a href="/DeleteCustomer/@customerId"> حذف </a></button></li>
+                                    }
+                                    <li><button class="button-a"><a href="/CustomersOrder/@customerId"> سفارشات </a></button></li>
+                                    <li><button class="button-a button-a-Active"><a href="/CustomersPay/@customerId"> پرداخت ها </a></button></li>
+                                    <li><button class="button-a"> گزارش </button></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+                <div class="row">
+                    <form>
+                        <div class="col-sm-5 col-md-5">
+                            <input type="datetime" id="pcal1" name="fromDate" class="form-control" style="text-align: right" placeholder="از تاریخ ..." autocomplete="off">
+                        </div>
+                        <div class="col-sm-5 col-md-5">
+                            <input type="datetime" id="pcal2" name="toDate" class="form-control" style="text-align: right" placeholder="تا تاریخ ..." autocomplete="off">
+                        </div>
+                        <div class="col-sm-2 col-md-2" style="margin: 10px 0 0">
+                            <a id="btnRefresh" class="btn btn-default btn-sm" href="/DoneOrders">بازنشانی</a>
+                        </div>
+                    </form>
+                </div>
+
+                <table class="table table-bordered table-condensed table-hover table-responsive table-striped text-center">
+                    <thead>
+                        <tr class="success">
+                            <th class="text-center">قطعه</th>
+                            <th class="text-center">شرح خرابی</th>
+                            <th class="text-center">تاریخ انجام شدن</th>
+                            <th class="text-center">مبلغ پرداخت شده</th>
+                            <th class="text-center">تاریخ پرداخت</th>
+                            <th class="text-center">دستورات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.InformationPayViewModels)
+                        {
+                            <tr>
+                                <td>@item.UnitName</td>
+                                <td>@item.DamageDescription</td>
+                                <td>@item.OrderChangeLevelDate.ToShamsi()</td>
+                                <td>@item.Amount.ToRial()</td>
+                                <td>@item.PayDate.ToShamsi()</td>
+                                <td>
+                                    <a href="/InformationOrder/@item.OrderId" class="btn btn-primary btn-sm">
+                                        صفحه مشخصات سفارش
+                                    </a>
+                                    <a href="/EditCustomersPay/@item.PayId" class="btn btn-primary btn-sm">
+                                        ویرایش پرداخت
+                                    </a>
+                                    <a href="/DeleteCustomersPay/@item.PayId" class="btn btn-primary btn-sm" onclick="DeletePay(@item.PayId)">
+                                        حذف پرداخت
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                            <ul class="pagination">
+
+                                @for (int i = 1; i <= Model.PageCount; i++)
+                                {
+                                    <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
+                                        <a href="/CustomersPay/@customerId/?PageId=@i">@i</a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+
+    $(document).ready(function () {
+
+        function soha_ajax(rd = "") {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("CustomersPay")",
+                dataType: "text",
+                data:
+                {
+                    filterDamageDescription: $('#txtDmg').val(),
+                    customerId: $('#sCustomer').val(),
+                    unitId: $('#sUnit').val(),
+                    estimatedTime: rd,
+                    fromDate: $('#pcal1').val(),
+                    toDate: $('#pcal2').val(),
+                },
+                success: function (msg) {
+                    var q = $(msg).find('tbody');
+                    $('tbody').replaceWith(q);
+                    console.log(q);
+                },
+                error: function (req, status, error) {
+                    console.log(msg);
+                }
+            });
+        }
+
+        $('.form-control').on('input',function() {
+
+            soha_ajax();
+
+        });
+
+
+
+        $('body').on('click','a.weekday',function() {
+
+            soha_ajax();
+
+        });
+
+        $("#btnEmpty").click(function (e) {
+
+            e.preventDefault();
+
+            $('.form-control').val('');
+            $(".button-dayOfweek").removeClass("button-dayOfweek-active");
+            $(".today").addClass("button-dayOfweek-active");
+            soha_ajax('today');
+
+        });
+
+        $("#btnRefresh").click(function (e) {
+
+            e.preventDefault();
+
+            $('.form-control').val('');
+            $(".button-dayOfweek").removeClass("button-dayOfweek-active");
+            $(".today").addClass("button-dayOfweek-active");
+            soha_ajax();
+
+        });
+
+        $(".button-dayOfweek").click(function() {
+
+            $(".button-dayOfweek").removeClass("button-dayOfweek-active");
+            $(this).addClass("button-dayOfweek-active");
+            var date = $(this).find('.ready-date').text();
+            console.log(date);
+            soha_ajax(date);
+
+        });
+
+
+    });
+
+
+    function DeletePay(id) {
+        if (confirm('از حذف این پرداخت مطمئن هستید؟') == true) {
+            $.ajax({
+                url: "/Customer/DeleteCustomersPay" + id,
+                type: "Get"
+            }).done(function (result) {
+                $('Pay_' + id).hide(1000);
+            });
+        }
+    }
+
+
+</script>
+

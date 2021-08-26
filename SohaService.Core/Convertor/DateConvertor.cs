@@ -11,12 +11,13 @@ namespace SohaService.Core.Convertor
         {
             PersianCalendar pc = new PersianCalendar();
             return pc.GetYear(value) + "/" + pc.GetMonth(value).ToString("00") + "/" +
-                   pc.GetDayOfMonth(value).ToString("00");
+                   pc.GetDayOfMonth(value).ToString("00") ;
         }
 
         public static DateTime ToMiladi(this DateTime dateTime)
         {
-            return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, new System.Globalization.PersianCalendar());
+            return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day,dateTime.Hour,dateTime.Minute,dateTime.Second,dateTime.Millisecond, new System.Globalization.PersianCalendar());
         }
     }
+
 }

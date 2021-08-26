@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SohaService.Core.DTOs.Customer;
 using SohaService.Core.Services.Interfaces;
@@ -22,8 +23,8 @@ namespace SohaService.Core.Services.Services
 
         public int AddCustomer(Customer customer)
         {
-            _context.Customers.AddAsync(customer);
-            _context.SaveChangesAsync();
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
             return customer.CustomerId;
         }
 
@@ -47,7 +48,7 @@ namespace SohaService.Core.Services.Services
 
         public CustomerViewModel GetCustomer(int pageId = 1, string filterFamily = "", string filterMobile = "")
         {
-            IQueryable<Customer> result = _context.Customers;
+            IQueryable<Customer> result = _context.Customers.Where(c=>c.IsDelete==false);
 
             if (!string.IsNullOrEmpty(filterMobile))
             {
@@ -74,7 +75,7 @@ namespace SohaService.Core.Services.Services
         {
             return _context.Customers.Find(customerId);
         }
-
+        
         public Customer GetDataForEditCustomer(int customerId)
         {
             return _context.Customers.Where(c => c.CustomerId == customerId).Select(c => new Customer()
@@ -89,7 +90,7 @@ namespace SohaService.Core.Services.Services
 
         public CustomerViewModel GetDeletedCustomer(int pageId = 1, string filterFamily = "", string filterMobile = "")
         {
-            IQueryable<Customer> result = _context.Customers.IgnoreQueryFilters().Where(c => c.IsDelete);
+            IQueryable<Customer> result = _context.Customers.Where(c => c.IsDelete);
 
             if (!string.IsNullOrEmpty(filterMobile))
             {
@@ -115,7 +116,17 @@ namespace SohaService.Core.Services.Services
         public void UpdateCustomer(Customer customer)
         {
             _context.Customers.Update(customer);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
+        }
+
+        public List<SelectListItem> GetCustomerListItem()
+        {
+            return _context.Customers.Where(c=>c.IsDelete==false).Select(s => new SelectListItem()
+            {
+                Text = s.CustomerName + " " + s.CustomerFamily,
+                Value = s.CustomerId.ToString()
+
+            }).ToList();
         }
     }
 }

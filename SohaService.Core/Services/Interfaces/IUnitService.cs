@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SohaService.Core.DTOs.Unit;
 using SohaService.DataLayer.Entities.Unit;
 
@@ -20,6 +21,7 @@ namespace SohaService.Core.Services.Interfaces
         Unit GetDataForEditUnit(int unitId);
         Unit GetUnitById(int unitId);
         void UpdateUnit(Unit unit);
+        List<SelectListItem> GetUnitListItem();
 
         #endregion
 
@@ -33,6 +35,8 @@ namespace SohaService.Core.Services.Interfaces
         UnitStatus GetDataForEditUnitStatus(int unitId);
         UnitStatus GetUnitStatusById(int unitId);
         void UpdateUnitStatus(UnitStatus unit);
+        List<SelectListItem> GetUnitStatusListItem();
+
 
         #endregion
     }

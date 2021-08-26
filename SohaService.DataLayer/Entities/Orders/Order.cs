@@ -17,7 +17,10 @@ namespace SohaService.DataLayer.Entities.Orders
 
         [Required]
         public int CustomerId { get; set; }
+
+        
         public int ExpertId { get; set; }
+
         public int UnitId { get; set; }
 
         [Display(Name = "تاریخ ثبت")]
@@ -53,6 +56,7 @@ namespace SohaService.DataLayer.Entities.Orders
         public Expert.Expert Expert { get; set; }
         public SendToCompany SendToCompany { get; set; }
         public Unit.Unit Unit { get; set; }
+        public List<Pay.Pay> Pays { get; set; }
 
         #endregion
 

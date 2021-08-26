@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SohaService.Core.DTOs.Expert;
 using SohaService.Core.Services.Interfaces;
@@ -22,8 +23,8 @@ namespace SohaService.Core.Services.Services
 
         public int AddExpert(Expert expert)
         {
-            _context.Experts.AddAsync(expert);
-            _context.SaveChangesAsync();
+            _context.Experts.Add(expert);
+            _context.SaveChanges();
             return expert.ExpertId;
         }
 
@@ -47,6 +48,7 @@ namespace SohaService.Core.Services.Services
         {
             return _context.Experts.Where(e => e.ExpertId == expertId).Select(e => new Expert()
             {
+                ExpertId = expertId,
                 ExpertName = e.ExpertName,
                 ExpertFamily = e.ExpertFamily,
                 ExpertMobile = e.ExpertMobile
@@ -55,7 +57,7 @@ namespace SohaService.Core.Services.Services
 
         public ExpertViewModel GetDeletedExperts(int pageId = 1, string filterFamily = "", string filterMobile = "")
         {
-            IQueryable<Expert> result = _context.Experts.IgnoreQueryFilters().Where(e => e.IsDelete);
+            IQueryable<Expert> result = _context.Experts.Where(e=>e.IsDelete);
 
             if (!string.IsNullOrEmpty(filterMobile))
             {
@@ -85,7 +87,7 @@ namespace SohaService.Core.Services.Services
 
         public ExpertViewModel GetExperts(int pageId = 1, string filterFamily = "", string filterMobile = "")
         {
-            IQueryable<Expert> result = _context.Experts;
+            IQueryable<Expert> result = _context.Experts.Where(e=>e.IsDelete==false && e.ExpertId!=3);
 
             if (!string.IsNullOrEmpty(filterMobile))
             {
@@ -111,7 +113,17 @@ namespace SohaService.Core.Services.Services
         public void UpdateExpert(Expert expert)
         {
             _context.Experts.Update(expert);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
+        }
+
+        public List<SelectListItem> GetExpertListItem()
+        {
+            return _context.Experts.Where(u => u.IsDelete == false && u.ExpertId!=3).Select(s => new SelectListItem()
+            {
+                Text = s.ExpertName + " " + s.ExpertFamily,
+                Value = s.ExpertId.ToString()
+
+            }).ToList();
         }
     }
 }
