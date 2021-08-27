@@ -1,4 +1,5 @@
-﻿@model SohaService.DataLayer.Entities.Orders.Order
+﻿@using SohaService.Core.Convertor
+@model SohaService.DataLayer.Entities.Orders.Order
 
 @{
     ViewData["Title"] = "افزودن سفارش جدید";
@@ -23,14 +24,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
-                                        @*<div class="input-group">
-                                                <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
-                                                <input type="text" asp-for="OrderSetDate" class="form-control" style="text-align: right" id="pcal1">
-                                                <label class="text-info">برای نمایش تقویم روی این دکمه کلیک کنید</label>
-                                            </div>*@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
-                                            <input type="datetime" asp-for="OrderSetDate" class="form-control" style="text-align: right" autocomplete="off">
+                                            <input type="datetime" asp-for="OrderSetDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SohaService.DataLayer.Context;
 
 namespace SohaService.DataLayer.Migrations
 {
     [DbContext(typeof(SohaServiceContext))]
-    partial class SohaServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20210827015845_mig_UpdateOrderAddDiscount")]
+    partial class mig_UpdateOrderAddDiscount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

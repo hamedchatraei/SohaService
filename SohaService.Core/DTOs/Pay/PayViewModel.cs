@@ -36,6 +36,9 @@ namespace SohaService.Core.DTOs.Pay
         public string CustomerAddress { get; set; }
         public string CustomerUNumber { get; set; }
         public string UnitName { get; set; }
+        public int Discount { get; set; }
+        public string DiscountTitle { get; set; }
+        public int TotalCost { get; set; }
 
     }
 }

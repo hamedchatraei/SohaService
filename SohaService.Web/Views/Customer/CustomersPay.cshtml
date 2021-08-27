@@ -65,24 +65,31 @@
 
                         @foreach (var item in Model.InformationPayViewModels)
                         {
-                            <tr>
-                                <td>@item.UnitName</td>
-                                <td>@item.DamageDescription</td>
-                                <td>@item.OrderChangeLevelDate.ToShamsi()</td>
+                        <tr>
+                            <td>@item.UnitName</td>
+                            <td>@item.DamageDescription</td>
+                            <td>@item.OrderChangeLevelDate.ToShamsi()</td>
+                            @if (item.Amount != 0)
+                            {
                                 <td>@item.Amount.ToRial()</td>
-                                <td>@item.PayDate.ToShamsi()</td>
-                                <td>
-                                    <a href="/InformationOrder/@item.OrderId" class="btn btn-primary btn-sm">
-                                        صفحه مشخصات سفارش
-                                    </a>
-                                    <a href="/EditCustomersPay/@item.PayId" class="btn btn-primary btn-sm">
-                                        ویرایش پرداخت
-                                    </a>
-                                    <a href="/DeleteCustomersPay/@item.PayId" class="btn btn-primary btn-sm" onclick="DeletePay(@item.PayId)">
-                                        حذف پرداخت
-                                    </a>
-                                </td>
-                            </tr>
+                            }
+                            else
+                            {
+                                <td>پرداخت اولیه (0)</td>
+                            }
+                            <td>@item.PayDate.ToShamsi()</td>
+                            <td>
+                                <a href="/InformationOrder/@item.OrderId" class="btn btn-primary btn-sm">
+                                    صفحه مشخصات سفارش
+                                </a>
+                                <a href="/EditCustomersPay/@item.PayId" class="btn btn-primary btn-sm">
+                                    ویرایش پرداخت
+                                </a>
+                                <a href="/DeleteCustomersPay/@item.PayId" class="btn btn-primary btn-sm" onclick="DeletePay(@item.PayId)">
+                                    حذف پرداخت
+                                </a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

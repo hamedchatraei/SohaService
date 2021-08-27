@@ -34,7 +34,7 @@
             <th class="text-center">قطعه</th>
             <th class="text-center">شرح خرابی</th>
             <th class="text-center">تاریخ انجام شدن</th>
-            <th class="text-center">هزینه ی برآورد شده</th>
+            <th class="text-center">هزینه ی کل</th>
             <th class="text-center">مبلغ پرداختی</th>
             <th class="text-center">تاریخ پرداخت</th>
             <th class="text-center">دستورات</th>
@@ -45,22 +45,29 @@
         @foreach (var item in Model.InformationPayViewModels)
 
         {
-        <tr>
-            <td>@item.CustomerNameFamily</td>
-            <td>@item.CustomerMobile</td>
-            <td>@item.CustomerAddress</td>
-            <td>@item.UnitName</td>
-            <td>@item.DamageDescription</td>
-            <td>@item.OrderChangeLevelDate.ToShamsi()</td>
-            <td>@item.EstimatedAmount.ToRial()</td>
-            <td>@item.Amount.ToRial()</td>
-            <td>@item.PayDate.ToShamsi()</td>
-            <td>
-                <a href="/CustomersPay/@item.CustomerId" class="btn btn-primary btn-sm">
-                    صفحه پرداخت های مشتری
-                </a>
-            </td>
-        </tr>
+            <tr>
+                <td>@item.CustomerNameFamily</td>
+                <td>@item.CustomerMobile</td>
+                <td>@item.CustomerAddress</td>
+                <td>@item.UnitName</td>
+                <td>@item.DamageDescription</td>
+                <td>@item.OrderChangeLevelDate.ToShamsi()</td>
+                <td>@item.TotalCost.ToRial()</td>
+                @if (item.Amount != 0)
+                {
+                    <td>@item.Amount.ToRial()</td>
+                }
+                else
+                {
+                    <td>پرداخت اولیه (0)</td>
+                }
+                <td>@item.PayDate.ToShamsi()</td>
+                <td>
+                    <a href="/CustomersPay/@item.CustomerId" class="btn btn-primary btn-sm">
+                        صفحه پرداخت های مشتری
+                    </a>
+                </td>
+            </tr>
         }
 
     </tbody>

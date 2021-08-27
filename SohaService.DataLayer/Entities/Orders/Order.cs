@@ -35,6 +35,15 @@ namespace SohaService.DataLayer.Entities.Orders
         [Display(Name = "هزینه برآورد شده")]
         public int EstimatedAmount { get; set; }
 
+        [Display(Name = "تخفیف")]
+        public int Discount { get; set; }
+
+        [Display(Name = "علت تخفیف")]
+        public string DiscountTitle { get; set; }
+
+        [Display(Name = "هزینه کل")]
+        public int TotalCost { get; set; }
+
         [Display(Name = "هزینه دریافت شده")]
         public int ReceivedAmount { get; set; }
 

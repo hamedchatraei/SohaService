@@ -63,6 +63,9 @@ namespace SohaService.Core.Services.Services
             editDoneOrder.OrderLevelId = 4;
             editDoneOrder.OrderChangeLevelDate = order.OrderChangeLevelDate;
             editDoneOrder.RemainingAmount = order.RemainingAmount;
+            editDoneOrder.Discount = order.Discount;
+            editDoneOrder.DiscountTitle = order.DiscountTitle;
+            editDoneOrder.TotalCost = order.TotalCost;
             UpdateOrder(editDoneOrder);
         }
 
@@ -116,7 +119,10 @@ namespace SohaService.Core.Services.Services
                 EstimatedAmount = o.EstimatedAmount,
                 ReceivedAmount = o.ReceivedAmount,
                 EstimatedToSendExpertTime = o.EstimatedToSendExpertTime,
-                OrderChangeLevelDate = o.OrderChangeLevelDate
+                OrderChangeLevelDate = o.OrderChangeLevelDate,
+                Discount = o.Discount,
+                DiscountTitle = o.DiscountTitle,
+                TotalCost = o.TotalCost
             }).Single();
         }
         

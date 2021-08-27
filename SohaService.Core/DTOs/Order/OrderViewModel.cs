@@ -41,6 +41,9 @@ namespace SohaService.Core.DTOs.Order
         public string CustomerFamily { get; set; }
         public string ExpertFamily { get; set; }
         public bool IsDelete { get; set; }
+        public int Discount { get; set; }
+        public string DiscountTitle { get; set; }
+        public int TotalCost { get; set; }
 
     }
 

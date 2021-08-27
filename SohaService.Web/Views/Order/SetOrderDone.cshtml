@@ -18,7 +18,7 @@
                         <div class="inner form-layer">
                             <form asp-action="SetOrderDone" method="post">
                                 <input type="hidden" asp-for="OrderId" />
-                                <input type="hidden" asp-for="EstimatedAmount"/>
+                                <input type="hidden" asp-for="EstimatedAmount" />
                                 <div class="row">
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
@@ -44,14 +44,60 @@
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon">هزینه دریافت شده</span>
+                                            <span class="input-group-addon">هزینه برآورد شده</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.EstimatedAmount.ToRial()" aria-describedby="username" disabled="disabled">
+                                            <input type="hidden" value="@Model.EstimatedAmount" id="esAmount" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تخفیف</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" onkeyup="separateNum(this.value,this);" onblur="sumInput()" name="discountPrice" id="discountPrice" aria-describedby="username">
+                                            <input type="hidden" class="form-control" asp-for="Discount" id="finalDiscountPrice" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">دلیل تخفیف</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <textarea class="form-control no-resiaze" rows="2" asp-for="DiscountTitle" aria-describedby="username"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">هزینه کل</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" id="TotalCost" aria-describedby="username" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">پرداخت اولیه</span>
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
                                             <input type="text" class="form-control" onkeyup="separateNum(this.value,this);" name="price" id="price" aria-describedby="username">
-                                            <input type="hidden" class="form-control" asp-for="ReceivedAmount" id="finalprice" aria-describedby="username">
+                                            <input type="hidden" class="form-control" asp-for="ReceivedAmount" id="finalPrice" aria-describedby="username">
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
@@ -101,14 +147,26 @@
     }
 
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         var myButton = $("#btnSave");
         var myInput = $("#price");
-        myButton.click(function(){
+        myButton.click(function () {
             var inputValue = myInput.val();
 
             inputValue = inputValue.replace(/,\s?/g, "");
-            document.getElementById("finalprice").value =
+            document.getElementById("finalPrice").value =
+                inputValue;
+        });
+    });
+
+    $(document).ready(function () {
+        var myButton = $("#btnSave");
+        var myInput2 = $("#discountPrice");
+        myButton.click(function () {
+            var inputValue = myInput2.val();
+
+            inputValue = inputValue.replace(/,\s?/g, "");
+            document.getElementById("finalDiscountPrice").value =
                 inputValue;
         });
     });

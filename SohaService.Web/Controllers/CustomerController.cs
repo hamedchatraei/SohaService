@@ -165,9 +165,12 @@ namespace SohaService.Web.Controllers
             Order order = _orderService.GetOrderById(pay.OrderId);
 
             int esAmount = order.EstimatedAmount;
+            int discount = order.Discount;
+            int totalCost = esAmount - discount;
             int resAmount = _payService.GetSumAmountPay(order.OrderId);
-            int remAmount = esAmount - resAmount;
+            int remAmount = totalCost - resAmount;
 
+            order.TotalCost = totalCost;
             order.RemainingAmount = remAmount;
 
             _orderService.EditDoneOrder(order);
@@ -203,9 +206,12 @@ namespace SohaService.Web.Controllers
             Order order = _orderService.GetOrderById(pay.OrderId);
 
             int esAmount = order.EstimatedAmount;
+            int discount = order.Discount;
+            int totalCost = esAmount - discount;
             int resAmount = _payService.GetSumAmountPay(order.OrderId);
-            int remAmount = esAmount - resAmount;
+            int remAmount = totalCost - resAmount;
 
+            order.TotalCost = totalCost;
             order.RemainingAmount = remAmount;
 
             _orderService.EditDoneOrder(order);

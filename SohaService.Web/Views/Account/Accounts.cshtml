@@ -37,7 +37,7 @@
             <th class="text-center">قطعه</th>
             <th class="text-center">شرح خرابی</th>
             <th class="text-center">تاریخ انجام شدن</th>
-            <th class="text-center">هزینه ی برآورد شده</th>
+            <th class="text-center">هزینه ی کل</th>
             <th class="text-center">مبلغ بدهی</th>
             <th class="text-center">دستورات</th>
         </tr>
@@ -54,7 +54,7 @@
             <td>@item.UnitName</td>
             <td>@item.DamageDescription</td>
             <td>@item.OrderChangeLevelDate.ToShamsi()</td>
-            <td>@item.EstimatedAmount.ToRial()</td>
+            <td>@item.TotalCost.ToRial()</td>
             <td>@item.RemainingAmount.ToRial()</td>
             <td>
                 <a href="/AddCustomersPay/@item.OrderId" class="btn btn-primary btn-sm">

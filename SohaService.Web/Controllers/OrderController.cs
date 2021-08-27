@@ -212,6 +212,7 @@ namespace SohaService.Web.Controllers
 
             order.ExpertId = 3;
             order.OrderLevelId = 1;
+            order.OrderChangeLevelDate = DateTime.Now;
 
             _orderService.AddOrder(order);
 
@@ -322,6 +323,7 @@ namespace SohaService.Web.Controllers
             if (!ModelState.IsValid)
                 return View(order);
 
+
             Pay pay = new Pay();
             pay.OrderId = order.OrderId;
             pay.Amount = order.ReceivedAmount;
@@ -329,10 +331,14 @@ namespace SohaService.Web.Controllers
 
             _payService.AddPay(pay);
 
-            int esAmount = order.EstimatedAmount;
-            int resAmount = _payService.GetSumAmountPay(order.OrderId);
-            int remAmount = esAmount - resAmount;
 
+            int esAmount = order.EstimatedAmount;
+            int discount = order.Discount;
+            int totalCost = esAmount - discount;
+            int resAmount = _payService.GetSumAmountPay(order.OrderId);
+            int remAmount = totalCost - resAmount;
+
+            order.TotalCost = totalCost;
             order.RemainingAmount = remAmount;
 
             _orderService.EditDoneOrder(order);
@@ -563,7 +569,7 @@ namespace SohaService.Web.Controllers
             send.IsReturn = false;
             send.UnitId = order.UnitId;
             send.UnitStatusId = 1;
-            send.ReturnDate=DateTime.Now;
+            send.ReturnDate = DateTime.Now;
             send.AssemblingDate = DateTime.Now;
 
             _orderService.AddSendToCompany(send);

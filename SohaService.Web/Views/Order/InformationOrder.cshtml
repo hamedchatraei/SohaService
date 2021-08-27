@@ -89,7 +89,40 @@
                                 {
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon">هزینه دریافت شده</span>
+                                            <span class="input-group-addon">تخفیف</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.Discount.ToRial()" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">دلیل تخفیف</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.DiscountTitle" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">هزینه کل</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.TotalCost.ToRial()" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">پرداخت اولیه</span>
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
