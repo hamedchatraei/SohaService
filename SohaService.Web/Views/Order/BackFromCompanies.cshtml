@@ -5,97 +5,199 @@
     ViewData["Title"] = "برگشت از شرکت";
 }
 
-<div class="row">
-    <form>
-        <div class="col-sm-5 col-md-5">
-            <input type="datetime" name="fromDate" class="form-control" style="text-align: right" placeholder="از تاریخ ..." autocomplete="off">
+<div class="filters">
+
+    <form class="filters-form">
+        <div class="filter-input" style="margin: 10px 0 0">
+            <input type="datetime" id="pcal1" name="fromDate" class="form-control" style="text-align: right" placeholder="از تاریخ ..." autocomplete="off">
         </div>
-        <div class="col-sm-5 col-md-5">
-            <input type="datetime" name="toDate" class="form-control" style="text-align: right" placeholder="تا تاریخ ..." autocomplete="off">
+        <div class="filter-input" style="margin: 10px 0 0">
+            <input type="datetime" id="pcal2" name="toDate" class="form-control" style="text-align: right" placeholder="تا تاریخ ..." autocomplete="off">
         </div>
-        <div class="col-sm-5 col-md-5" style="margin: 10px 0 0">
-            <select id="sCustomer" class="form-control" name="customerId" asp-items="@(ViewData["customers"] as SelectList)"></select>
+        <div class="filter-input" style="margin: 10px 0 0">
+            <select id="sCustomer" class="form-control sohaselect" name="customerId" asp-items="@(ViewData["customers"] as SelectList)"></select>
         </div>
-        <div class="col-sm-5 col-md-5" style="margin: 10px 0 0">
-            <select id="sUnit" class="form-control" name="unitId" asp-items="@(ViewData["units"] as SelectList)"></select>
+        <div class="filter-input" style="margin: 10px 0 0">
+            <select id="sUnit" class="form-control sohaselect" name="unitId" asp-items="@(ViewData["units"] as SelectList)"></select>
         </div>
-        <div class="col-sm-5 col-md-5" style="margin: 10px 0 0">
-            <select id="sCompany" class="form-control" name="companyId" asp-items="@(ViewData["company"] as SelectList)"></select>
+        <div class="filter-input" style="margin: 10px 0 0">
+            <select id="sCompany" class="form-control sohaselect" name="companyId" asp-items="@(ViewData["company"] as SelectList)"></select>
         </div>
-        <div class="col-sm-5 col-md-5" style="margin: 10px 0 0">
-            <select id="sUnitStatus" class="form-control" name="companyId" asp-items="@(ViewData["unitStatus"] as SelectList)"></select>
+        <div class="filter-input" style="margin: 10px 0 0">
+            <select id="sUnitStatus" class="form-control sohaselect" name="unitStatusId" asp-items="@(ViewData["unitStatus"] as SelectList)"></select>
         </div>
-        <div class="col-sm-2 col-md-2" style="margin: 10px 0 0">
-            <a id="btnEmpty" class="btn btn-default btn-sm" href="/DoneOrders">برو به امروز</a>
+        <div class="filter-input" style="margin: 10px 0 0">
+            <a id="btnEmpty" class="btn btn-default btn-sm" href="/Orders">برو به امروز</a>
         </div>
-        <div class="col-sm-2 col-md-2" style="margin: 10px 0 0">
-            <a id="btnRefresh" class="btn btn-default btn-sm" href="/DoneOrders">بازنشانی</a>
+        <div class="filter-input" style="margin: 10px 0 0">
+            <a id="btnRefresh" class="btn btn-default btn-sm" href="/Orders">بازنشانی</a>
         </div>
     </form>
-</div>
 
-<table class="table table-bordered table-condensed table-hover table-responsive table-striped text-center">
-    <thead>
-        <tr class="success">
-            <th class="text-center">مشتری</th>
-            <th class="text-center">موبایل</th>
-            <th class="text-center">آدرس</th>
-            <th class="text-center">قطعه</th>
-            <th class="text-center">وضعیت قطعه</th>
-            <th class="text-center">شرکت</th>
-            <th class="text-center">تاریخ برگشت از شرکت</th>
-            <th class="text-center">تاریخ نصب مجدد</th>
-            <th class="text-center">دستورات</th>
-        </tr>
-    </thead>
-    <tbody>
+    <div class="col-md-12" style="margin: 10px 0;">
 
-        @foreach (var item in Model.InformationSendToCompany)
+        <div class="main-content">
 
-        {
-        <tr>
-            <td>@item.CustomerNameFamily</td>
-            <td>@item.CustomerMobile</td>
-            <td>@item.CustomerAddress</td>
-            <td>@item.UnitName</td>
-            <td>@item.UnitStatusTitle</td>
-            <td>@item.CompanyName</td>
-            <td>@item.ReturnDate.ToShamsi()</td>
-            <td>@item.AssemblingDate.ToShamsi()</td>
-            <td>
-                <a href="/InformationSendToCompany/@item.SendToCompanyId" class="btn btn-primary btn-sm">
-                    صفحه مشخصات
-                </a>
-            </td>
-        </tr>
-        }
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-wrap">
 
-    </tbody>
-</table>
+                            <table class="table table-responsive-xl">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%;">مشتری</th>
+                                        <th style="width: 10%;">موبایل</th>
+                                        <th style="width: 16%;">آدرس</th>
+                                        <th style="width: 10%;">قطعه</th>
+                                        <th style="width: 10%;">وضعیت قطعه</th>
+                                        <th style="width: 14%;">شرکت</th>
+                                        <th style="width: 15%;">تاریخ برگشت از شرکت</th>
+                                        <th style="width: 15%;">تاریخ نصب مجدد</th>
+                                        <th style="width: 20%;">دستورات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.InformationSendToCompany)
+                                    {
+                                        <tr class="alert" role="alert">
+                                            <td>@item.CustomerNameFamily</td>
+                                            <td>@item.CustomerMobile</td>
+                                            <td>@item.CustomerAddress</td>
+                                            <td>@item.UnitName</td>
+                                            <td>@item.UnitStatusTitle</td>
+                                            <td>@item.CompanyName</td>
+                                            <td>@item.ReturnDate.ToShamsi()</td>
+                                            <td>@item.AssemblingDate.ToShamsi()</td>
+                                            <td>
+                                                <a href="/InformationSendToCompany/@item.SendToCompanyId" class="btn btn-primary btn-sm">
+                                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.08 512.08" style="enable-background:new 0 0 512.08 512.08;" xml:space="preserve">
+                                                    <g>
+                                                    <g>
+                                                    <polygon points="82.944,79.656 34.192,134.84 16,116.328 4.592,127.544 34.816,158.312 94.944,90.248   "></polygon>
+                                                </g>
+                                            </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="88.936" width="188.032" height="16"></rect>
+                                                </g>
+                                            </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="136.824" width="352.64" height="16"></rect>
+                                                </g>
+                                            </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="222.744" width="188.032" height="16"></rect>
+                                                </g>
+                                            </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="270.632" width="352.64" height="16"></rect>
+                                                </g>
+                                            </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="356.568" width="188.032" height="16"></rect>
+                                                </g>
+                                            </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="404.456" width="352.64" height="16"></rect>
+                                                </g>
+                                            </g>
+                                                    <g>
+                                                    <g>
+                                                    <path d="M43.248,210.76C19.408,210.76,0,230.472,0,254.68c0,24.208,19.408,43.92,43.248,43.92    c23.856,0,43.264-19.696,43.264-43.92C86.512,230.456,67.104,210.76,43.248,210.76z M43.248,282.6    C28.208,282.6,16,270.072,16,254.68c0-15.392,12.224-27.92,27.248-27.92c15.024,0,27.264,12.528,27.264,27.92    C70.512,270.072,58.288,282.6,43.248,282.6z"></path>
+                                                </g>
+                                            </g>
+                                                    <g>
+                                                    <g>
+                                                    <path d="M43.248,344.584C19.408,344.584,0,364.28,0,388.504s19.408,43.92,43.248,43.92c23.856,0,43.264-19.696,43.264-43.92    S67.104,344.584,43.248,344.584z M43.248,416.424c-15.024,0-27.248-12.528-27.248-27.92c0-15.392,12.224-27.92,27.248-27.92    c15.024,0,27.264,12.528,27.264,27.92C70.512,403.896,58.272,416.424,43.248,416.424z"></path>
+                                                </g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                                    <g>
+                                            </g>
+                                        </svg>
+                                                </a>
+                                            </td>
 
-<div class="row">
-    <div class="col-sm-6">
-        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
-            <ul class="pagination">
+                                        </tr>
 
-                @for (int i = 1; i <= Model.PageCount; i++)
-                {
-                    <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
-                        <a href="/BackFromCompanies?PageId=@i">@i</a>
-                    </li>
-                }
+                                    }
+                                </tbody>
+                            </table>
 
-            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                        <ul class="pagination">
+
+                            @for (int i = 1; i <= Model.PageCount; i++)
+                            {
+                                <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
+                                    <a href="/BackFromCompanies?PageId=@i">@i</a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        
+
     </div>
 </div>
 
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.min.js"></script>
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.fa.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type=datetime]').datepicker({ dateFormat: "yy/mm/dd", isRTL: true, showButtonPanel: true });
+    });
+</script>
 
 <script>
 
     $(document).ready(function () {
 
-        function soha_ajax(rd = "") {
+        function soha_ajax(rd = "", fd = "", td = "") {
 
             $.ajax({
                 type: "POST",
@@ -108,12 +210,12 @@
                     companyId: $('#sCompany').val(),
                     unitStatusId: $('#sUnitStatus').val(),
                     returnTime: rd,
-                    fromDate: $('#pcal1').val(),
-                    toDate: $('#pcal2').val(),
+                    fromDate: fd,
+                    toDate: td,
                 },
                 success: function (msg) {
-                    var q = $(msg).find('tbody');
-                    $('tbody').replaceWith(q);
+                    var q = $(msg).find('.main-content');
+                    $('.main-content').replaceWith(q);
                     console.log(q);
                 },
                 error: function (req, status, error) {
@@ -166,6 +268,13 @@
             console.log(date);
             soha_ajax(date);
 
+        });
+
+        $('#ui-datepicker-div').on('click', '.ui-datepicker-calendar td a', function (e) {
+
+            var fd = $('#pcal1').val();
+            var td = $('#pcal2').val();
+            soha_ajax("", fd, td);
         });
 
 

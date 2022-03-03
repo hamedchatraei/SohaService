@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SohaService.Core.DTOs.Expert;
+using SohaService.Core.Security;
 using SohaService.Core.Services.Interfaces;
 using SohaService.DataLayer.Entities.Expert;
 
@@ -20,6 +21,7 @@ namespace SohaService.Web.Controllers
 
         #region Experts
 
+        [PermissionChecker(1027)]
         [Route("Experts")]
         public IActionResult Experts(int pageId = 1, string filterFamily = "", string filterMobile = "")
         {
@@ -32,6 +34,7 @@ namespace SohaService.Web.Controllers
 
         #region DeletedExperts
 
+        [PermissionChecker(1027)]
         [Route("DeletedExperts")]
         public IActionResult DeletedExperts(int pageId = 1, string filterFamily = "", string filterMobile = "")
         {
@@ -44,6 +47,7 @@ namespace SohaService.Web.Controllers
 
         #region InformationExpert
 
+        [PermissionChecker(1027)]
         [Route("InformationExpert/{id}")]
         public IActionResult InformationExpert(int id)
         {
@@ -63,6 +67,7 @@ namespace SohaService.Web.Controllers
 
         #region AddExpert
 
+        [PermissionChecker(1028)]
         [Route("AddExpert")]
         public IActionResult AddExpert()
         {
@@ -87,6 +92,7 @@ namespace SohaService.Web.Controllers
 
         #region EditExpert
 
+        [PermissionChecker(1029)]
         [Route("EditExpert/{id}")]
         public IActionResult EditExpert(int id)
         {
@@ -113,6 +119,7 @@ namespace SohaService.Web.Controllers
 
         #region DeleteExpert
 
+        [PermissionChecker(1030)]
         [Route("DeleteExpert/{id}")]
         public IActionResult DeleteExpert(int id)
         {

@@ -9,6 +9,8 @@ using SohaService.Core.DTOs.Customer;
 using SohaService.Core.Services.Interfaces;
 using SohaService.DataLayer.Context;
 using SohaService.DataLayer.Entities.Customer;
+using SohaService.DataLayer.Entities.Orders;
+using SohaService.DataLayer.Entities.Repair;
 
 namespace SohaService.Core.Services.Services
 {
@@ -32,6 +34,22 @@ namespace SohaService.Core.Services.Services
         {
             Customer customer = GetCustomerById(customerId);
             customer.IsDelete = true;
+
+
+            List<Order> customersOrder = _context.Orders.Where(o => o.CustomerId == customerId).ToList();
+            List<Repair> customersRepair = _context.Repairs.Where(r => r.CustomerId == customerId).ToList();
+
+            foreach (var item in customersOrder)
+            {
+                item.IsDelete = true;
+            }
+
+            foreach (var item in customersRepair)
+            {
+                item.IsDelete = true;
+            }
+
+
             UpdateCustomer(customer);
         }
 
@@ -48,7 +66,7 @@ namespace SohaService.Core.Services.Services
 
         public CustomerViewModel GetCustomer(int pageId = 1, string filterFamily = "", string filterMobile = "")
         {
-            IQueryable<Customer> result = _context.Customers.Where(c=>c.IsDelete==false);
+            IQueryable<Customer> result = _context.Customers.Where(c=>c.IsDelete==false && c.CustomerId != 20);
 
             if (!string.IsNullOrEmpty(filterMobile))
             {
@@ -57,7 +75,7 @@ namespace SohaService.Core.Services.Services
 
             if (!string.IsNullOrEmpty(filterFamily))
             {
-                result = result.Where(a => a.CustomerFamily.Contains(filterFamily));
+                result = result.Where(a => a.CustomerName.Contains(filterFamily));
             }
 
             int take = 10;
@@ -66,6 +84,10 @@ namespace SohaService.Core.Services.Services
             CustomerViewModel list = new CustomerViewModel();
             list.CurrentPage = pageId;
             list.PageCount = (int)Math.Ceiling((decimal)result.Count() / take);
+
+            list.StartPage = (pageId - 2 <= 0) ? 1 : pageId - 2;
+            list.EndPage = (pageId + 9 > list.PageCount) ? list.PageCount : pageId + 9;
+
             list.Customers = result.OrderBy(u => u.CustomerFamily).Skip(skip).Take(take).ToList();
 
             return list;
@@ -121,9 +143,9 @@ namespace SohaService.Core.Services.Services
 
         public List<SelectListItem> GetCustomerListItem()
         {
-            return _context.Customers.Where(c=>c.IsDelete==false).Select(s => new SelectListItem()
+            return _context.Customers.Where(c=>c.IsDelete==false&&c.CustomerId!=20).Select(s => new SelectListItem()
             {
-                Text = s.CustomerName + " " + s.CustomerFamily,
+                Text = s.CustomerName + "/" + s.CustomerFamily,
                 Value = s.CustomerId.ToString()
 
             }).ToList();

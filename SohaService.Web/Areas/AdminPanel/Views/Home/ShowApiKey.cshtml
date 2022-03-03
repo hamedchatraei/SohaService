@@ -1,0 +1,32 @@
+﻿@model SohaService.DataLayer.Entities.ApiKey.ApiKey
+
+@{
+    ViewData["Title"] = "تغییر کلید وب سرویس";
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <form method="post" enctype="multipart/form-data" style="width: 100%">
+        <input type="hidden" asp-for="ApiKeyId" />
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    ویرایش کلید وب سرویس
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>کد امنیتی (Security code)</label>
+                        <input type="text" asp-for="SecurityCode" value="@Model.SecurityCode" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>کلید وب سرویس (Api key)</label>
+                        <input type="text" asp-for="ApiKeyCode" value="@Model.ApiKeyCode" class="form-control">
+                    </div>
+                    <input type="submit" value="ویرایش اطلاعات" class="btn btn-success" />
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+    </form>
+</div>

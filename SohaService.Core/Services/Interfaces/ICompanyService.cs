@@ -14,6 +14,8 @@ namespace SohaService.Core.Services.Interfaces
         int AddCompany(Company company);
         void DeleteCompany(int companyId);
         void EditCompany(Company company);
+        List<Company> GetAllCompanies();
+        List<InformationCompanyViewModel> ShowAllCompanies();
         CompanyViewModel GetCompanies(int pageId = 1, string filterName = "", string filterPhone = "");
         CompanyViewModel GetDeletedCompanies(int pageId = 1, string filterName = "", string filterPhone = "");
         Company GetDataFoeEditCompany(int companyId);

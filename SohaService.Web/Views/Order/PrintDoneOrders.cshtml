@@ -1,0 +1,69 @@
+﻿@using SohaService.Core.Convertor
+@model SohaService.Core.DTOs.Order.OrderViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PrintAccount</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/BootstrapJalaliDatePicker/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/new.css">
+    <link rel="stylesheet" type="text/css" href="/css/select2.min.css">
+</head>
+
+<body>
+    <div class="col-md-12" style="margin: 10px 0;">
+
+        <div class="main-content">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-wrap">
+
+                            <table class="table table-responsive-xl">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%;">مشتری</th>
+                                        <th style="width: 10%;">موبایل</th>
+                                        <th style="width: 16%;">آدرس</th>
+                                        <th style="width: 10%;">قطعه</th>
+                                        <th style="width: 14%;">شرح خرابی</th>
+                                        <th style="width: 15%;">تاریخ انجام شدن</th>
+                                        <th style="width: 15%;">هزینه ی کل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.InformationOrder)
+                                    {
+                                    <tr class="alert" role="alert">
+                                        <td>@item.CustomerNameFamily</td>
+                                        <td>@item.CustomerMobile</td>
+                                        <td>@item.CustomerAddress</td>
+                                        <td>@item.UnitName</td>
+                                        <td>@item.DamageDescription</td>
+                                        <td>@item.OrderChangeLevelDate.ToShamsi()</td>
+                                        <td>@item.TotalCost.ToRial()</td>
+
+                                    </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -10,7 +10,7 @@ namespace SohaService.Core.Convertor
     {
         public static string ToRial(this int value)
         {
-            return value.ToString("#,0 ریال");
+            return value.ToString("#,0 تومان");
         }
     }
 }

@@ -32,6 +32,7 @@ namespace SohaService.DataLayer.Entities.Company
         #region Relations
 
         public List<SendToCompany> SendToCompanies { get; set; }
+        public List<Repair.Repair> Repairs { get; set; }
 
         #endregion
 

@@ -18,8 +18,12 @@
                         </header>
                         <div class="inner form-layer">
                             <form asp-action="SetBackFromCompany" method="post">
-                                <input type="hidden" asp-for="SendToCompanyId"/>
-                                <input type="hidden" asp-for="OrderId"/>
+                                <input type="hidden" asp-for="SendToCompanyId" />
+                                <input type="hidden" asp-for="OrderId" />
+                                <input type="hidden" asp-for="SetDate" />
+                                <input type="hidden" asp-for="CompanyId" />
+                                <input type="hidden" asp-for="UnitId" />
+                                <input type="hidden" asp-for="Description" />
                                 <div class="row">
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
@@ -29,7 +33,7 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
-                                            <input type="datetime" asp-for="ReturnDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                            <input type="datetime" asp-for="ReturnDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
@@ -40,7 +44,7 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                            <select class="form-control" asp-for="UnitStatusId" asp-items="@(ViewData["unitStatus"] as SelectList)"></select>
+                                            <select class="form-control sohaselect" asp-for="UnitStatusId" asp-items="@(ViewData["unitStatus"] as SelectList)" required></select>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
@@ -51,7 +55,7 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
-                                            <input type="datetime" asp-for="AssemblingDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                            <input type="datetime" asp-for="AssemblingDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
@@ -68,5 +72,13 @@
     </div>
 </main>
 
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.min.js"></script>
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.fa.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type=datetime]').datepicker({ dateFormat: "yy/mm/dd", isRTL: true, showButtonPanel: true });
+    });
+</script>
 
 

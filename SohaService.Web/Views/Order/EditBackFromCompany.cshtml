@@ -39,10 +39,25 @@
                         <div class="inner form-layer">
                             <form asp-action="EditBackFromCompany" method="post">
                                 <input type="hidden" asp-for="SendToCompanyId" />
+                                <input type="hidden" asp-for="OrderId" />
+                                <input type="hidden" asp-for="SetDate" />
+                                <input type="hidden" asp-for="UnitId" />
+                                <input type="hidden" asp-for="Description" />
                                 <div class="row">
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">شرکت</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <select class="form-control" asp-for="CompanyId" asp-items="@(ViewData["company"] as SelectList)"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">وضعیت قطعه</span>
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
@@ -86,5 +101,12 @@
     </div>
 </main>
 
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.min.js"></script>
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.fa.min.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type=datetime]').datepicker({ dateFormat: "yy/mm/dd", isRTL: true, showButtonPanel: true });
+    });
+</script>
 

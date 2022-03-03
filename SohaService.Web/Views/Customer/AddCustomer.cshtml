@@ -19,24 +19,24 @@
                                 <div class="row">
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon">نام</span>
+                                            <span class="input-group-addon">نام و نام خانوادگی</span>
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                            <input type="text" class="form-control" asp-for="CustomerName" aria-describedby="username">
+                                            <input type="text" class="form-control" asp-for="CustomerName" aria-describedby="username" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon">نام خانوادگی</span>
+                                            <span class="input-group-addon">پسوند</span>
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                            <input type="text" class="form-control" asp-for="CustomerFamily" aria-describedby="username">
+                                            <input type="text" class="form-control" asp-for="CustomerFamily" aria-describedby="username" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
@@ -47,7 +47,7 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                            <input type="text" class="form-control" asp-for="CustomerMobile" aria-describedby="username">
+                                            <input type="text" class="form-control" asp-for="CustomerMobile" aria-describedby="username" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
@@ -58,12 +58,11 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                            <input type="text" class="form-control" asp-for="CustomerAddress" aria-describedby="username">
+                                            <input type="text" class="form-control" asp-for="CustomerAddress" aria-describedby="username" required>
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <button class="btn btn-success"> ذخیره اطلاعات </button>
-                                        <a href="/Customers" class="btn btn-outline btn-info"> انصراف </a>
                                     </div>
                                 </div>
                             </form>
@@ -74,4 +73,3 @@
         </div>
     </div>
 </main>
-

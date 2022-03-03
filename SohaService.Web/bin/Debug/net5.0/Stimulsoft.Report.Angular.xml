@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Stimulsoft.Report.Angular</name>
+    </assembly>
+    <members>
+        <member name="M:Stimulsoft.Report.Angular.StiAngularDesigner.DesignerDataResult(Stimulsoft.Report.Web.StiRequestParams,Stimulsoft.Report.Angular.StiAngularDesignerOptions)">
+            <summary>
+            Get the action result which returns a set of client scripts necessary for the work of the designer for Angular version.
+            </summary>
+            <param name="requestParams">Request parameters passed from the client side of the designer.</param>
+            <param name="options">A set of options that will be used for the designer.</param>
+        </member>
+        <member name="M:Stimulsoft.Report.Angular.StiAngularViewer.ViewerDataResult(Stimulsoft.Report.Web.StiRequestParams,Stimulsoft.Report.Angular.StiAngularViewerOptions)">
+            <summary>
+            Get the initial data for Angular Viewer
+            </summary>
+            <param name="requestParams">Request parameters passed from the client side of the viewer.</param>
+            <param name="options">The viewer options.</param>
+        </member>
+    </members>
+</doc>

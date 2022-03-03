@@ -31,7 +31,7 @@ namespace SohaService.DataLayer.Entities.Customer
         [MaxLength(500, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
         public string CustomerAddress { get; set; }
 
-        [Display(Name = "آدرس")]
+        [Display(Name = "کد مشتری")]
         [MaxLength(20, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
         public string CustomerUNumber { get; set; }
 
@@ -40,6 +40,7 @@ namespace SohaService.DataLayer.Entities.Customer
         #region Relations
 
         public List<Order> Orders { get; set; }
+        public List<Repair.Repair> Repairs { get; set; }
 
         #endregion
 

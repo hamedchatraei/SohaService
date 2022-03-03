@@ -13,6 +13,8 @@ namespace SohaService.Core.DTOs.Order
         public List<InformationOrderViewModel> InformationOrder { get; set; }
         public int CurrentPage { get; set; }
         public int PageCount { get; set; }
+        public int StartPage { get; set; }
+        public int EndPage { get; set; }
     }
 
     public class InformationOrderViewModel
@@ -42,9 +44,14 @@ namespace SohaService.Core.DTOs.Order
         public string ExpertFamily { get; set; }
         public bool IsDelete { get; set; }
         public int Discount { get; set; }
-        public string DiscountTitle { get; set; }
         public int TotalCost { get; set; }
-
+        public int ConfirmationStatusId { get; set; }
+        public int FinalAmount { get; set; }
+        public string OrderAddress { get; set; }
+        public int EstimatedServiceAmount { get; set; }
+        public int EstimatedUnitAmount { get; set; }
+        public string CustomerName { get; set; }
+        public string registrant { get; set; }
     }
 
     public class SendToCompanyViewModel
@@ -81,5 +88,6 @@ namespace SohaService.Core.DTOs.Order
         public bool IsDelete { get; set; }
         public bool IsSend { get; set; }
         public bool IsReturn { get; set; }
+        public string Description { get; set; }
     }
 }

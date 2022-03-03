@@ -1,0 +1,237 @@
+﻿@using SohaService.Core.Convertor
+@using SohaService.Core.DTOs.Repair
+@using SohaService.Core.Services.Interfaces
+@model SohaService.DataLayer.Entities.Repair.Repair
+@inject IRepairService _repairService;
+
+@{
+    ViewData["Title"] = "ویرایش تعمیر";
+
+    InformationRepairViewModel informationRepair = _repairService.ShowInformationRepairById(Model.RepairId);
+}
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <button class="header">صفحه ی سفارش @informationRepair.CustomersNameFamily در تاریخ @informationRepair.ReceivedUnitDate.ToShamsi()</button>
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <aside>
+                        <section>
+                            <div class="inner">
+                                <ul>
+                                    <li><button class="button-a"><a href="/InformationRepair/@Model.RepairId"> مشخصات </a></button></li>
+                                    @if (Model.IsDelete == false)
+                                    {
+                                        <li><button class="button-a button-a-Active"><a href="#"> ویرایش </a></button></li>
+                                        <li><button class="button-a"><a href="/DeleteRepair/@Model.RepairId"> حذف </a></button></li>
+                                    }
+                                    <li><button class="button-a"> گزارش </button></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header>
+                            <h1>ویرایش تعمیرات</h1>
+                        </header>
+                        <div class="inner form-layer">
+                            <form asp-action="EditDoneRepair" method="post">
+                                <input type="hidden" asp-for="RepairId" />
+                                <input type="hidden" asp-for="UnitStatusId" />
+                                <input type="hidden" asp-for="CustomerId" />
+                                <input type="hidden" asp-for="CompanyId" />
+                                <input type="hidden" asp-for="ReceivedUnitDate" />
+                                <input type="hidden" asp-for="EstimatedToSendUnitDate" />
+                                <input type="hidden" asp-for="RepairDate" />
+                                <input type="hidden" asp-for="DamageDescription" />
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تاریخ فرستادن قطعه</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
+                                            <input type="datetime" asp-for="SendUnitDate" value="@Model.SendUnitDate.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">هزینه برآورد شده</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.EstimatedAmount.ToRial()" aria-describedby="username" disabled="disabled" required>
+                                            <input type="hidden" value="@Model.EstimatedAmount" id="esAmount" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">هزینه قطعی</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.FinalAmount" onkeyup="separateNum(this.value,this);" onblur="sumInput()" id="finalPrice" aria-describedby="username" required>
+                                            <input type="hidden" class="form-control" asp-for="FinalAmount" id="finalFPrice" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تخفیف</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.Discount" onkeyup="separateNum(this.value,this);" onblur="sumInput()" id="discountPrice" aria-describedby="username" required>
+                                            <input type="hidden" class="form-control" asp-for="Discount" id="finalDiscountPrice" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">هزینه کل</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.TotalCost.ToRial()" id="TotalCost" aria-describedby="username" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">پرداخت اولیه</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.ReceivedAmount" onkeyup="separateNum(this.value, this);" name="price" id="price" aria-describedby="username" required>
+                                            <input type="hidden" class="form-control" asp-for="ReceivedAmount" id="finalRecPrice" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">توضیحات نهایی</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <textarea class="form-control no-resiaze" rows="5" asp-for="DoneDescription" aria-describedby="username"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success" id="btnSave"> ویرایش اطلاعات </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.min.js"></script>
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.fa.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type=datetime]').datepicker({ dateFormat: "yy/mm/dd", isRTL: true, showButtonPanel: true });
+    });
+</script>
+
+<script type="text/javascript">
+
+    function separateNum(value, input) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        if (input !== undefined) {
+
+            input.value = x1 + x2;
+        } else {
+            return x1 + x2;
+        }
+    }
+
+    function sumInput() {
+
+        $(document).ready(function () {
+            var myInput = $("#finalPrice");
+            var inputValue = myInput.val();
+
+            inputValue = inputValue.replace(/,\s?/g, "");
+            document.getElementById("finalFPrice").value =
+                inputValue;
+        });
+
+        $(document).ready(function () {
+            var myInput = $("#discountPrice");
+            var inputValue = myInput.val();
+
+            inputValue = inputValue.replace(/,\s?/g, "");
+            document.getElementById("finalDiscountPrice").value =
+                inputValue;
+        });
+
+
+        var finalPrice = document.getElementById('finalFPrice').value;
+        var discount = document.getElementById('finalDiscountPrice').value;
+
+        var m = finalPrice - discount;
+
+        var total = document.getElementById('TotalCost');
+
+        total.value = m;
+
+        var mm = separateNum(total.value, total);
+
+        total.value = mm.toString();
+    }
+
+
+    $(document).ready(function () {
+        var myButton = $("#btnSave");
+        var myInput = $("#price");
+        myButton.click(function () {
+            var inputValue = myInput.val();
+
+            inputValue = inputValue.replace(/,\s?/g, "");
+            document.getElementById("finalRecPrice").value =
+                inputValue;
+        });
+    });
+
+    $(document).ready(function () {
+        var myButton = $("#btnSave");
+        var myInput2 = $("#discountPrice");
+        myButton.click(function () {
+            var inputValue = myInput2.val();
+
+            inputValue = inputValue.replace(/,\s?/g, "");
+            document.getElementById("finalDiscountPrice").value =
+                inputValue;
+        });
+    });
+
+</script>
+
+

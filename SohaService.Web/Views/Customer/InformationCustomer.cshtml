@@ -7,7 +7,7 @@
 <main>
     <div class="container">
         <div class="user-account">
-            <button class="header">صفحه ی @Model.CustomerName @Model.CustomerFamily</button>
+            <button class="header">صفحه ی @Model.CustomerName / @Model.CustomerFamily</button>
             <div class="row">
                 <div class="col-md-3 col-sm-4 col-xs-12">
                     <aside>
@@ -21,6 +21,7 @@
                                         <li><button class="button-a"><a href="/DeleteCustomer/@Model.CustomerId"> حذف </a></button></li>
                                     }
                                     <li><button class="button-a"><a href="/CustomersOrder/@Model.CustomerId"> سفارشات </a></button></li>
+                                    <li><button class="button-a"><a href="/CustomersRepair/@Model.CustomerId"> تعمیرات </a></button></li>
                                     <li><button class="button-a"><a href="/CustomersPay/@Model.CustomerId"> پرداخت ها </a></button></li>
                                     <li><button class="button-a"> گزارش </button></li>
                                 </ul>

@@ -1,4 +1,5 @@
 ﻿@using SohaService.Core.Services.Interfaces
+@using SohaService.DataLayer.Entities.User
 <!DOCTYPE html>
 <html>
 
@@ -8,29 +9,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>پنل مدیر سایت</title>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/BootstrapJalaliDatePicker/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/new.css">
+    <link rel="stylesheet" type="text/css" href="/css/select2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
     <!-- Core CSS - Include with every page -->
     <link href="/AdminPanel/css/bootstrap-rtl.css" rel="stylesheet">
     <link href="/AdminPanel/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <!-- Page-Level Plugin CSS - Dashboard -->
+    <!-- Page-Level Plugin CSS - Dashboard-->
     <link href="/AdminPanel/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
     <link href="/AdminPanel/css/plugins/timeline/timeline.css" rel="stylesheet">
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="/AdminPanel/css/sb-admin.css" rel="stylesheet">
-
+  
 </head>
 
 @inject IPermissionService _PermissionService;
+@inject IUserService _userService
 
 <body>
 
     <div id="wrapper">
-
+        @{
+            User myUser = _userService.GetUserByUserName(User.Identity.Name);
+        }
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/AdminPanel">پنل مدیریت  @User.Identity.Name</a>
+                <a class="navbar-brand" href="/AdminPanel">پنل مدیریت  @myUser.UserAliasName</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -73,6 +88,25 @@
                                 </ul>
                             </li>
                         }
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> سفارشات و تعمیرات انجام شده<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/OrdersForAdmin">سفارشات</a>
+                                </li>
+                                <li>
+                                    <a href="/RepairsForAdmin">تعمیرات</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> تنظیمات پنل پیامک<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/ShowApiKey">کلید وب سرویس</a>
+                                </li>
+                            </ul>
+                        </li>
 
                     </ul>
                     <!-- /#side-menu -->
@@ -91,8 +125,8 @@
 
     </div>
     <!-- /#wrapper -->
-    <!-- Core Scripts - Include with every page -->
-    <script src="/AdminPanel/js/jquery-1.10.2.js"></script>
+    <!-- Core Scripts - Include with every page
+    <script src="/AdminPanel/js/jquery-1.10.2.js"></script>-->
     <script src="/AdminPanel/js/bootstrap.min.js"></script>
     <script src="/AdminPanel/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 

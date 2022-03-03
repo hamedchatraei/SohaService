@@ -13,8 +13,9 @@ namespace SohaService.DataLayer.Entities.Pay
         [Key]
         public int PayId { get; set; }
 
-        [Required]
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }
+
+        public int? RepairId { get; set; }
 
         [Display(Name = "مبلغ")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
@@ -27,6 +28,7 @@ namespace SohaService.DataLayer.Entities.Pay
         #region Relations
 
         public Order Order { get; set; }
+        public Repair.Repair Repair { get; set; }
 
         #endregion
     }

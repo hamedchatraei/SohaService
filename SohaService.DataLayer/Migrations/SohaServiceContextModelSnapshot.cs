@@ -19,6 +19,24 @@ namespace SohaService.DataLayer.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("SohaService.DataLayer.Entities.ApiKey.ApiKey", b =>
+                {
+                    b.Property<int>("ApiKeyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApiKeyCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ApiKeyId");
+
+                    b.ToTable("ApiKeys");
+                });
+
             modelBuilder.Entity("SohaService.DataLayer.Entities.Company.Company", b =>
                 {
                     b.Property<int>("CompanyId")
@@ -47,6 +65,21 @@ namespace SohaService.DataLayer.Migrations
                     b.HasKey("CompanyId");
 
                     b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("SohaService.DataLayer.Entities.ConfirmationStatus.ConfirmationStatus", b =>
+                {
+                    b.Property<int>("ConfirmationStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConfirmationStatusTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ConfirmationStatusId");
+
+                    b.ToTable("ConfirmationStatus");
                 });
 
             modelBuilder.Entity("SohaService.DataLayer.Entities.Customer.Customer", b =>
@@ -125,17 +158,18 @@ namespace SohaService.DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ConfirmationStatusId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("DamageDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Discount")
                         .HasColumnType("int");
-
-                    b.Property<string>("DiscountTitle")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DoneDescription")
                         .HasColumnType("nvarchar(max)");
@@ -143,14 +177,26 @@ namespace SohaService.DataLayer.Migrations
                     b.Property<int>("EstimatedAmount")
                         .HasColumnType("int");
 
+                    b.Property<int>("EstimatedServiceAmount")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EstimatedToSendExpertTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("EstimatedUnitAmount")
+                        .HasColumnType("int");
 
                     b.Property<int>("ExpertId")
                         .HasColumnType("int");
 
+                    b.Property<int>("FinalAmount")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
+
+                    b.Property<string>("OrderAddress")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderChangeLevelDate")
                         .HasColumnType("datetime2");
@@ -173,7 +219,15 @@ namespace SohaService.DataLayer.Migrations
                     b.Property<int>("UnitId")
                         .HasColumnType("int");
 
+                    b.Property<string>("WitchOne")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("registrant")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("OrderId");
+
+                    b.HasIndex("ConfirmationStatusId");
 
                     b.HasIndex("CustomerId");
 
@@ -215,6 +269,10 @@ namespace SohaService.DataLayer.Migrations
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
@@ -264,15 +322,20 @@ namespace SohaService.DataLayer.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PayDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("RepairId")
+                        .HasColumnType("int");
+
                     b.HasKey("PayId");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("RepairId");
 
                     b.ToTable("Pay");
                 });
@@ -319,6 +382,110 @@ namespace SohaService.DataLayer.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("RolePermissions");
+                });
+
+            modelBuilder.Entity("SohaService.DataLayer.Entities.Repair.Repair", b =>
+                {
+                    b.Property<int>("RepairId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ConfirmationStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DamageDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Discount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DoneDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EstimatedAmount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EstimatedToSendUnitDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FinalAmount")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReady")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRepair")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSend")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ReceivedAmount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReceivedUnitDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RemainingAmount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RepairDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("SendUnitDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TotalCost")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UnitName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UnitStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WitchOne")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("registrant")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RepairId");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("ConfirmationStatusId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("UnitStatusId");
+
+                    b.ToTable("Repairs");
+                });
+
+            modelBuilder.Entity("SohaService.DataLayer.Entities.Today.ToDay", b =>
+                {
+                    b.Property<int>("ToDayId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ToDayTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ToDayId");
+
+                    b.ToTable("ToDays");
                 });
 
             modelBuilder.Entity("SohaService.DataLayer.Entities.Unit.Unit", b =>
@@ -407,6 +574,11 @@ namespace SohaService.DataLayer.Migrations
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserAliasName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("UserAvatar")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -445,6 +617,12 @@ namespace SohaService.DataLayer.Migrations
 
             modelBuilder.Entity("SohaService.DataLayer.Entities.Orders.Order", b =>
                 {
+                    b.HasOne("SohaService.DataLayer.Entities.ConfirmationStatus.ConfirmationStatus", "ConfirmationStatus")
+                        .WithMany("Orders")
+                        .HasForeignKey("ConfirmationStatusId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("SohaService.DataLayer.Entities.Customer.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
@@ -468,6 +646,8 @@ namespace SohaService.DataLayer.Migrations
                         .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("ConfirmationStatus");
 
                     b.Navigation("Customer");
 
@@ -517,11 +697,15 @@ namespace SohaService.DataLayer.Migrations
                 {
                     b.HasOne("SohaService.DataLayer.Entities.Orders.Order", "Order")
                         .WithMany("Pays")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("SohaService.DataLayer.Entities.Repair.Repair", "Repair")
+                        .WithMany("Pays")
+                        .HasForeignKey("RepairId");
 
                     b.Navigation("Order");
+
+                    b.Navigation("Repair");
                 });
 
             modelBuilder.Entity("SohaService.DataLayer.Entities.Permission.Permission", b =>
@@ -550,6 +734,41 @@ namespace SohaService.DataLayer.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("SohaService.DataLayer.Entities.Repair.Repair", b =>
+                {
+                    b.HasOne("SohaService.DataLayer.Entities.Company.Company", "Company")
+                        .WithMany("Repairs")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SohaService.DataLayer.Entities.ConfirmationStatus.ConfirmationStatus", "ConfirmationStatus")
+                        .WithMany("Repairs")
+                        .HasForeignKey("ConfirmationStatusId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SohaService.DataLayer.Entities.Customer.Customer", "Customer")
+                        .WithMany("Repairs")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SohaService.DataLayer.Entities.Unit.UnitStatus", "UnitStatus")
+                        .WithMany("Repairs")
+                        .HasForeignKey("UnitStatusId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("ConfirmationStatus");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("UnitStatus");
+                });
+
             modelBuilder.Entity("SohaService.DataLayer.Entities.User.UserRole", b =>
                 {
                     b.HasOne("SohaService.DataLayer.Entities.User.Role", "Role")
@@ -571,12 +790,23 @@ namespace SohaService.DataLayer.Migrations
 
             modelBuilder.Entity("SohaService.DataLayer.Entities.Company.Company", b =>
                 {
+                    b.Navigation("Repairs");
+
                     b.Navigation("SendToCompanies");
+                });
+
+            modelBuilder.Entity("SohaService.DataLayer.Entities.ConfirmationStatus.ConfirmationStatus", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("Repairs");
                 });
 
             modelBuilder.Entity("SohaService.DataLayer.Entities.Customer.Customer", b =>
                 {
                     b.Navigation("Orders");
+
+                    b.Navigation("Repairs");
                 });
 
             modelBuilder.Entity("SohaService.DataLayer.Entities.Expert.Expert", b =>
@@ -603,6 +833,11 @@ namespace SohaService.DataLayer.Migrations
                     b.Navigation("RolePermissions");
                 });
 
+            modelBuilder.Entity("SohaService.DataLayer.Entities.Repair.Repair", b =>
+                {
+                    b.Navigation("Pays");
+                });
+
             modelBuilder.Entity("SohaService.DataLayer.Entities.Unit.Unit", b =>
                 {
                     b.Navigation("Orders");
@@ -612,6 +847,8 @@ namespace SohaService.DataLayer.Migrations
 
             modelBuilder.Entity("SohaService.DataLayer.Entities.Unit.UnitStatus", b =>
                 {
+                    b.Navigation("Repairs");
+
                     b.Navigation("SendToCompanies");
                 });
 

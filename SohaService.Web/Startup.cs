@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -34,8 +36,19 @@ namespace SohaService.Web
                 = CultureInfo.DefaultThreadCurrentUICulture
                     = PersianDateExtensionMethods.GetPersianCulture();
 
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(10080);
+            });
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddRazorPages();
+
+            services.AddDataProtection()
+                // This helps surviving a restart: a same app will find back its keys. Just ensure to create the folder.
+                .PersistKeysToFileSystem(new DirectoryInfo("wwwroot/KeyDirectory/"))
+                // This helps surviving a site update: each app has its own store, building the site creates a new app
+                .SetApplicationName("ProjectName")
+                .SetDefaultKeyLifetime(TimeSpan.FromMinutes(43200));
 
             #region Authentication
 
@@ -74,6 +87,10 @@ namespace SohaService.Web
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IUnitService, UnitService>();
             services.AddTransient<IPayService, PayService>();
+            services.AddTransient<IToDayService, ToDayService>();
+			services.AddTransient<IRepairService, RepairService>();
+			services.AddTransient<IBackupService, BackupService>();
+			services.AddTransient<ISmsService, SmsService>();
 
             #endregion
 
@@ -91,6 +108,7 @@ namespace SohaService.Web
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseMvc();
 

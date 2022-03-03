@@ -22,6 +22,7 @@ namespace SohaService.DataLayer.Entities.Unit
         #region Relations
 
         public List<SendToCompany> SendToCompanies { get; set; }
+        public List<Repair.Repair> Repairs { get; set; }
 
         #endregion
 

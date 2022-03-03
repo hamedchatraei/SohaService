@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SohaService.Core.Convertor;
 using SohaService.Core.DTOs.Order;
 using SohaService.Core.DTOs.Pay;
+using SohaService.Core.Security;
 using SohaService.Core.Services.Interfaces;
 
 namespace SohaService.Web.Controllers
 {
+    [PermissionChecker(1015)]
     public class AccountController : Controller
     {
         private IOrderService _orderService;
@@ -31,7 +33,7 @@ namespace SohaService.Web.Controllers
         {
             if (filterDoneDate == "today")
             {
-                filterDoneDate = DateTime.Now.ToString("d");
+                filterDoneDate = DateTime.Now.ToString();
 
             }
 
@@ -42,31 +44,20 @@ namespace SohaService.Web.Controllers
             }
             else if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
             {
-                DateTime fDate = Convert.ToDateTime(fromDate).ToMiladi();
-
-                fromDate = fDate.ToString("d");
                 toDate = "";
                 filterDoneDate = "";
             }
             else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
             {
-                DateTime tDate = Convert.ToDateTime(toDate).ToMiladi();
-
                 fromDate = "";
-                toDate = tDate.ToString("d");
                 filterDoneDate = "";
             }
             else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
             {
-                DateTime fDate = Convert.ToDateTime(fromDate).ToMiladi();
-                DateTime tDate = Convert.ToDateTime(toDate).ToMiladi();
-
-                fromDate = fDate.ToString("d");
-                toDate = tDate.ToString("d");
                 filterDoneDate = "";
             }
 
-            OrderViewModel order = _orderService.GetDebtors(pageId, filterCustomerId, filterAmount,
+            DebtorsViewModel order = _orderService.GetDebtors(pageId, filterCustomerId, filterAmount,
                 filterDoneDate, fromDate, toDate);
 
             List<SelectListItem> customers = new List<SelectListItem>()
@@ -81,6 +72,18 @@ namespace SohaService.Web.Controllers
 
         #endregion
 
+        #region PrintAccount
+
+        [Route("PrintAccount")]
+        public IActionResult PrintAccount(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            DebtorsViewModel order = _orderService.GetDebtorsForPrint(fromDate,toDate,filterCustomerId);
+
+            return View(order);
+        }
+
+        #endregion
+
         #region ShowAllPays
 
         [Route("ShowAllPays")]
@@ -88,7 +91,7 @@ namespace SohaService.Web.Controllers
         {
             if (filterPayDate == "today")
             {
-                filterPayDate = DateTime.Now.ToString("d");
+                filterPayDate = DateTime.Now.ToString();
 
             }
 
@@ -99,27 +102,16 @@ namespace SohaService.Web.Controllers
             }
             else if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
             {
-                DateTime fDate = Convert.ToDateTime(fromDate).ToMiladi();
-
-                fromDate = fDate.ToString("d");
                 toDate = "";
                 filterPayDate = "";
             }
             else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
             {
-                DateTime tDate = Convert.ToDateTime(toDate).ToMiladi();
-
                 fromDate = "";
-                toDate = tDate.ToString("d");
                 filterPayDate = "";
             }
             else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
             {
-                DateTime fDate = Convert.ToDateTime(fromDate).ToMiladi();
-                DateTime tDate = Convert.ToDateTime(toDate).ToMiladi();
-
-                fromDate = fDate.ToString("d");
-                toDate = tDate.ToString("d");
                 filterPayDate = "";
             }
 
@@ -131,6 +123,18 @@ namespace SohaService.Web.Controllers
             };
             customers.AddRange(_customerService.GetCustomerListItem());
             ViewData["customers"] = new SelectList(customers, "Value", "Text", 0);
+
+            return View(pay);
+        }
+
+        #endregion
+
+        #region PrintPays
+
+        [Route("PrintPays")]
+        public IActionResult PrintPays(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            PayViewModel pay = _payService.GetPaysForPrint(fromDate, toDate, filterCustomerId);
 
             return View(pay);
         }

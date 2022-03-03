@@ -41,7 +41,7 @@
                         </header>
                         <div class="inner form-layer">
                             <div class="row">
-                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                <div class="col-md-4 col-sm-8 col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon">تاریخ ثبت سفارش</span>
                                     </div>
@@ -52,7 +52,7 @@
                                         <input type="text" class="form-control" value="@Model.OrderSetDate.ToShamsi()" disabled="disabled">
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                <div class="col-md-4 col-sm-8 col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon">وضعیت سفارش</span>
                                     </div>
@@ -63,7 +63,7 @@
                                         <input type="text" class="form-control" asp-for="OrderLevelTitle" disabled="disabled">
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                <div class="col-md-4 col-sm-8 col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon">زمان برآورد شده فرستادن کارشناس</span>
                                     </div>
@@ -74,7 +74,7 @@
                                         <input type="text" class="form-control" value="@Model.EstimatedToSendExpertTime.ToShamsi()" disabled="disabled">
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                <div class="col-md-4 col-sm-8 col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon">هزینه برآورد شده</span>
                                     </div>
@@ -87,7 +87,18 @@
                                 </div>
                                 @if (Model.OrderLevelId == 4)
                                 {
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">هزینه قطعی</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.FinalAmount.ToRial()" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">تخفیف</span>
                                         </div>
@@ -98,18 +109,7 @@
                                             <input type="text" class="form-control" value="@Model.Discount.ToRial()" disabled="disabled">
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">دلیل تخفیف</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-sm-8 col-xs-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                            <input type="text" class="form-control" value="@Model.DiscountTitle" disabled="disabled">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">هزینه کل</span>
                                         </div>
@@ -120,7 +120,7 @@
                                             <input type="text" class="form-control" value="@Model.TotalCost.ToRial()" disabled="disabled">
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">پرداخت اولیه</span>
                                         </div>
@@ -131,7 +131,7 @@
                                             <input type="text" class="form-control" value="@Model.ReceivedAmount.ToRial()" disabled="disabled">
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">هزینه باقی مانده</span>
                                         </div>
@@ -143,7 +143,7 @@
                                         </div>
                                     </div>
                                 }
-                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                <div class="col-md-4 col-sm-8 col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon">شرح خرابی</span>
                                     </div>
@@ -156,7 +156,7 @@
                                 </div>
                                 @if (Model.OrderLevelId == 4)
                                 {
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">توضیحات نهایی</span>
                                         </div>
@@ -168,7 +168,7 @@
                                         </div>
                                     </div>
                                 }
-                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                <div class="col-md-4 col-sm-8 col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon">قطعه</span>
                                     </div>
@@ -179,7 +179,7 @@
                                         <input type="text" class="form-control" asp-for="UnitName" disabled="disabled">
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-8 col-xs-12">
+                                <div class="col-md-4 col-sm-8 col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon">مشتری</span>
                                     </div>
@@ -192,7 +192,7 @@
                                 </div>
                                 @if (Model.OrderLevelId == 4)
                                 {
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">کارشناس</span>
                                         </div>
@@ -204,6 +204,17 @@
                                         </div>
                                     </div>
                                 }
+                                <div class="col-md-4 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">کارشناس ثبت کننده</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                        <input type="text" class="form-control" value="@Model.registrant" disabled="disabled">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>

@@ -1,0 +1,45 @@
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.deps.json
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.runtimeconfig.json
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.runtimeconfig.dev.json
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.dll
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\net5.0\ref\SohaService.DataLayer.dll
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.pdb
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.AssemblyInfoInputs.cache
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.AssemblyInfo.cs
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.dll
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\net5.0\ref\SohaService.DataLayer.dll
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.pdb
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.genruntimeconfig.cache
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.csproj.AssemblyReference.cache
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.deps.json
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.runtimeconfig.json
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.runtimeconfig.dev.json
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.dll
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\ref\SohaService.DataLayer.dll
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.pdb
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.csproj.AssemblyReference.cache
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.AssemblyInfoInputs.cache
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.AssemblyInfo.cs
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.dll
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\ref\SohaService.DataLayer.dll
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.pdb
+C:\Users\AMG\Desktop\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.genruntimeconfig.cache
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.deps.json
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.runtimeconfig.json
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.runtimeconfig.dev.json
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.dll
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\bin\Debug\net5.0\SohaService.DataLayer.pdb
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.AssemblyInfoInputs.cache
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.AssemblyInfo.cs
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.dll
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\ref\SohaService.DataLayer.dll
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.pdb
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.genruntimeconfig.cache
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\SohaService.DataLayer.csproj.AssemblyReference.cache
+C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.DataLayer\obj\Debug\net5.0\refint\SohaService.DataLayer.dll

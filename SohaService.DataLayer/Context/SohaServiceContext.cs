@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using SohaService.DataLayer.Entities.ApiKey;
 using SohaService.DataLayer.Entities.Company;
+using SohaService.DataLayer.Entities.ConfirmationStatus;
 using SohaService.DataLayer.Entities.Customer;
 using SohaService.DataLayer.Entities.Expert;
 using SohaService.DataLayer.Entities.Orders;
 using SohaService.DataLayer.Entities.Pay;
 using SohaService.DataLayer.Entities.Permission;
+using SohaService.DataLayer.Entities.Repair;
+using SohaService.DataLayer.Entities.Today;
 using SohaService.DataLayer.Entities.Unit;
 using SohaService.DataLayer.Entities.User;
 
@@ -72,6 +76,30 @@ namespace SohaService.DataLayer.Context
         #region Pay
 
         public DbSet<Pay> Pay { get; set; }
+
+        #endregion
+
+        #region ToDay
+
+        public DbSet<ToDay> ToDays { get; set; }
+
+        #endregion
+
+        #region Repair
+
+        public DbSet<Repair> Repairs { get; set; }
+
+        #endregion
+
+        #region ConfirmationStatus
+
+        public DbSet<ConfirmationStatus> ConfirmationStatus { get; set; }
+
+        #endregion
+
+        #region ApiKey
+
+        public DbSet<ApiKey> ApiKeys { get; set; }
 
         #endregion
 

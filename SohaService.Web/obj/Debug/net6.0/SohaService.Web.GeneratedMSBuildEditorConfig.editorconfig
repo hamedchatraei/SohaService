@@ -1,0 +1,452 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SohaService.Web
+build_property.RootNamespace = SohaService.Web
+build_property.ProjectDir = C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.Web\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Phoenix\Desktop\New folder (2)\SohaService\SohaService\SohaService.Web
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/AcceptORDeny/OrdersForAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xBY2NlcHRPUkRlbnlcT3JkZXJzRm9yQWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/AcceptORDeny/RepairsForAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xBY2NlcHRPUkRlbnlcUmVwYWlyc0ZvckFkbWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/Home/CreateUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xIb21lXENyZWF0ZVVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/Home/DeleteUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xIb21lXERlbGV0ZVVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/Home/EditUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xIb21lXEVkaXRVc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xIb21lXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/Home/ListDeleteUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xIb21lXExpc3REZWxldGVVc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/Home/ShowApiKey.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xIb21lXFNob3dBcGlLZXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/ManageRoles/CreateRole.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xNYW5hZ2VSb2xlc1xDcmVhdGVSb2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/ManageRoles/DeleteRole.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xNYW5hZ2VSb2xlc1xEZWxldGVSb2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/ManageRoles/EditRole.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xNYW5hZ2VSb2xlc1xFZGl0Um9sZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/ManageRoles/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xNYW5hZ2VSb2xlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xTaGFyZWRcX0FkbWluTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/AdminPanel/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5QYW5lbFxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/ManageUser/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlVXNlclxWaWV3c1xBY2NvdW50XExvZ2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/ManageUser/Views/Home/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlVXNlclxWaWV3c1xIb21lXENoYW5nZVBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/ManageUser/Views/Home/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlVXNlclxWaWV3c1xIb21lXEVkaXRQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/ManageUser/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlVXNlclxWaWV3c1xIb21lXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/ManageUser/Views/Shared/_SideBar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlVXNlclxWaWV3c1xTaGFyZWRcX1NpZGVCYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/ManageUser/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlVXNlclxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Areas/ManageUser/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlVXNlclxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Account/Accounts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2NvdW50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Account/PrintAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcmludEFjY291bnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Account/PrintPays.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcmludFBheXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Account/ShowAllPays.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTaG93QWxsUGF5cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Company/AddCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxBZGRDb21wYW55LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Company/Companies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxDb21wYW5pZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Company/DeleteCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxEZWxldGVDb21wYW55LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Company/DeletedCompanies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxEZWxldGVkQ29tcGFuaWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Company/EditCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxFZGl0Q29tcGFueS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Company/InformationCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcGFueVxJbmZvcm1hdGlvbkNvbXBhbnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/AddCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQWRkQ3VzdG9tZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/AddCustomerForRepair.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQWRkQ3VzdG9tZXJGb3JSZXBhaXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/AddCustomersOrderPay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQWRkQ3VzdG9tZXJzT3JkZXJQYXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/AddCustomersRepairPay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQWRkQ3VzdG9tZXJzUmVwYWlyUGF5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/Customers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ3VzdG9tZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/CustomersOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ3VzdG9tZXJzT3JkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/CustomersPay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ3VzdG9tZXJzUGF5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/CustomersRepair.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ3VzdG9tZXJzUmVwYWlyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/DeleteCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcRGVsZXRlQ3VzdG9tZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/DeletedCustomers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcRGVsZXRlZEN1c3RvbWVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/EditCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcRWRpdEN1c3RvbWVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/EditCustomersOrderPay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcRWRpdEN1c3RvbWVyc09yZGVyUGF5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/EditCustomersRepairPay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcRWRpdEN1c3RvbWVyc1JlcGFpclBheS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Customer/InformationCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSW5mb3JtYXRpb25DdXN0b21lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Expert/AddExpert.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZXJ0XEFkZEV4cGVydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Expert/DeletedExperts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZXJ0XERlbGV0ZWRFeHBlcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Expert/DeleteExpert.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZXJ0XERlbGV0ZUV4cGVydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Expert/EditExpert.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZXJ0XEVkaXRFeHBlcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Expert/Experts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZXJ0XEV4cGVydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Expert/InformationExpert.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZXJ0XEluZm9ybWF0aW9uRXhwZXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Home/BackupDB.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCYWNrdXBEQi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/AddOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcQWRkT3JkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/AddSendToCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcQWRkU2VuZFRvQ29tcGFueS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/BackFromCompanies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcQmFja0Zyb21Db21wYW5pZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/DeleteBackFromCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGVsZXRlQmFja0Zyb21Db21wYW55LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/DeletedOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGVsZXRlZE9yZGVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/DeleteOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGVsZXRlT3JkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/DeleteSendToCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGVsZXRlU2VuZFRvQ29tcGFueS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/DeniedOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGVuaWVkT3JkZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/DoneOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRG9uZU9yZGVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/EditBackFromCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRWRpdEJhY2tGcm9tQ29tcGFueS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/EditDoneOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRWRpdERvbmVPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/EditOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRWRpdE9yZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/EditSendToCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRWRpdFNlbmRUb0NvbXBhbnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/InformationOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcSW5mb3JtYXRpb25PcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/InformationSendToCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcSW5mb3JtYXRpb25TZW5kVG9Db21wYW55LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/Orders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/PrintDoneOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcUHJpbnREb25lT3JkZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/PrintOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcUHJpbnRPcmRlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/SendToCompanies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcU2VuZFRvQ29tcGFuaWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/SetBackFromCompany.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcU2V0QmFja0Zyb21Db21wYW55LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Order/SetOrderDone.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcU2V0T3JkZXJEb25lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/AddRepair.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXEFkZFJlcGFpci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/DeletedRepairs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXERlbGV0ZWRSZXBhaXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/DeleteRepair.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXERlbGV0ZVJlcGFpci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/DeniedRepairs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXERlbmllZFJlcGFpcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/DoneRepair.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXERvbmVSZXBhaXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/DoneRepairs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXERvbmVSZXBhaXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/EditDoneRepair.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXEVkaXREb25lUmVwYWlyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/EditRepair.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXEVkaXRSZXBhaXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/EditRepairedRepair.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXEVkaXRSZXBhaXJlZFJlcGFpci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/InformationRepair.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXEluZm9ybWF0aW9uUmVwYWlyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/RepairedRepair.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXFJlcGFpcmVkUmVwYWlyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/RepairedRepairs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXFJlcGFpcmVkUmVwYWlycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Repair/Repairs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYWlyXFJlcGFpcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Shared/_Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Shared/_MainMenu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NYWluTWVudS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Shared/_MenuBar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NZW51QmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Shared/_MetaTags.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NZXRhVGFncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Shared/_Styles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TdHlsZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/AddUnit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxBZGRVbml0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/AddUnitStatus.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxBZGRVbml0U3RhdHVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/DeletedUnits.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxEZWxldGVkVW5pdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/DeleteUnit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxEZWxldGVVbml0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/DeleteUnitStatus.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxEZWxldGVVbml0U3RhdHVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/EditUnit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxFZGl0VW5pdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/EditUnitStatus.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxFZGl0VW5pdFN0YXR1cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/InformationUnit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxJbmZvcm1hdGlvblVuaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/InformationUnitStatus.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxJbmZvcm1hdGlvblVuaXRTdGF0dXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/Units.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxVbml0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Unit/UnitStatuses.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxVbml0U3RhdHVzZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/wwwroot/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdFxfVmlld1N0YXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 

@@ -4,58 +4,229 @@
     ViewData["Title"] = "قطعه های حذف شده";
 }
 
-<div class="row">
-    <form>
-        <div class="col-sm-5 col-md-5">
-            <input type="text" name="filterName" class="form-control" placeholder="نام قطعه" />
+<div class="filters">
+
+    <form class="filters-form">
+        <div class="filter-input" style="margin: 10px 0 0">
+            <input id="txtName" type="text" name="filterName" class="form-control" placeholder="نام شرکت" />
         </div>
-        <div class="col-sm-2 col-md-2" style="margin: 10px 0 0">
-            <button type="submit" class="btn btn-info">بگرد</button>
-            <a class="btn btn-default btn-sm" href="/DeletedUnits">خالی</a>
+        <div class="filter-input" style="margin: 10px 0 0">
+            <a id="btnEmpty" class="btn btn-default btn-sm" href="/Orders">پیش فرض</a>
         </div>
     </form>
-</div>
 
-<table class="table table-bordered table-condensed table-hover table-responsive table-striped text-center">
-    <thead>
-    <tr class="success">
-        <th class="text-center">نام قطعه</th>
-        <th class="text-center">دستورات</th>
-    </tr>
-    </thead>
-    <tbody>
+    <div class="col-md-12" style="margin: 10px 0;">
 
-    @foreach (var item in Model.Units)
+        <div class="main-content">
 
-    {
-        <tr>
-            <td>@item.UnitName</td>
-            <td>
-                <a href="/InformationUnit/@item.UnitId" class="btn btn-primary btn-sm">
-                    صفحه مشخصات
-                </a>
-            </td>
-        </tr>
-    }
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-wrap">
 
-    </tbody>
-</table>
+                            <table class="table table-responsive-xl">
+                                <thead>
+                                    <tr>
 
-<div class="row">
-    <div class="col-sm-6">
-        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
-            <ul class="pagination">
+                                        <th style="width: 10%;">نام قطعه</th>
+                                        <th style="width: 20%;">دستورات</th>
 
-                @for (int i = 1; i <= Model.PageCount; i++)
-                {
-                    <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
-                        <a href="/DeletedUnits?PageId=@i">@i</a>
-                    </li>
-                }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Units)
+                                    {
+                                        <tr class="alert" role="alert">
+                                            <td>@item.UnitName</td>
+                                            <td>
+                                                <a href="/InformationUnit/@item.UnitId" class="btn btn-primary btn-sm">
+                                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.08 512.08" style="enable-background:new 0 0 512.08 512.08;" xml:space="preserve">
+                                                    <g>
+                                                    <g>
+                                                    <polygon points="82.944,79.656 34.192,134.84 16,116.328 4.592,127.544 34.816,158.312 94.944,90.248   "></polygon>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="88.936" width="188.032" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="136.824" width="352.64" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="222.744" width="188.032" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="270.632" width="352.64" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="356.568" width="188.032" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                    <g>
+                                                    <rect x="159.44" y="404.456" width="352.64" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                    <g>
+                                                    <path d="M43.248,210.76C19.408,210.76,0,230.472,0,254.68c0,24.208,19.408,43.92,43.248,43.92    c23.856,0,43.264-19.696,43.264-43.92C86.512,230.456,67.104,210.76,43.248,210.76z M43.248,282.6    C28.208,282.6,16,270.072,16,254.68c0-15.392,12.224-27.92,27.248-27.92c15.024,0,27.264,12.528,27.264,27.92    C70.512,270.072,58.288,282.6,43.248,282.6z"></path>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                    <g>
+                                                    <path d="M43.248,344.584C19.408,344.584,0,364.28,0,388.504s19.408,43.92,43.248,43.92c23.856,0,43.264-19.696,43.264-43.92    S67.104,344.584,43.248,344.584z M43.248,416.424c-15.024,0-27.248-12.528-27.248-27.92c0-15.392,12.224-27.92,27.248-27.92    c15.024,0,27.264,12.528,27.264,27.92C70.512,403.896,58.272,416.424,43.248,416.424z"></path>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                    <g>
+                                                    </g>
+                                                </svg>
+                                                </a>
+                                            </td>
 
-            </ul>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                        <ul class="pagination">
+
+                            @for (int i = 1; i <= Model.PageCount; i++)
+                            {
+                                <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
+                                    <a href="/Units?PageId=@i">@i</a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        
+
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+
+
+
+        function soha_ajax(pageId=1) {
+            console.log('');
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("DeletedUnits")",
+                dataType: "text",
+                data:
+                {
+                    filterName: $('#txtName').val(),
+                    pageId: pageId
+                },
+                success: function (msg) {
+                    var q = $(msg).find('.main-content');
+                    $('.main-content').replaceWith(q);
+                    console.log(q);
+                },
+                error: function (req, status, error) {
+                    console.log(msg);
+                }
+            });
+        }
+
+        $('.form-control').on('input',function() {
+
+            var date = $(".button-dayOfweek-active .ready-date").text();
+            soha_ajax();
+
+        });
+
+        $("body").on('click','#btnEmpty',function (e) {
+
+            e.preventDefault();
+
+            $('.form-control').val('');
+            $(".button-dayOfweek").removeClass("button-dayOfweek-active");
+            $(".today").addClass("button-dayOfweek-active");
+            soha_ajax($(".days").data("today"));
+
+        });
+
+        $("body").on('click','.button-dayOfweek',function() {
+
+            $(".button-dayOfweek").removeClass("button-dayOfweek-active");
+            $(this).addClass("button-dayOfweek-active");
+            var date = $(this).find('.ready-date').text();
+            console.log(date);
+            soha_ajax(date);
+
+        });
+
+        $("body").on('click','.pagination a',function (e) {
+            e.preventDefault();
+            
+            var pageId = $(this).text();
+            soha_ajax(pageId);
+        });
+
+
+        $('#ui-datepicker-div').on('click','.ui-datepicker-calendar td a',function(e) {
+
+            $(".button-dayOfweek-active").removeClass("button-dayOfweek-active");
+           // $(this).addClass("button-dayOfweek-active");
+            var date = $('#pcal1').val();
+            console.log(date);
+            soha_ajax(date);
+
+        });
+
+    });
+</script>
 
 

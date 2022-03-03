@@ -70,7 +70,7 @@ namespace SohaService.Web.Areas.ManageUser.Controllers
                     else
                     {
                         ReturnUrl = "/";
-                        return Redirect(ReturnUrl);
+                            return Redirect(ReturnUrl);
                     }
 
 #pragma warning disable CS0162 // Unreachable code detected

@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using SohaService.Core.DTOs.Company;
+using SohaService.Core.DTOs.Order;
 using SohaService.Core.Services.Interfaces;
 using SohaService.DataLayer.Entities.Company;
+using SohaService.Core.Security;
 
 namespace SohaService.Web.Controllers
 {
@@ -20,6 +24,7 @@ namespace SohaService.Web.Controllers
 
         #region Companies
 
+        [PermissionChecker(1016)]
         [Route("Companies")]
         public IActionResult Companies(int pageId = 1, string filterName = "", string filterPhone = "")
         {
@@ -32,6 +37,7 @@ namespace SohaService.Web.Controllers
 
         #region DeletedCompanies
 
+        [PermissionChecker(1016)]
         [Route("DeletedCompanies")]
         public IActionResult DeletedCompanies(int pageId = 1, string filterName = "", string filterPhone = "")
         {
@@ -44,6 +50,7 @@ namespace SohaService.Web.Controllers
 
         #region InformationCompany
 
+        [PermissionChecker(1016)]
         [Route("InformationCompany/{id}")]
         public IActionResult InformationCompany(int id)
         {
@@ -56,6 +63,7 @@ namespace SohaService.Web.Controllers
 
         #region AddCompany
 
+        [PermissionChecker(1017)]
         [Route("AddCompany")]
         public IActionResult AddCompany()
         {
@@ -80,6 +88,7 @@ namespace SohaService.Web.Controllers
 
         #region EditCompany
 
+        [PermissionChecker(1018)]
         [Route("EditCompany/{id}")]
         public IActionResult EditCompany(int id)
         {
@@ -106,6 +115,7 @@ namespace SohaService.Web.Controllers
 
         #region DeleteCompany
 
+        [PermissionChecker(1019)]
         [Route("DeleteCompany/{id}")]
         public IActionResult DeleteCompany(int id)
         {
@@ -124,5 +134,6 @@ namespace SohaService.Web.Controllers
         }
 
         #endregion
+        
     }
 }

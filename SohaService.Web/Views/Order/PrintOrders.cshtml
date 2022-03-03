@@ -1,0 +1,160 @@
+﻿@using SohaService.Core.Convertor
+@model SohaService.Core.DTOs.Order.OrderViewModel
+@{
+    Layout = "";
+}
+
+<div>
+    @foreach (var item in Model.InformationOrder)
+    {
+        <div class="d-flex">
+
+            <div class="flex-item large f">
+
+                <div class="sd-flex b">
+                    <div class="ssd-flex">
+                        <p>آدرس :</p>
+                        <span>
+                            @item.CustomerAddress
+                        </span>
+                    </div>
+                    <div class="ssd-flex">
+                        <p>شرح خرابی :</p>
+                        <span>
+                            @item.DamageDescription
+                        </span>
+                    </div>
+                </div>
+
+                <div class="sd-flex">
+                    <div class="ssd-flex">
+                        <p>تاریخ :<span>@item.OrderSetDate.Date.ToShamsi()</span></p>
+                        <p>ساعت :<span>@item.OrderSetDate.Hour.ToString("00"):@item.OrderSetDate.Minute.ToString("00")</span></p>
+                    </div>
+                    <div class="ssd-flex">
+                        <p>مشتری :<span>@item.CustomerName</span></p>
+                        <p>موبایل :<span>@item.CustomerMobile</span></p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex-item large">
+                <div class="sd-flex b c">
+                    <div class="ssd-flex">
+                        <p>هزینه برآورد شده سرویس :<span>@item.EstimatedServiceAmount.ToRial()</span></p>
+                        <p>هزینه برآورد شده محصول :<span>@item.EstimatedUnitAmount.ToRial()</span></p>
+                        <p>هزینه برآورد شده :<span>@item.EstimatedAmount.ToRial()</span></p>
+                        <p>تخفیف :<span></span></p>
+                        <p class="lastRow">هزینه دریافت شده :<span></span></p>
+                        <p class="lastRow">کارشناس :<span></span></p>
+                        <p class="lastRow">امضاء مشتری :<span></span></p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="flex-item">
+                <div class="ssd-flex">
+                    <p>توضیحات نهایی :<span></span></p>
+                </div>
+                <div class="ssd-flex">
+                    <p>تاریخ اعزام :<span>@item.EstimatedToSendExpertTime.Date.ToShamsi()</span></p>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+<style>
+
+    .d-flex {
+        width: 98%;
+        display: flex;
+        /* background-color: #ddd; */
+        height: 300px;
+        border-top: 2px solid #333;
+        flex-direction: column;
+        direction: rtl;
+        color: #333;
+        margin: 35px 8px;
+    }
+
+    .d-flex:nth-child(3n) {
+        page-break-after: always;
+    }
+    .flex-item.large.f .sd-flex.b .ssd-flex {
+        min-height: 65px;
+    }
+
+    .flex-item {
+        border-bottom: 1px solid #333;
+        display: flex;
+        flex-basis: 20%;
+    }
+
+    .sd-flex {
+        flex-basis: 45%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #333;
+    }
+
+        .sd-flex.b {
+            flex-basis: 55%;
+            display: flex;
+            flex-direction: column;
+        }
+
+    .ssd-flex {
+        flex-basis: 50%;
+        border: 1px solid #333;
+    }
+
+    p {
+        font-size: 14px;
+        margin: 10px;
+        display: inline-block;
+        font-weight: bold
+    }
+
+    span {
+        margin: 10px 10px;
+        font-size: 16px;
+    }
+
+    .d-flex {
+        /* background-color: #ddd; */
+        color: #333;
+    }
+
+    .sd-flex.b.c {
+        flex-basis: 100%;
+        border-bottom: unset;
+        border-top: unset;
+    }
+
+        .sd-flex.b.c p {
+            width: 35%;
+        }
+
+        .sd-flex.b.c .ssd-flex {
+            border-top: unset;
+        }
+    
+    p.lastRow {
+        width: 30% !important;
+    }
+</style>
+<script>
+
+    $('html').dblclick(function() {
+        var margin = $('.d-flex').css('margin');
+        var person = prompt("فاصله بین فرم ها", margin);
+        if (person != null) {
+            $('.d-flex').css('margin', person);
+        }
+    });
+
+</script>

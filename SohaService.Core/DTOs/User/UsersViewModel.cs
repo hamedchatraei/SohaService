@@ -20,6 +20,11 @@ namespace SohaService.Core.DTOs.User
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string UserName { get; set; }
 
+        [Display(Name = "نام نمایشی کاربر")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string UserAliasName { get; set; }
+
         [Display(Name = "موبایل")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(11, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
@@ -37,7 +42,13 @@ namespace SohaService.Core.DTOs.User
     public class EditUserViewModel
     {
         public int UserId { get; set; }
+
         public string UserName { get; set; }
+
+        [Display(Name = "نام نمایشی کاربر")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string UserAliasName { get; set; }
 
         [Display(Name = "موبایل")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]

@@ -3,14 +3,18 @@
 @using SohaService.Core.DTOs.Order
 @using SohaService.Core.Services.Interfaces
 @model SohaService.Core.DTOs.Order.OrderViewModel
+@inject IOrderService _orderService
 
 @{
     ViewData["Title"] = "سفارشات";
 
+    DateTime esTime = Convert.ToDateTime(ViewData["esTime"]);
+    string esTimeToday = DateTime.Now.ToString();
+
     PersianCalendar pc = new PersianCalendar();
 
-    DayOfWeek nowDay = pc.GetDayOfWeek(DateTime.Now);
-    DateTime nowTime = DateTime.Now;
+    DayOfWeek nowDay = pc.GetDayOfWeek(esTime);
+    DateTime nowTime = esTime;
     bool isSa = false;
     bool isSu = false;
     bool isMo = false;
@@ -115,144 +119,304 @@
             }
     }
     string today = "button-dayOfweek-active today";
-   
+
 }
 
-<div>
-    <button class="button-dayOfweek @if(isSa) {@today;}">شنبه <br />    <span class="ready-date"> @sa </span> </button>
-    <button class="button-dayOfweek @if(isSu) {@today;}">یکشنبه <br />  <span class="ready-date"> @su </span> </button>
-    <button class="button-dayOfweek @if(isMo) {@today;}">دوشنبه <br />  <span class="ready-date"> @mo </span> </button>
-    <button class="button-dayOfweek @if(isTu) {@today;}">سه شنبه <br /> <span class="ready-date">  @tu</span>  </button>
-    <button class="button-dayOfweek @if(isWe) {@today;}">چهارشنبه <br /><span class="ready-date"> @we </span> </button>
-    <button class="button-dayOfweek @if(isTh) {@today;}">پنجشنبه <br /> <span class="ready-date">  @th</span> </button>
-    <button class="button-dayOfweek @if(isFri){@today;}">جمعه <br />    <span class="ready-date"> @fri</span> </button>
-</div>
+<div class="filters">
+    <div class="days" data-today="@esTimeToday">
+        <button id="prevWeek"><</button>
+        <button class="button-dayOfweek @if (isSa) {@today;}">شنبه <br /> <span class="ready-date"> @sa </span>    <br /> <span class="count-order"> @_orderService.GetCountOrderByDate(Convert.ToDateTime(sa).Date) </span> </button>
+        <button class="button-dayOfweek @if (isSu) {@today;}">یکشنبه <br /> <span class="ready-date"> @su </span>  <br /> <span class="count-order"> @_orderService.GetCountOrderByDate(Convert.ToDateTime(su).Date) </span> </button>
+        <button class="button-dayOfweek @if (isMo) {@today;}">دوشنبه <br /> <span class="ready-date"> @mo </span>  <br /> <span class="count-order"> @_orderService.GetCountOrderByDate(Convert.ToDateTime(mo).Date) </span> </button>
+        <button class="button-dayOfweek @if (isTu) {@today;}">سه شنبه <br /> <span class="ready-date"> @tu</span>  <br /> <span class="count-order"> @_orderService.GetCountOrderByDate(Convert.ToDateTime(tu).Date) </span> </button>
+        <button class="button-dayOfweek @if (isWe) {@today;}">چهارشنبه <br /><span class="ready-date"> @we </span> <br /> <span class="count-order"> @_orderService.GetCountOrderByDate(Convert.ToDateTime(we).Date) </span> </button>
+        <button class="button-dayOfweek @if (isTh) {@today;}">پنجشنبه <br /> <span class="ready-date"> @th</span>  <br /> <span class="count-order"> @_orderService.GetCountOrderByDate(Convert.ToDateTime(th).Date) </span> </button>
+        <button class="button-dayOfweek @if (isFri){@today;}">جمعه <br /> <span class="ready-date"> @fri</span>    <br /> <span class="count-order"> @_orderService.GetCountOrderByDate(Convert.ToDateTime(fri).Date) </span> </button>
+        <button id="nextWeek">></button>
+    </div>
 
-<div class="row">
-    <form>
-        <div class="col-sm-5 col-md-5">
-            <input id="txtDmg" type="text" name="filterDamageDescription" class="form-control" placeholder="شرح خرابی" />
+
+    <form class="filters-form">
+        <div class="filter-input" style="margin: 10px 0 0">
+            <input id="txtDmg" type="text" name="filterCustomerMobile" class="form-control" placeholder="موبایل مشتری" />
         </div>
-        <div class="col-sm-5 col-md-5" style="margin: 10px 0 0">
-            <select id="sCustomer" class="form-control" name="customerId" asp-items="@(ViewData["customers"] as SelectList)"></select>
+        <div class="filter-input" style="margin: 10px 0 0">
+            <select id="sCustomer" class="form-control sohaselect" name="customerId" asp-items="@(ViewData["customers"] as SelectList)"></select>
         </div>
-        <div class="col-sm-5 col-md-5" style="margin: 10px 0 0">
-            <select id="sUnit" class="form-control" name="unitId" asp-items="@(ViewData["units"] as SelectList)"></select>
+        <div class="filter-input" style="margin: 10px 0 0">
+            <select id="sUnit" class="form-control sohaselect" name="unitId" asp-items="@(ViewData["units"] as SelectList)"></select>
         </div>
-        <div class="col-sm-5 col-md-5">
+        <div class="filter-input" style="margin: 10px 0 0">
             <input type="datetime" id="pcal1" class="form-control" style="text-align: right" placeholder="انتخاب تاریخ ..." autocomplete="off">
         </div>
-        <div class="col-sm-2 col-md-2" style="margin: 10px 0 0">
+        <div class="filter-input" style="margin: 10px 0 0">
             <a id="btnEmpty" class="btn btn-default btn-sm" href="/Orders">پیش فرض امروز</a>
         </div>
     </form>
-</div>
-<div class="col-md-12" style="margin: 10px 0;">
 
-    <a href="/AddOrder" class="btn btn-outline btn-success">افزودن سفارش جدید</a>
+    <div class="col-md-12 actions">
 
-</div>
+        <a href="/AddOrder/20" class="btn btn-outline btn-success">افزودن سفارش جدید</a>
+        <form method="post">
+            <button type="submit" id="btnPrint" class="btn btn-outline btn-success">چاپ</button>
+        </form>
 
-<div class="main-content">
+    </div>
 
-    <table class="table table-bordered table-condensed table-hover table-responsive table-striped text-center">
-        <thead>
-            <tr class="success">
-                <th class="text-center">مشتری</th>
-                <th class="text-center">موبایل</th>
-                <th class="text-center">آدرس</th>
-                <th class="text-center">قطعه</th>
-                <th class="text-center">شرح خرابی</th>
-                <th class="text-center">مرحله سفارش</th>
-                <th class="text-center">دستورات</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="col-md-12" style="margin: 10px 0;">
 
-        @foreach (var item in Model.InformationOrder)
+        <div class="main-content">
 
-        {
-            <tr>
-                <td>@item.CustomerNameFamily</td>
-                <td>@item.CustomerMobile</td>
-                <td>@item.CustomerAddress</td>
-                <td>@item.UnitName</td>
-                <td>@item.DamageDescription</td>
-                @if (item.OrderLevelId == 1)
-                {
-                    <td>
-                        <a href="" class="btn btn-primary btn-sm">
-                            آماده برای تعمیر
-                        </a>
-                    </td>
-                }
-                else
-                {
-            <td>
-                <a href="" class="btn btn-danger btn-sm">
-                    برگشت شده از شرکت
-                </a>
-            </td>
-                }
-                <td>
-                    <a href="/InformationOrder/@item.OrderId" class="btn btn-primary btn-sm">
-                        صفحه مشخصات
-                    </a>
-                    @if (item.OrderLevelId == 1)
-                    {
-                        <a href="/AddSendToCompany/@item.OrderId" class="btn btn-success btn-sm">
-                            ارسال به شرکت
-                        </a>
-                    }
-                    <a href="/SetOrderDone/@item.OrderId" class="btn btn-default btn-sm">
-                        انجام شده
-                    </a>
-                </td>
-            </tr>
-        }
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-wrap">
+                            <table class="table table-responsive-xl">
+                                <thead>
+                                    <tr>
 
-        </tbody>
-    </table>
+                                        <th style="width: 10%;">مشتری</th>
+                                        <th style="width: 10%;">موبایل</th>
+                                        <th style="width: 16%;">آدرس</th>
+                                        <th style="width: 10%;">قطعه</th>
+                                        <th style="width: 14%;">شرح خرابی</th>
+                                        <th style="width: 15%;">مرحله سفارش</th>
+                                        <th style="width: 20%;">دستورات</th>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
-                <ul class="pagination">
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var item in Model.InformationOrder)
+                                {
+                                    <tr class="alert" role="alert">
+                                        <td>@item.CustomerNameFamily</td>
+                                        <td>@item.CustomerMobile</td>
+                                        <td>@item.CustomerAddress</td>
+                                        <td>@item.UnitName</td>
+                                        <td>@item.DamageDescription</td>
+                                        @if (item.OrderLevelId == 1)
+                                        {
+                                            <td>
+                                                <a href="" class="waiting">
+                                                    آماده برای تعمیر
+                                                </a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <a href="" class="btn btn-danger company btn-sm">
+                                                    برگشت شده از شرکت
+                                                </a>
+                                            </td>
+                                        }
+                                        <td>
+                                            <a href="/InformationOrder/@item.OrderId" class="btn btn-primary btn-sm">
+                                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.08 512.08" style="enable-background:new 0 0 512.08 512.08;" xml:space="preserve">
+                                                <g>
+                                                <g>
+                                                <polygon points="82.944,79.656 34.192,134.84 16,116.328 4.592,127.544 34.816,158.312 94.944,90.248   "></polygon>
+                                                        </g>
+                                                    </g>
+                                                <g>
+                                                <g>
+                                                <rect x="159.44" y="88.936" width="188.032" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                <g>
+                                                <g>
+                                                <rect x="159.44" y="136.824" width="352.64" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                <g>
+                                                <g>
+                                                <rect x="159.44" y="222.744" width="188.032" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                <g>
+                                                <g>
+                                                <rect x="159.44" y="270.632" width="352.64" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                <g>
+                                                <g>
+                                                <rect x="159.44" y="356.568" width="188.032" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                <g>
+                                                <g>
+                                                <rect x="159.44" y="404.456" width="352.64" height="16"></rect>
+                                                        </g>
+                                                    </g>
+                                                <g>
+                                                <g>
+                                                <path d="M43.248,210.76C19.408,210.76,0,230.472,0,254.68c0,24.208,19.408,43.92,43.248,43.92    c23.856,0,43.264-19.696,43.264-43.92C86.512,230.456,67.104,210.76,43.248,210.76z M43.248,282.6    C28.208,282.6,16,270.072,16,254.68c0-15.392,12.224-27.92,27.248-27.92c15.024,0,27.264,12.528,27.264,27.92    C70.512,270.072,58.288,282.6,43.248,282.6z"></path>
+                                                        </g>
+                                                    </g>
+                                                <g>
+                                                <g>
+                                                <path d="M43.248,344.584C19.408,344.584,0,364.28,0,388.504s19.408,43.92,43.248,43.92c23.856,0,43.264-19.696,43.264-43.92    S67.104,344.584,43.248,344.584z M43.248,416.424c-15.024,0-27.248-12.528-27.248-27.92c0-15.392,12.224-27.92,27.248-27.92    c15.024,0,27.264,12.528,27.264,27.92C70.512,403.896,58.272,416.424,43.248,416.424z"></path>
+                                                        </g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                </svg>
+                                            </a>
+                                            @if (item.OrderLevelId == 1)
+                                            {
+                                                <a href="/AddSendToCompany/@item.OrderId" class="btn btn-success btn-sm">
+                                                    <svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" xml:space="preserve">
+                                                    <path id="XMLID_2_" d="M224,9h-26V2h-54v7h-26v131h44v-28h18v28h44V9z M153,97h-19V80h19V97z M153,71h-19V52h19V71z M153,44h-19V27  h19V44z M180,97h-18V80h18V97z M180,71h-18V52h8.3h0.1h9.5V71z M180,44h-9.5h-0.1H162V27h8.3h0.1h9.5V44z M208,97h-18V80h18V97z   M208,71h-17.8H190V52h18V71z M208,44h-18V27h18V44z M254.6,156.3c-3.3-9-15.4-14-24.3-10.7l-64,23.7c0.5,4.4,0.4,11.8-1.5,15.8  c-5.3,11.6-20.9,16.8-32.4,11.5l-42.7-19.2l2.9-7.3l42.7,19.2c8.7,3.6,19.2-0.3,22.6-9c1.3-2.7,1.8-5.8,1.4-8.4  c0.1-2.9-1-5.9-2.5-8.2c-2.1-2.6-4.6-4.6-7.9-6.2l-77.6-34.4c-6.8-3.9-15-5.4-23.2-3.5c-1.8,0.4-3.5,0.9-5.1,1.7l-0.2,0.1l-0.2,0.2  l-14,11.9L0,157.7v74.6l36.5-34.7l77.2,23.3c6.5,2.1,13.9,2.2,19.7,0l109.8-40.7C255.6,175.8,258,165.3,254.6,156.3z"></path>
+                                                    </svg>
+                                                </a>
+                                            }
+                                            <a href="/SetOrderDone/@item.OrderId" class="btn btn-default btn-sm">
+                                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 400 400" style="enable-background:new 0 0 400 400;" xml:space="preserve">
+                                                <g>
+                                                <g>
+                                                <path d="M199.996,0C89.713,0,0,89.72,0,200s89.713,200,199.996,200S400,310.28,400,200S310.279,0,199.996,0z M199.996,373.77    C104.18,373.77,26.23,295.816,26.23,200c0-95.817,77.949-173.769,173.766-173.769c95.817,0,173.771,77.953,173.771,173.769    C373.768,295.816,295.812,373.77,199.996,373.77z"></path>
+                                                <path d="M272.406,134.526L169.275,237.652l-41.689-41.68c-5.123-5.117-13.422-5.12-18.545,0.003    c-5.125,5.125-5.125,13.425,0,18.548l50.963,50.955c2.561,2.558,5.916,3.838,9.271,3.838s6.719-1.28,9.279-3.842    c0.008-0.011,0.014-0.022,0.027-0.035L290.95,153.071c5.125-5.12,5.125-13.426,0-18.546    C285.828,129.402,277.523,129.402,272.406,134.526z"></path>
+                                                        </g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                <g>
+                                                    </g>
+                                                </svg>
+                                            </a>
+                                        </td>
 
-                    @for (int i = 1; i <= Model.PageCount; i++)
-                    {
-                        <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
-                            <a id="aPage"  href="/Orders?PageId=@i">@i</a>
-                        </li>
-                    }
+                                    </tr>
 
-                </ul>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                            <ul class="pagination">
+                                @if (Model.CurrentPage > 1)
+                                {
+                                    <a id="aFirstPage" href="" class="paginate_button">اولین صفحه</a>
+                                    <a id="aPreviousPage" href="" class="paginate_button">قبلی</a>
+                                }
+
+                                @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                                {
+                                    <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
+                                        <a id="aPage" href="/Orders?PageId=@i">@i</a>
+                                    </li>
+                                }
+
+                                @if (Model.CurrentPage < Model.PageCount)
+                                {
+                                    <a id="aNextPage" href="" class="paginate_button">بعدی</a>
+                                    <a id="aLastPage" href="" class="paginate_button">آخرین صفحه</a>
+                                }
+                                <a id="pageCount" hidden>@Model.PageCount</a>
+                                <a id="currentPage" hidden>@Model.CurrentPage</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            
         </div>
     </div>
+
+
 </div>
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.min.js"></script>
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.fa.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type=datetime]').datepicker({ dateFormat: "yy/mm/dd", isRTL: true, showButtonPanel: true });
+    });
+</script>
 
 <script>
     $(document).ready(function () {
 
-        function soha_ajax(rd = "",pageId=1)
-        {
 
+
+        function soha_ajax(rd = "",pageId=1) {
+            console.log('');
             $.ajax({
                 type: "POST",
                 url: "@Url.Action("Orders")",
                 dataType: "text",
                 data:
                 {
-                    filterDamageDescription: $('#txtDmg').val(),
+                    filterCustomerMobile: $('#txtDmg').val(),
                     customerId: $('#sCustomer').val(),
                     unitId: $('#sUnit').val(),
                     estimatedTime: rd,
                     pageId : pageId,
-        },
+                },
                 success: function (msg) {
-                    var q = $(msg).find('.main-content');
-                    $('.main-content').replaceWith(q);
+                    var q = $(msg).find('.days');
+                    var qq = $(msg).find('.main-content');
+                    $('.days').replaceWith(q);
+                    $('.main-content').replaceWith(qq);
                     console.log(q);
                 },
                 error: function (req, status, error) {
@@ -261,25 +425,52 @@
             });
         }
 
+        function printOrder(today = "") {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("PrintOrders")",
+                dataType: "text",
+                data:
+                {
+                    date: today
+                },
+                success: function(r) {
+                    $('html').html(r);
+                }
+            });
+        }
+
+        $("#btnPrint").click(function (e) {
+            e.preventDefault();
+
+            var date = $(".button-dayOfweek-active .ready-date").text();
+
+            console.log(date);
+
+            printOrder(date);
+
+        });
+
         $('.form-control').on('input',function() {
 
             var date = $(".button-dayOfweek-active .ready-date").text();
+            console.log($('#pcal1').val());
             soha_ajax(date);
 
         });
 
-        $("#btnEmpty").click(function (e) {
+        $("body").on('click','#btnEmpty',function (e) {
 
             e.preventDefault();
 
             $('.form-control').val('');
             $(".button-dayOfweek").removeClass("button-dayOfweek-active");
             $(".today").addClass("button-dayOfweek-active");
-            soha_ajax($(".today .ready-date").text());
+            soha_ajax($(".days").data("today"));
 
         });
 
-        $(".button-dayOfweek").click(function() {
+        $("body").on('click','.button-dayOfweek',function() {
 
             $(".button-dayOfweek").removeClass("button-dayOfweek-active");
             $(this).addClass("button-dayOfweek-active");
@@ -289,14 +480,98 @@
 
         });
 
-        $("body").on('click','.pagination a',function (e) {
+        $("body").on('click', '.pagination a#aPage', function (e) {
             e.preventDefault();
-
             var date = $(".button-dayOfweek-active .ready-date").text();
             var pageId = $(this).text();
             console.log(date, pageId);
-            soha_ajax(date,pageId);
-            
+            soha_ajax(date, pageId);
+        });
+
+        $("body").on('click', '.pagination a#aFirstPage', function (e) {
+            e.preventDefault();
+            var date = $(".button-dayOfweek-active .ready-date").text();
+            var pageId = '1';
+            console.log(date, pageId);
+            soha_ajax(date, pageId);
+        });
+
+        $("body").on('click', '.pagination a#aPreviousPage', function (e) {
+            e.preventDefault();
+            var date = $(".button-dayOfweek-active .ready-date").text();
+            var pageId = $('#currentPage').text();
+            var pageNum = Number(pageId) - 1;
+            console.log(date, pageId);
+            soha_ajax(date, pageNum);
+        });
+
+        $("body").on('click', '.pagination a#aNextPage', function (e) {
+            e.preventDefault();
+            var date = $(".button-dayOfweek-active .ready-date").text();
+            var pageId = $('#currentPage').text();
+            var pageNum = Number(pageId) + 1;
+            console.log(date, pageNum);
+            soha_ajax(date, pageNum);
+        });
+
+        $("body").on('click', '.pagination a#aLastPage', function (e) {
+            e.preventDefault();
+            var date = $(".button-dayOfweek-active .ready-date").text();
+            var pageId = $('#pageCount').text();
+            console.log(date, pageId);
+            soha_ajax(date, pageId);
+        });
+
+
+        $('#ui-datepicker-div').on('click','.ui-datepicker-calendar td a',function(e) {
+
+            $(".button-dayOfweek-active").removeClass("button-dayOfweek-active");
+           // $(this).addClass("button-dayOfweek-active");
+            var date = $('#pcal1').val();
+            console.log(date);
+            soha_ajax(date);
+
+        });
+
+
+
+        $("body").on('click', '#nextWeek', function () {
+
+            var date = $('.button-dayOfweek-active .ready-date').text();
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetNextWeek")",
+                dataType: "text",
+                data:
+                {
+                    date: date,
+                    next: true
+                },
+                success: function(r) {
+                    soha_ajax(r);
+                }
+            });
+
+        });
+
+        $("body").on('click', '#prevWeek', function () {
+
+            var date = $('.button-dayOfweek-active .ready-date').text();
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("GetNextWeek")",
+                dataType: "text",
+                data:
+                {
+                    date: date,
+                    next: false
+                },
+                success: function(r) {
+                    soha_ajax(r);
+                }
+            });
 
         });
 

@@ -1,0 +1,12 @@
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\netcoreapp3.1\SohaService.DataLayer.deps.json
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\netcoreapp3.1\SohaService.DataLayer.runtimeconfig.json
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\netcoreapp3.1\SohaService.DataLayer.runtimeconfig.dev.json
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\netcoreapp3.1\SohaService.DataLayer.dll
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\bin\Debug\netcoreapp3.1\SohaService.DataLayer.pdb
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\netcoreapp3.1\SohaService.DataLayer.csproj.AssemblyReference.cache
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\netcoreapp3.1\SohaService.DataLayer.AssemblyInfoInputs.cache
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\netcoreapp3.1\SohaService.DataLayer.AssemblyInfo.cs
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\netcoreapp3.1\SohaService.DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\netcoreapp3.1\SohaService.DataLayer.dll
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\netcoreapp3.1\SohaService.DataLayer.pdb
+C:\Users\Phoenix\Desktop\SohaService\SohaService.DataLayer\obj\Debug\netcoreapp3.1\SohaService.DataLayer.genruntimeconfig.cache

@@ -2,29 +2,27 @@
 <html class="no-js" dir="rtl" lang="fa-IR">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex">
     <title> SohaService | @ViewData["Title"] </title>
     <partial name="_MetaTags" />
     <partial name="_Styles" />
     <script src="/js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
 </head>
 <body>
     <script src="/js/modernizr-custom.js"></script>
 
-    <div class="landing-layer">
-        <div class="container">
-            <partial name="_MenuBar" />
-        </div>
-    </div>
+    
 
     <!-- main manu -->
     <partial name="_MainMenu" />
     <!-- /main manu -->
     <!-- content -->
-    <main id="home-page">
-        <div class="container">
+   
             @RenderBody()
-        </div>
-    </main>
+   
     <!-- /content -->
     <!-- footer -->
     <partial name="_Footer" />
@@ -32,13 +30,14 @@
 
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/script.js"></script>
-    <script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.min.js"></script>
-    <script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.fa.min.js"></script>
 
-    <script type="text/javascript">
+    <script>
         $(document).ready(function () {
-            $('input[type=datetime]').datepicker({ dateFormat: "yy/mm/dd", isRTL: true, showButtonPanel: true });
+
+            $('.sohaselect').select2();
         });
+
     </script>
+
 </body>
 </html>

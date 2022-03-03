@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SohaService.Core.DTOs.Customer;
 using SohaService.Core.DTOs.Order;
+using SohaService.Core.DTOs.Pay;
+using SohaService.Core.DTOs.Repair;
 using SohaService.Core.Services.Interfaces;
 using SohaService.DataLayer.Context;
 using SohaService.DataLayer.Entities.Orders;
@@ -49,8 +51,13 @@ namespace SohaService.Core.Services.Services
             editOrder.CustomerId = order.CustomerId;
             editOrder.UnitId = order.UnitId;
             editOrder.DamageDescription = order.DamageDescription;
+            editOrder.EstimatedServiceAmount = order.EstimatedServiceAmount;
+            editOrder.EstimatedUnitAmount = order.EstimatedUnitAmount;
             editOrder.EstimatedAmount = order.EstimatedAmount;
             editOrder.EstimatedToSendExpertTime = order.EstimatedToSendExpertTime;
+            editOrder.registrant = order.registrant;
+            editOrder.OrderSetDate = order.OrderSetDate;
+            editOrder.WitchOne = order.WitchOne;
             UpdateOrder(editOrder);
         }
 
@@ -60,12 +67,20 @@ namespace SohaService.Core.Services.Services
             editDoneOrder.ExpertId = order.ExpertId;
             editDoneOrder.DoneDescription = order.DoneDescription;
             editDoneOrder.ReceivedAmount = order.ReceivedAmount;
-            editDoneOrder.OrderLevelId = 4;
+            editDoneOrder.OrderLevelId = order.OrderLevelId;
             editDoneOrder.OrderChangeLevelDate = order.OrderChangeLevelDate;
             editDoneOrder.RemainingAmount = order.RemainingAmount;
             editDoneOrder.Discount = order.Discount;
-            editDoneOrder.DiscountTitle = order.DiscountTitle;
+            editDoneOrder.FinalAmount = order.FinalAmount;
             editDoneOrder.TotalCost = order.TotalCost;
+            editDoneOrder.ConfirmationStatusId = order.ConfirmationStatusId;
+            editDoneOrder.OrderAddress = order.OrderAddress;
+            editDoneOrder.EstimatedServiceAmount = order.EstimatedServiceAmount;
+            editDoneOrder.EstimatedUnitAmount = order.EstimatedUnitAmount;
+            editDoneOrder.EstimatedAmount = order.EstimatedAmount;
+            editDoneOrder.registrant = order.registrant;
+            editDoneOrder.OrderSetDate = order.OrderSetDate;
+            editDoneOrder.WitchOne = order.WitchOne;
             UpdateOrder(editDoneOrder);
         }
 
@@ -76,11 +91,11 @@ namespace SohaService.Core.Services.Services
             UpdateOrder(changeOrder);
         }
 
-        public List<InformationOrderViewModel> ShowDebtors()
+        public List<InformationDebtorsViewModel> ShowDebtors()
         {
             using (IDbConnection db = new SqlConnection(_configuration.GetConnectionString("SohaConnection")))
             {
-                var Show = db.Query<InformationOrderViewModel>("ShowDebtors", commandType: CommandType.StoredProcedure).ToList();
+                var Show = db.Query<InformationDebtorsViewModel>("ShowDebtors", commandType: CommandType.StoredProcedure).ToList();
 
                 return Show;
             }
@@ -111,6 +126,7 @@ namespace SohaService.Core.Services.Services
             return _context.Orders.Where(o => o.OrderId == orderId).Select(o => new Order()
             {
                 OrderId = orderId,
+                OrderLevelId = o.OrderLevelId,
                 CustomerId = o.CustomerId,
                 ExpertId = o.ExpertId,
                 UnitId = o.UnitId,
@@ -118,21 +134,28 @@ namespace SohaService.Core.Services.Services
                 DamageDescription = o.DamageDescription,
                 EstimatedAmount = o.EstimatedAmount,
                 ReceivedAmount = o.ReceivedAmount,
+                EstimatedServiceAmount = o.EstimatedServiceAmount,
+                EstimatedUnitAmount = o.EstimatedUnitAmount,
                 EstimatedToSendExpertTime = o.EstimatedToSendExpertTime,
                 OrderChangeLevelDate = o.OrderChangeLevelDate,
                 Discount = o.Discount,
-                DiscountTitle = o.DiscountTitle,
-                TotalCost = o.TotalCost
+                FinalAmount = o.FinalAmount,
+                TotalCost = o.TotalCost,
+                OrderAddress = o.OrderAddress,
+                ConfirmationStatusId = o.ConfirmationStatusId,
+                registrant = o.registrant,
+                OrderSetDate = o.OrderSetDate,
+                WitchOne = o.WitchOne
             }).Single();
         }
         
-        public OrderViewModel GetDeletedOrders(int pageId = 1, string estimatedTime = "", int customerId = 0, int unitId = 0, string filterDamageDescription = "")
+        public OrderViewModel GetDeletedOrders(int pageId = 1, string estimatedTime = "", int customerId = 0, int unitId = 0, string filterCustomerMobile = "")
         {
             IEnumerable<InformationOrderViewModel> information = ShowDeletedInformationOrder();
 
-            if (!string.IsNullOrEmpty(filterDamageDescription))
+            if (!string.IsNullOrEmpty(filterCustomerMobile))
             {
-                information = information.Where(a => a.DamageDescription.Contains(filterDamageDescription));
+                information = information.Where(a => a.CustomerMobile.Contains(filterCustomerMobile));
             }
 
             if (!string.IsNullOrEmpty(estimatedTime))
@@ -156,32 +179,55 @@ namespace SohaService.Core.Services.Services
             OrderViewModel list = new OrderViewModel();
             list.CurrentPage = pageId;
             list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
+
+            list.StartPage = (pageId - 2 <= 0) ? 1 : pageId - 2;
+            list.EndPage = (pageId + 3 > list.PageCount) ? list.PageCount : pageId + 3;
+
             list.InformationOrder = information.OrderBy(u => u.OrderSetDate).Skip(skip).Take(take).ToList();
 
             return list;
         }
 
-        public OrderViewModel GetDebtors(int pageId = 1, int filterCustomerId = 0, string filterAmount = "", string filterDoneDate = "",
+        public DebtorsViewModel GetDebtors(int pageId = 1, int filterCustomerId = 0, string filterAmount = "", string filterDoneDate = "",
             string fromDate = "", string toDate = "")
         {
-            IEnumerable<InformationOrderViewModel> information = ShowDebtors();
-            
+            var date = DateTime.Now;
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
             if (!string.IsNullOrEmpty(filterDoneDate))
             {
-                information = information.Where(r => r.OrderChangeLevelDate.ToString("d") == filterDoneDate);
+                date = Convert.ToDateTime(filterDoneDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IEnumerable<InformationDebtorsViewModel> information = ShowDebtors();
+
+            if (!string.IsNullOrEmpty(filterDoneDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date == date);
             }
 
             if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
             {
-                information = information.Where(r => r.OrderChangeLevelDate >= Convert.ToDateTime(fromDate));
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate);
             }
             else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
             {
-                information = information.Where(r => r.OrderChangeLevelDate <= Convert.ToDateTime(toDate));
+                information = information.Where(r => r.OrderChangeLevelDate.Date <= tDate);
             }
             else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
             {
-                information = information.Where(r => r.OrderChangeLevelDate >= Convert.ToDateTime(fromDate) && r.OrderChangeLevelDate <= Convert.ToDateTime(toDate));
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate && r.OrderChangeLevelDate.Date <= tDate);
             }
 
             if (filterCustomerId != 0)
@@ -197,29 +243,83 @@ namespace SohaService.Core.Services.Services
             int take = 10;
             int skip = (pageId - 1) * take;
 
-            OrderViewModel list = new OrderViewModel();
+            DebtorsViewModel list = new DebtorsViewModel();
             list.CurrentPage = pageId;
             list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
-            list.InformationOrder = information.OrderBy(u => u.OrderSetDate).Skip(skip).Take(take).ToList();
+            list.InformationDebtorsViewModels = information.OrderBy(u => u.OrderChangeLevelDate).Skip(skip).Take(take).ToList();
+
+            return list;
+        }
+
+        public DebtorsViewModel GetDebtorsForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IEnumerable<InformationDebtorsViewModel> information = ShowDebtors();
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate && r.OrderChangeLevelDate.Date <= tDate);
+            }
+
+            if (filterCustomerId != 0)
+            {
+                information = information.Where(a => a.CustomerId == filterCustomerId);
+            }
+
+            DebtorsViewModel list = new DebtorsViewModel();
+            list.InformationDebtorsViewModels = information.OrderBy(u => u.OrderChangeLevelDate).ToList();
 
             return list;
         }
 
         public OrderViewModel GetCustomersOrder(int customerId, int pageId = 1, string fromDate = "", string toDate = "")
         {
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
             IEnumerable<InformationOrderViewModel> result = ShowCustomersOrder(customerId);
 
             if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
             {
-                result = result.Where(r => r.OrderChangeLevelDate >= Convert.ToDateTime(fromDate));
+                result = result.Where(r => r.OrderChangeLevelDate.Date >= fDate);
             }
             else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
             {
-                result = result.Where(r => r.OrderChangeLevelDate <= Convert.ToDateTime(toDate));
+                result = result.Where(r => r.OrderChangeLevelDate.Date <= tDate);
             }
             else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
             {
-                result = result.Where(r => r.OrderChangeLevelDate >= Convert.ToDateTime(fromDate) && r.OrderChangeLevelDate <= Convert.ToDateTime(toDate));
+                result = result.Where(r => r.OrderChangeLevelDate.Date >= fDate && r.OrderChangeLevelDate.Date <= tDate);
             }
 
             int take = 10;
@@ -229,6 +329,18 @@ namespace SohaService.Core.Services.Services
             list.CurrentPage = pageId;
             list.PageCount = (int)Math.Ceiling((decimal)result.Count() / take);
             list.InformationOrder = result.OrderBy(u => u.OrderChangeLevelDate).Skip(skip).Take(take).ToList();
+
+            return list;
+        }
+
+        public OrderViewModel GetReadyOrderByDate(string date)
+        {
+            var nowDate = Convert.ToDateTime(date).Date;
+
+            IEnumerable<InformationOrderViewModel> information = ShowInformationOrder();
+
+            OrderViewModel list = new OrderViewModel();
+            list.InformationOrder = information.Where(o => o.EstimatedToSendExpertTime.Date == nowDate).OrderBy(o=>o.EstimatedToSendExpertTime).ThenBy(o=>o.CustomerAddress).ToList();
 
             return list;
         }
@@ -253,6 +365,16 @@ namespace SohaService.Core.Services.Services
             }
         }
 
+        public List<InformationOrderViewModel> ShowInformationDeniedOrders()
+        {
+            using (IDbConnection db = new SqlConnection(_configuration.GetConnectionString("SohaConnection")))
+            {
+                var Show = db.Query<InformationOrderViewModel>("ShowInformationDeniedOrders", commandType: CommandType.StoredProcedure).ToList();
+
+                return Show;
+            }
+        }
+
         public List<InformationOrderViewModel> ShowDeletedInformationOrder()
         {
             using (IDbConnection db = new SqlConnection(_configuration.GetConnectionString("SohaConnection")))
@@ -268,7 +390,12 @@ namespace SohaService.Core.Services.Services
             return _context.Orders.Find(orderId);
         }
 
-        public OrderViewModel GetReadyOrders(int pageId = 1,string estimatedTime = "", int customerId = 0, int unitId = 0, string filterDamageDescription = "")
+        public int GetCountOrderByDate(DateTime date)
+        {
+            return _context.Orders.Count(o => o.EstimatedToSendExpertTime == date && o.IsDelete==false && (o.OrderLevelId==1 || o.OrderLevelId==3));
+        }
+
+        public OrderViewModel GetReadyOrders(int pageId = 1,string estimatedTime = "", int customerId = 0, int unitId = 0, string filterCustomerMobile = "")
         {
             var date = Convert.ToDateTime(estimatedTime).Date;
 
@@ -277,9 +404,9 @@ namespace SohaService.Core.Services.Services
             IEnumerable<InformationOrderViewModel> information = ShowInformationOrder();
 
 
-            if (!string.IsNullOrEmpty(filterDamageDescription))
+            if (!string.IsNullOrEmpty(filterCustomerMobile))
             {
-                information = information.Where(a => a.DamageDescription.Contains(filterDamageDescription));
+                information = information.Where(a => a.CustomerMobile.Contains(filterCustomerMobile));
             }
 
             if (!string.IsNullOrEmpty(estimatedTime))
@@ -303,16 +430,187 @@ namespace SohaService.Core.Services.Services
             OrderViewModel list = new OrderViewModel();
             list.CurrentPage = pageId;
             list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
+
+            list.StartPage = (pageId - 2 <= 0) ? 1 : pageId - 2;
+            list.EndPage = (pageId + 9 > list.PageCount) ? list.PageCount : pageId + 9;
+
             list.InformationOrder = information.OrderBy(u => u.OrderSetDate).Skip(skip).Take(take).ToList();
 
             return list;
         }
 
-        public OrderViewModel GetDoneOrders(int pageId = 1, string estimatedTime = "", string fromDate = "", string toDate = "", int customerId = 0, int unitId = 0, string filterDamageDescription = "")
+        public OrderViewModel GetDoneOrders(int pageId = 1, string estimatedTime = "", string fromDate = "", string toDate = "", int customerId = 0, int unitId = 0, string filterCustomerMobile = "", int filterExpertId = 0)
         {
+            var date = DateTime.Now;
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(estimatedTime))
+            {
+                date = Convert.ToDateTime(estimatedTime).Date;
+            }
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
             IQueryable<Order> result = _context.Orders;
 
             IEnumerable<InformationOrderViewModel> information = ShowInformationDoneOrders();
+
+            if (!string.IsNullOrEmpty(filterCustomerMobile))
+            {
+                information = information.Where(a => a.CustomerMobile.Contains(filterCustomerMobile));
+            }
+
+            if (!string.IsNullOrEmpty(estimatedTime))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date == date);
+            }
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate && r.OrderChangeLevelDate.Date <= tDate);
+            }
+
+            if (customerId != 0)
+            {
+                information = information.Where(a => a.CustomerId == customerId);
+            }
+
+            if (unitId != 0)
+            {
+                information = information.Where(a => a.UnitId == unitId);
+            }
+
+            if (filterExpertId != 0)
+            {
+                information = information.Where(a => a.ExpertId == filterExpertId);
+            }
+
+            int take = 10;
+            int skip = (pageId - 1) * take;
+
+            OrderViewModel list = new OrderViewModel();
+            list.CurrentPage = pageId;
+            list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
+
+            list.StartPage = (pageId - 2 <= 0) ? 1 : pageId - 2;
+            list.EndPage = (pageId + 9 > list.PageCount) ? list.PageCount : pageId + 9;
+
+            list.InformationOrder = information.OrderByDescending(u => u.OrderChangeLevelDate).Skip(skip).Take(take).ToList();
+
+            return list;
+        }
+
+        public OrderViewModel GetDoneOrdersForPrint(int pageId = 1, string estimatedTime = "", string fromDate = "", string toDate = "", int customerId = 0, int unitId = 0, string filterCustomerMobile = "", int filterExpertId = 0)
+        {
+            var date = DateTime.Now;
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(estimatedTime))
+            {
+                date = Convert.ToDateTime(estimatedTime).Date;
+            }
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IQueryable<Order> result = _context.Orders;
+
+            IEnumerable<InformationOrderViewModel> information = ShowInformationDoneOrders();
+
+            if (!string.IsNullOrEmpty(filterCustomerMobile))
+            {
+                information = information.Where(a => a.CustomerMobile.Contains(filterCustomerMobile));
+            }
+
+            if (!string.IsNullOrEmpty(estimatedTime))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date == date);
+            }
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate && r.OrderChangeLevelDate.Date <= tDate);
+            }
+
+            if (customerId != 0)
+            {
+                information = information.Where(a => a.CustomerId == customerId);
+            }
+
+            if (unitId != 0)
+            {
+                information = information.Where(a => a.UnitId == unitId);
+            }
+
+            if (filterExpertId != 0)
+            {
+                information = information.Where(a => a.ExpertId == filterExpertId);
+            }
+            
+
+            OrderViewModel list = new OrderViewModel();
+            list.InformationOrder = information.OrderByDescending(u => u.OrderChangeLevelDate).ToList();
+
+            return list;
+        }
+
+        public OrderViewModel GetDeniedOrders(int pageId = 1, string estimatedTime = "", string fromDate = "", string toDate = "", int customerId = 0, int unitId = 0, string filterDamageDescription = "")
+        {
+            var date = DateTime.Now;
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(estimatedTime))
+            {
+                date = Convert.ToDateTime(estimatedTime).Date;
+            }
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IQueryable<Order> result = _context.Orders;
+
+            IEnumerable<InformationOrderViewModel> information = ShowInformationDeniedOrders();
 
             if (!string.IsNullOrEmpty(filterDamageDescription))
             {
@@ -321,20 +619,20 @@ namespace SohaService.Core.Services.Services
 
             if (!string.IsNullOrEmpty(estimatedTime))
             {
-                information = information.Where(r => r.OrderChangeLevelDate.ToString("d") == estimatedTime);
+                information = information.Where(r => r.OrderChangeLevelDate.Date == date);
             }
 
             if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
             {
-                information = information.Where(r => r.OrderChangeLevelDate >= Convert.ToDateTime(fromDate));
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate);
             }
             else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
             {
-                information = information.Where(r => r.OrderChangeLevelDate <= Convert.ToDateTime(toDate));
+                information = information.Where(r => r.OrderChangeLevelDate.Date <= tDate);
             }
             else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
             {
-                information = information.Where(r => r.OrderChangeLevelDate >= Convert.ToDateTime(fromDate) && r.OrderChangeLevelDate <= Convert.ToDateTime(toDate));
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate && r.OrderChangeLevelDate.Date <= tDate);
             }
 
             if (customerId != 0)
@@ -391,6 +689,7 @@ namespace SohaService.Core.Services.Services
             SendToCompany editSendToCompany = GetSendToCompanyById(sendTo.SendToCompanyId);
             editSendToCompany.CompanyId = sendTo.CompanyId;
             editSendToCompany.SetDate = sendTo.SetDate;
+            editSendToCompany.Description = sendTo.Description;
             UpdateSendToCompany(editSendToCompany);
         }
 
@@ -426,38 +725,54 @@ namespace SohaService.Core.Services.Services
                 ReturnDate = s.ReturnDate,
                 AssemblingDate = s.AssemblingDate,
                 UnitStatusId = s.UnitStatusId,
+                UnitId = s.UnitId,
                 IsSend = s.IsSend,
-                IsReturn = s.IsReturn
+                IsReturn = s.IsReturn,
+                Description = s.Description
             }).Single();
         }
 
         public SendToCompanyViewModel GetSendToCompany(int pageId = 1, string setTime = "", string fromDate = "", string toDate = "", int customerId = 0, int companyId = 0, int unitId = 0)
         {
+            var date = DateTime.Now;
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(setTime))
+            {
+                date = Convert.ToDateTime(setTime).Date;
+            }
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
             IQueryable<SendToCompany> result = _context.SendToCompanies;
 
             IEnumerable<InformationSendToCompanyViewModel> information = ShowInformationSendToCompany();
 
             if (!string.IsNullOrEmpty(setTime))
             {
-                information = information.Where(r => r.SetDate.ToString("d") == setTime);
+                information = information.Where(r => r.SetDate.Date == date);
             }
 
             if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
             {
-                information = information.Where(r => r.SetDate >= Convert.ToDateTime(fromDate));
+                information = information.Where(r => r.SetDate.Date >= fDate);
             }
             else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
             {
-                information = information.Where(r => r.SetDate <= Convert.ToDateTime(toDate));
+                information = information.Where(r => r.SetDate.Date <= tDate);
             }
             else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
             {
-                information = information.Where(r => r.SetDate >= Convert.ToDateTime(fromDate) && r.SetDate <= Convert.ToDateTime(toDate));
-            }
-
-            if (!string.IsNullOrEmpty(setTime))
-            {
-                information = information.Where(r => r.SetDate == Convert.ToDateTime(setTime));
+                information = information.Where(r => r.SetDate.Date >= fDate && r.SetDate.Date <= tDate);
             }
 
             if (companyId != 0)
@@ -480,7 +795,7 @@ namespace SohaService.Core.Services.Services
 
             SendToCompanyViewModel list = new SendToCompanyViewModel();
             list.CurrentPage = pageId;
-            list.PageCount = (int)Math.Ceiling((decimal)result.Count() / take);
+            list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
             list.InformationSendToCompany = information.OrderBy(u => u.SetDate).Skip(skip).Take(take).ToList();
 
             return list;
@@ -488,26 +803,45 @@ namespace SohaService.Core.Services.Services
 
         public SendToCompanyViewModel GetBackFromCompany(int pageId = 1, string returnTime = "", string fromDate = "", string toDate = "", int customerId = 0, int companyId = 0, int unitId = 0, int unitStatusId = 0)
         {
+            var date = DateTime.Now;
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(returnTime))
+            {
+                date = Convert.ToDateTime(returnTime).Date;
+            }
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
             IQueryable<SendToCompany> result = _context.SendToCompanies;
 
             IEnumerable<InformationSendToCompanyViewModel> information = ShowInformationBackFromCompany();
 
             if (!string.IsNullOrEmpty(returnTime))
             {
-                information = information.Where(r => r.SetDate.ToString("d") == returnTime);
+                information = information.Where(r => r.SetDate.Date == date);
             }
 
             if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
             {
-                information = information.Where(r => r.SetDate >= Convert.ToDateTime(fromDate));
+                information = information.Where(r => r.SetDate.Date >= fDate);
             }
             else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
             {
-                information = information.Where(r => r.SetDate <= Convert.ToDateTime(toDate));
+                information = information.Where(r => r.SetDate.Date <= tDate);
             }
             else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
             {
-                information = information.Where(r => r.SetDate >= Convert.ToDateTime(fromDate) && r.SetDate <= Convert.ToDateTime(toDate));
+                information = information.Where(r => r.SetDate.Date >= fDate && r.SetDate.Date <= tDate);
             }
 
             if (!string.IsNullOrEmpty(returnTime))
@@ -540,7 +874,7 @@ namespace SohaService.Core.Services.Services
 
             SendToCompanyViewModel list = new SendToCompanyViewModel();
             list.CurrentPage = pageId;
-            list.PageCount = (int)Math.Ceiling((decimal)result.Count() / take);
+            list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
             list.InformationSendToCompany = information.OrderBy(u => u.ReturnDate).Skip(skip).Take(take).ToList();
 
             return list;

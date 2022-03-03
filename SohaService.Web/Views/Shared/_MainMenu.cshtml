@@ -1,55 +1,133 @@
-﻿<div class="main-menu">
-    <div class="container">
-        <nav>
-            <span class="responsive-sign"><i class="zmdi zmdi-menu"></i></span>
-            <ul>
-                <li>
-                    <a href=""> سفارشات </a>
-                    <ul>
-                        <li><a href="/Orders"> آماده روزانه </a></li>
-                        <li><a href="/SendToCompanies"> ارسال به شرکت </a></li>
-                        <li><a href="/BackFromCompanies"> برگشت از شرکت </a></li>
-                        <li><a href="/DoneOrders"> انجام شده </a></li>
-                        <li><a href="/DeletedOrders"> سفارشات حذف شده </a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href=""> پروفایل مشتریان </a>
-                    <ul>
-                        <li><a href="/Customers">لیست مشتریان</a></li>
-                        <li><a href="/DeletedCustomers">مشتریان حذف شده</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="">کارشناسان</a>
-                    <ul>
-                        <li><a href="/Experts">لیست کارشناسان</a></li>
-                        <li><a href="/DeletedExperts">کارشناسان حذف شده</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="">شرکت ها</a>
-                    <ul>
-                        <li><a href="/Companies">لیست شرکت ها</a></li>
-                        <li><a href="/DeletedCompanies">لیست شرکت های حذف شده</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="">قطعه ها</a>
-                    <ul>
-                        <li><a href="/Units">لیست قطعه ها</a></li>
-                        <li><a href="/DeletedUnits">قطعه های حذف شده</a></li>
-                        <li><a href="/UnitStatuses">وضعیت قطعه ها</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="">مالی</a>
-                    <ul>
-                        <li><a href="/Accounts">لیست بدهکاران</a></li>
-                        <li><a href="/ShowAllPays">لیست کل پرداخت ها</a></li>
-                    </ul>
-                </li>
-            </ul>
+﻿@using SohaService.Core.DTOs.User
+@using SohaService.Core.Services.Interfaces
+@using SohaService.DataLayer.Entities.User
+@inject IPermissionService _permissionService;
+@inject IUserService _userService
+
+@{
+    
+}
+
+<header class="u-clearfix u-custom-color-3 u-header u-header" id="sec-2f2f">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <a href="/" class="u-image u-logo u-image-1">
+            <img src="~/css/logo.png" class="u-logo-image u-logo-image-1">
+        </a>
+        <div class="loggein ">
+            @if (User.Identity.IsAuthenticated)
+            {
+                SideBarUserPanelViewModel user = _userService.GetSideBarUserPanelData(User.Identity.Name);
+                User myUser = _userService.GetUserByUserName(user.UserName);
+                
+                <div class="loggein"> <i class="zmdi "></i><a href="/ManageUser">کاربر : @myUser.UserAliasName</a> / <a href="/Logout"> خروج </a> </div>
+            }
+
+        </div>
+        <nav class="u-align-right u-dropdown-icon u-menu u-menu-dropdown u-offcanvas u-menu-1">
+
+            <div class="u-nav-container">
+                <ul class="u-nav u-unstyled u-nav-1">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        @if (!_permissionService.CheckPermission(1044, User.Identity.Name) || _permissionService.CheckPermission(1, User.Identity.Name))
+                        {
+                            <li class="u-nav-item">
+                                <a class="u-button-style u-nav-link u-text-active-custom-color-8 u-text-hover-custom-color-9" href="#" style="padding: 10px 20px;" href=""> سفارشات </a>
+                                <div class="u-nav-popup">
+                                    <ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
+                                        <li><a class="sub-menu" href="/Orders"> آماده روزانه </a></li>
+                                        <li><a class="sub-menu" href="/SendToCompanies"> ارسال به شرکت </a></li>
+                                        <li><a class="sub-menu" href="/BackFromCompanies"> برگشت از شرکت </a></li>
+                                        <li><a class="sub-menu" href="/DoneOrders"> انجام شده </a></li>
+                                        <li><a class="sub-menu" href="/DeniedOrders"> تایید نشده </a></li>
+                                        <li><a class="sub-menu" href="/DeletedOrders"> سفارشات حذف شده </a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+
+                        @if (_permissionService.CheckPermission(1044, User.Identity.Name))
+                        {
+                            <li class="u-nav-item">
+                                <a class="u-button-style u-nav-link u-text-active-custom-color-8 u-text-hover-custom-color-9" href="#" style="padding: 10px 20px;" href=""> تعمیرات </a>
+                                <div class="u-nav-popup">
+                                    <ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
+                                        <li><a class="sub-menu" href="/Repairs"> در حال انتظار </a></li>
+                                        <li><a class="sub-menu" href="/RepairedRepairs"> آماده روزانه </a></li>
+                                        <li><a class="sub-menu" href="/DoneRepairs"> انجام شده </a></li>
+                                        <li><a class="sub-menu" href="/DeniedRepairs"> تایید نشده </a></li>
+                                        <li><a class="sub-menu" href="/DeletedRepairs"> سفارشات حذف شده </a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+
+                        <li class="u-nav-item">
+                            <a class="u-button-style u-nav-link u-text-active-custom-color-8 u-text-hover-custom-color-9" href="#" style="padding: 10px 20px;" href=""> پروفایل مشتریان </a>
+                            <div class="u-nav-popup">
+                                <ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
+                                    <li><a class="sub-menu" href="/Customers">لیست مشتریان</a></li>
+                                    <li><a class="sub-menu" href="/DeletedCustomers">مشتریان حذف شده</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        @if (!_permissionService.CheckPermission(1044, User.Identity.Name) || _permissionService.CheckPermission(1, User.Identity.Name))
+                        {
+                            <li class="u-nav-item">
+                                <a class="u-button-style u-nav-link u-text-active-custom-color-8 u-text-hover-custom-color-9" href="#" style="padding: 10px 20px;" href=""> کارشناسان </a>
+                                <div class="u-nav-popup">
+                                    <ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
+                                        <li><a class="sub-menu" href="/Experts">لیست کارشناسان</a></li>
+                                        <li><a class="sub-menu" href="/DeletedExperts">کارشناسان حذف شده</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+
+
+                        <li class="u-nav-item">
+                            <a class="u-button-style u-nav-link u-text-active-custom-color-8 u-text-hover-custom-color-9" href="#" style="padding: 10px 20px;" href=""> شرکت ها </a>
+                            <div class="u-nav-popup">
+                                <ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
+                                    <li><a class="sub-menu" href="/Companies">لیست شرکت ها</a></li>
+                                    <li><a class="sub-menu" href="/DeletedCompanies">لیست شرکت های حذف شده</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="u-nav-item">
+                            <a class="u-button-style u-nav-link u-text-active-custom-color-8 u-text-hover-custom-color-9" href="#" style="padding: 10px 20px;" href=""> قطعه ها </a>
+                            <div class="u-nav-popup">
+                                <ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
+                                    <li><a class="sub-menu" href="/Units">لیست قطعه ها</a></li>
+                                    <li><a class="sub-menu" href="/DeletedUnits">قطعه های حذف شده</a></li>
+                                    <li><a class="sub-menu" href="/UnitStatuses">وضعیت قطعه ها</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="u-nav-item">
+                            <a class="u-button-style u-nav-link u-text-active-custom-color-8 u-text-hover-custom-color-9" href="#" style="padding: 10px 20px;" href=""> مالی </a>
+                            <div class="u-nav-popup">
+                                <ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
+                                    <li><a class="sub-menu" href="/Accounts">لیست بدهکاران</a></li>
+                                    <li><a class="sub-menu" href="/ShowAllPays">لیست کل پرداخت ها</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        @*<li class="u-nav-item">
+                            <a class="u-button-style u-nav-link u-text-active-custom-color-8 u-text-hover-custom-color-9" href="/BackupDB" style="padding: 10px 20px;" href=""> پشتیبان گیری </a>
+                        </li>*@
+                    }
+
+                </ul>
+            </div>
+
         </nav>
     </div>
-</div>
+</header>
+
+

@@ -1,0 +1,71 @@
+﻿
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header>
+                            <h1> پشتیبان گیری </h1>
+                        </header>
+                        <div class="inner form-layer">
+                            <form asp-action="BackupDB" method="post">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">مسیر ذخیره بکاپ</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" id="fileName" class="form-control" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success" id="btnBackup"> ذخیره اطلاعات </button>
+                                        <a href="/" class="btn btn-outline btn-info"> انصراف </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+
+    $(document).ready(function () {
+
+        function backup() {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("BackupDB")",
+                dataType: "text",
+                data:
+                {
+                    path: $('#fileName').val()
+                },
+                success: function (msg) {
+                    alert('عملیات پشتیبان گیری با موفقیت انجام شد');
+                },
+                error: function (req, status, error) {
+
+                }
+            });
+        }
+
+        $("#btnBackup").click(function (e) {
+            e.preventDefault();
+            backup();
+        });
+
+
+    });
+
+</script>

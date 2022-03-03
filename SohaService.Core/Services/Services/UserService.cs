@@ -37,6 +37,7 @@ namespace SohaService.Core.Services.Services
             addUser.IsActive = true;
             addUser.RegisterDate = DateTime.Now;
             addUser.UserName = user.UserName;
+            addUser.UserAliasName = user.UserAliasName;
 
             #region Save Avatar
 
@@ -78,31 +79,32 @@ namespace SohaService.Core.Services.Services
 
         public void EditProfile(string userName, EditProfileViewModel profile)
         {
+            User user = GetUserById(profile.UserId);
+
             if (profile.UserAvatar != null)
             {
-                string imagePath = "";
-                if (profile.AvatarName != "Defult.jpg")
+                //Delete old Image
+                if (profile.AvatarName != "Default.jpg")
                 {
-                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", profile.AvatarName);
-                    if (File.Exists(imagePath))
+                    string deletePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", profile.AvatarName);
+                    if (File.Exists(deletePath))
                     {
-                        File.Delete(imagePath);
+                        File.Delete(deletePath);
                     }
                 }
 
-                profile.AvatarName = NameGenerator.GenerateUniqCode() + Path.GetExtension(profile.UserAvatar.FileName);
-                imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", profile.AvatarName);
+                //Save New Image
+                user.UserAvatar = NameGenerator.GenerateUniqCode() + Path.GetExtension(profile.UserAvatar.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", user.UserAvatar);
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
                     profile.UserAvatar.CopyTo(stream);
                 }
-
             }
 
-            var user = GetUserByUserName(userName);
             user.UserName = profile.UserName;
+            user.UserAliasName = profile.UserAliasName;
             user.Mobile = profile.Mobile;
-            user.UserAvatar = profile.AvatarName;
 
             UpdateUser(user);
         }
@@ -143,11 +145,15 @@ namespace SohaService.Core.Services.Services
 
         public EditProfileViewModel GetDataForEditProfileUser(string userName)
         {
-            return _context.Users.Where(u => u.UserName == userName).Select(u => new EditProfileViewModel()
+            User user = GetUserByUserName(userName);
+
+            return _context.Users.Where(u => u.UserId == user.UserId).Select(u => new EditProfileViewModel()
             {
+                UserId = user.UserId,
                 AvatarName = u.UserAvatar,
                 Mobile = u.Mobile,
-                UserName = u.UserName
+                UserName = u.UserName,
+                UserAliasName = u.UserAliasName
             }).Single();
         }
 
@@ -183,6 +189,7 @@ namespace SohaService.Core.Services.Services
             return _context.Users.Where(u => u.UserName == userName).Select(u => new SideBarUserPanelViewModel()
             {
                 UserName = u.UserName,
+                UserAliasName = u.UserAliasName,
                 RegisterDate = u.RegisterDate,
                 ImageName = u.UserAvatar
             }).Single();
@@ -207,6 +214,7 @@ namespace SohaService.Core.Services.Services
                     AvatarName = u.UserAvatar,
                     Mobile = u.Mobile,
                     UserName = u.UserName,
+                    UserAliasName = u.UserAliasName,
                     UserRoles = u.UserRoles.Select(r => r.RoleId).ToList()
                 }).Single();
         }
@@ -216,6 +224,7 @@ namespace SohaService.Core.Services.Services
             var user = GetUserByUserName(userName);
             InformationUserViewModel information = new InformationUserViewModel();
             information.UserName = user.UserName;
+            information.UserAliasName = user.UserAliasName;
             information.Mobile = user.Mobile;
             information.RegisterDate = user.RegisterDate;
 
@@ -227,6 +236,7 @@ namespace SohaService.Core.Services.Services
             var user = GetUserById(userId);
             InformationUserViewModel information = new InformationUserViewModel();
             information.UserName = user.UserName;
+            information.UserAliasName = user.UserAliasName;
             information.Mobile = user.Mobile;
             information.RegisterDate = user.RegisterDate;
 
@@ -251,7 +261,7 @@ namespace SohaService.Core.Services.Services
 
         public UserForAdminViewModel GetUsers(int pageId = 1, string filterMobile = "", string filterUserName = "")
         {
-            IQueryable<User> result = _context.Users;
+            IQueryable<User> result = _context.Users.Where(u=>u.IsDelete==false);
 
             if (!string.IsNullOrEmpty(filterMobile))
             {

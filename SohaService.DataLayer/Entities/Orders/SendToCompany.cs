@@ -31,6 +31,9 @@ namespace SohaService.DataLayer.Entities.Orders
         public bool IsDelete { get; set; }
         public bool IsSend { get; set; }
         public bool IsReturn { get; set; }
+        [Display(Name = "توضیحات")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string Description { get; set; }
 
         #region Relations
 

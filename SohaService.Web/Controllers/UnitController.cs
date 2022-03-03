@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SohaService.Core.DTOs.Unit;
+using SohaService.Core.Security;
 using SohaService.Core.Services.Interfaces;
 using SohaService.DataLayer.Entities.Unit;
 
@@ -22,6 +23,7 @@ namespace SohaService.Web.Controllers
 
         #region Units
 
+        [PermissionChecker(1031)]
         [Route("Units")]
         public IActionResult Units(int pageId = 1, string filterName = "")
         {
@@ -34,6 +36,7 @@ namespace SohaService.Web.Controllers
 
         #region DeletedUnits
 
+        [PermissionChecker(1031)]
         [Route("DeletedUnits")]
         public IActionResult DeletedUnits(int pageId = 1, string filterName = "")
         {
@@ -46,6 +49,7 @@ namespace SohaService.Web.Controllers
 
         #region InformationUnit
 
+        [PermissionChecker(1031)]
         [Route("InformationUnit/{id}")]
         public IActionResult InformationUnit(int id)
         {
@@ -58,6 +62,7 @@ namespace SohaService.Web.Controllers
 
         #region AddUnit
 
+        [PermissionChecker(1032)]
         [Route("AddUnit")]
         public IActionResult AddUnit()
         {
@@ -82,6 +87,7 @@ namespace SohaService.Web.Controllers
 
         #region EditUnit
 
+        [PermissionChecker(1033)]
         [Route("EditUnit/{id}")]
         public IActionResult EditUnit(int id)
         {
@@ -108,6 +114,7 @@ namespace SohaService.Web.Controllers
 
         #region DeleteUnit
 
+        [PermissionChecker(1034)]
         [Route("DeleteUnit/{id}")]
         public IActionResult DeleteUnit(int id)
         {
@@ -133,6 +140,7 @@ namespace SohaService.Web.Controllers
 
         #region UnitStatuses
 
+        [PermissionChecker(1031)]
         [Route("UnitStatuses")]
         public IActionResult UnitStatuses(int pageId = 1, string filterTitle = "")
         {
@@ -157,6 +165,7 @@ namespace SohaService.Web.Controllers
 
         #region InformationUnitStatus
 
+        [PermissionChecker(1031)]
         [Route("InformationUnitStatus/{id}")]
         public IActionResult InformationUnitStatus(int id)
         {
@@ -176,6 +185,7 @@ namespace SohaService.Web.Controllers
 
         #region AddUnitStatus
 
+        [PermissionChecker(1035)]
         [Route("AddUnitStatus")]
         public IActionResult AddUnitStatus()
         {
@@ -200,6 +210,7 @@ namespace SohaService.Web.Controllers
 
         #region EditUnitStatus
 
+        [PermissionChecker(1036)]
         [Route("EditUnitStatus/{id}")]
         public IActionResult EditUnitStatus(int id)
         {
@@ -226,6 +237,7 @@ namespace SohaService.Web.Controllers
 
         #region DeleteUnitStatus
 
+        [PermissionChecker(1037)]
         [Route("DeleteUnitStatus/{id}")]
         public IActionResult DeleteUnitStatus(int id)
         {

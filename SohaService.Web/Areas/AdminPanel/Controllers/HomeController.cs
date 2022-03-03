@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SohaService.Core.DTOs.User;
 using SohaService.Core.Security;
 using SohaService.Core.Services.Interfaces;
+using SohaService.DataLayer.Entities.ApiKey;
 
 namespace SohaService.Web.Areas.AdminPanel.Controllers
 {
@@ -15,11 +16,13 @@ namespace SohaService.Web.Areas.AdminPanel.Controllers
     {
         private IUserService _userService;
         private IPermissionService _permissionService;
+        private ISmsService _smsService;
 
-        public HomeController(IUserService userService, IPermissionService permissionService)
+        public HomeController(IUserService userService, IPermissionService permissionService, ISmsService smsService)
         {
             _userService = userService;
             _permissionService = permissionService;
+            _smsService = smsService;
         }
 
         public IActionResult Index(int pageId = 1, string filterUserName = "", string filterEmail = "")
@@ -108,6 +111,27 @@ namespace SohaService.Web.Areas.AdminPanel.Controllers
             int userId = Convert.ToInt32(id);
 
             _userService.DeleteUser(userId);
+
+            return Redirect("/AdminPanel");
+        }
+
+        #endregion
+
+        #region ApiKey
+
+        [Route("ShowApiKey")]
+        public IActionResult ShowApiKey()
+        {
+            ApiKey apiKey = _smsService.ShowApiKey();
+
+            return View(apiKey);
+        }
+
+        [HttpPost]
+        [Route("ShowApiKey")]
+        public IActionResult ShowApiKey(ApiKey apiKey)
+        {
+            _smsService.EditApiKey(apiKey);
 
             return Redirect("/AdminPanel");
         }

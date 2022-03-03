@@ -33,6 +33,10 @@
                             <header><h1> ویرایش حساب کاربری </h1></header>
                             <div class="inner form-layer">
                                 <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" asp-for="UserId" />
+                                    <input type="hidden" asp-for="AvatarName" />
+                                    <input type="hidden" asp-for="UserName" />
+
                                     @if (ViewBag.IsSuccess != null)
                                     {
                                         <div class="alert alert-success">
@@ -40,12 +44,18 @@
                                         </div>
                                     }
 
-                                    <input type="hidden" asp-for="AvatarName" />
+
                                     <div class="row">
                                         <div class="col-md-7 col-sm-8 col-xs-12">
                                             <div class="input-group">
                                                 <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
-                                                <input type="text" class="form-control" asp-for="UserName" placeholder="نام کاربری" aria-describedby="username">
+                                                <input type="text" class="form-control" asp-for="UserName" placeholder="نام کاربری" aria-describedby="username" disabled="disabled">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 col-sm-8 col-xs-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
+                                                <input type="text" class="form-control" asp-for="UserAliasName" placeholder="نام نمایشی کاربر" aria-describedby="username">
                                             </div>
                                         </div>
                                         <div class="col-md-7 col-sm-8 col-xs-12">
@@ -58,9 +68,9 @@
                                             <p class="help-block">
                                                 آواتار
                                             </p>
+                                            <img id="imgAvatar" class="thumbnail" src="/UserAvatar/@Model.AvatarName" style="max-width: 150px" />
                                             <input type="file" asp-for="UserAvatar" />
                                             <p>لطفا فقط تصویر انتخاب کنید</p>
-                                            <img id="imgAvatar" class="thumbnail" src="/UserAvatar/@Model.AvatarName" style="max-width: 150px" />
                                         </div>
                                         <div class="col-md-7 col-sm-8 col-xs-12">
                                             <button class="btn btn-success"> ویرایش اطلاعات </button>

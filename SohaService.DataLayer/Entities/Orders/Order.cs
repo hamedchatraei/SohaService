@@ -15,13 +15,19 @@ namespace SohaService.DataLayer.Entities.Orders
         [Required]
         public int OrderLevelId { get; set; }
 
-        [Required]
+        [Display(Name = "مشتری")]
+        [Required(ErrorMessage = "لطفا {0} را انتخاب کنید")]
         public int CustomerId { get; set; }
 
-        
+        [Required]
         public int ExpertId { get; set; }
 
+        [Display(Name = "قطعه")]
+        [Required(ErrorMessage = "لطفا {0} را انتخاب کنید")]
         public int UnitId { get; set; }
+
+        [Required]
+        public int ConfirmationStatusId { get; set; }
 
         [Display(Name = "تاریخ ثبت")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
@@ -30,16 +36,26 @@ namespace SohaService.DataLayer.Entities.Orders
         public DateTime OrderChangeLevelDate { get; set; }
 
         [Display(Name = "زمان برآورد شده ارسال کارشناس")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public DateTime EstimatedToSendExpertTime { get; set; }
 
+        [Display(Name = "هزینه برآورد شده سرویس")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public int EstimatedServiceAmount { get; set; }
+
+        [Display(Name = "هزینه برآورد شده محصول")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public int EstimatedUnitAmount { get; set; }
+
         [Display(Name = "هزینه برآورد شده")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public int EstimatedAmount { get; set; }
 
         [Display(Name = "تخفیف")]
         public int Discount { get; set; }
 
-        [Display(Name = "علت تخفیف")]
-        public string DiscountTitle { get; set; }
+        [Display(Name = "هزینه قطعی")]
+        public int FinalAmount { get; set; }
 
         [Display(Name = "هزینه کل")]
         public int TotalCost { get; set; }
@@ -51,11 +67,18 @@ namespace SohaService.DataLayer.Entities.Orders
         public int RemainingAmount { get; set; }
 
         [Display(Name = "شرح خرابی")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string DamageDescription { get; set; }
 
         [Display(Name = "توضیحات")]
         public string DoneDescription { get; set; }
+
+        [Display(Name = "آدرس")]
+        public string OrderAddress { get; set; }
+
         public bool IsDelete { get; set; }
+        public string WitchOne { get; set; } 
+        public string registrant { get; set; }
 
 
         #region Relations
@@ -66,6 +89,7 @@ namespace SohaService.DataLayer.Entities.Orders
         public SendToCompany SendToCompany { get; set; }
         public Unit.Unit Unit { get; set; }
         public List<Pay.Pay> Pays { get; set; }
+        public ConfirmationStatus.ConfirmationStatus ConfirmationStatus { get; set; }
 
         #endregion
 

@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SohaService.Core.DTOs.Company;
+using SohaService.Core.DTOs.Order;
 using SohaService.Core.Services.Interfaces;
 using SohaService.DataLayer.Context;
 using SohaService.DataLayer.Entities.Company;
@@ -15,10 +20,12 @@ namespace SohaService.Core.Services.Services
     public class CompanyService : ICompanyService
     {
         private SohaServiceContext _context;
+        private IConfiguration _configuration;
 
-        public CompanyService(SohaServiceContext context)
+        public CompanyService(SohaServiceContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public int AddCompany(Company company)
@@ -43,6 +50,21 @@ namespace SohaService.Core.Services.Services
             editCompany.CompanyAddress = company.CompanyAddress;
 
             UpdateCompany(editCompany);
+        }
+
+        public List<Company> GetAllCompanies()
+        {
+            return _context.Companies.ToList();
+        }
+
+        public List<InformationCompanyViewModel> ShowAllCompanies()
+        {
+            using (IDbConnection db = new SqlConnection(_configuration.GetConnectionString("SohaConnection")))
+            {
+                var Show = db.Query<InformationCompanyViewModel>("GetAllCompanies", commandType: CommandType.StoredProcedure).ToList();
+
+                return Show;
+            }
         }
 
         public CompanyViewModel GetCompanies(int pageId = 1, string filterName = "", string filterPhone = "")

@@ -41,8 +41,17 @@
                         <div class="inner form-layer">
                             <form asp-action="EditOrder" method="post">
                                 <input type="hidden" asp-for="OrderId" />
+                                <input type="hidden" asp-for="OrderLevelId" />
+                                <input type="hidden" asp-for="ExpertId" />
+                                <input type="hidden" asp-for="OrderSetDate" />
+                                <input type="hidden" asp-for="OrderChangeLevelDate" />
+                                <input type="hidden" asp-for="IsDelete" />
+                                <input type="hidden" asp-for="WitchOne" />
+                                <input type="hidden" asp-for="ConfirmationStatusId" />
+                                <input type="hidden" asp-for="registrant" />
+                                <input type="hidden" asp-for="TotalCost" />
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">مشتری</span>
                                         </div>
@@ -53,7 +62,7 @@
                                             <select class="form-control" asp-for="CustomerId" asp-items="@(ViewData["customers"] as SelectList)"></select>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">قطعه</span>
                                         </div>
@@ -64,7 +73,7 @@
                                             <select class="form-control" asp-for="UnitId" asp-items="@(ViewData["units"] as SelectList)"></select>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">شرح خرابی</span>
                                         </div>
@@ -75,7 +84,31 @@
                                             <textarea class="form-control no-resiaze" rows="5" asp-for="DamageDescription" aria-describedby="username"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> هزینه برآورد شده سرویس</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.EstimatedServiceAmount" onkeyup="separateNum(this.value, this);" onblur="sumInput()" id="priceService" aria-describedby="username" required>
+                                            <input type="hidden" asp-for="EstimatedServiceAmount" class="form-control" id="finalpriceService" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> هزینه برآورد شده محصول</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@Model.EstimatedUnitAmount" onkeyup="separateNum(this.value, this);" onblur="sumInput()" id="priceUnit" aria-describedby="username" required>
+                                            <input type="hidden" asp-for="EstimatedUnitAmount" class="form-control" id="finalpriceUnit" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">هزینه برآورد شده</span>
                                         </div>
@@ -83,11 +116,11 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                            <input type="text" class="form-control" onkeyup="separateNum(this.value,this);" name="price" id="price" aria-describedby="username" placeholder="@Model.EstimatedAmount.ToRial()">
+                                            <input type="text" class="form-control" id="price" value="@Model.EstimatedAmount" aria-describedby="username" disabled="disabled">
                                             <input type="hidden" class="form-control" asp-for="EstimatedAmount" id="finalprice" aria-describedby="username">
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">تاریخ برآورد شده ارسال کارشناس</span>
                                         </div>
@@ -95,7 +128,18 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
-                                            <input type="datetime" asp-for="EstimatedToSendExpertTime" class="form-control" style="text-align: right" autocomplete="off">
+                                            <input type="datetime" asp-for="EstimatedToSendExpertTime" value="@Model.EstimatedToSendExpertTime.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">آدرس</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" value="@orderViewModel.CustomerAddress" asp-for="OrderAddress" />
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
@@ -110,6 +154,15 @@
         </div>
     </div>
 </main>
+
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.min.js"></script>
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.fa.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type=datetime]').datepicker({ dateFormat: "yy/mm/dd", isRTL: true, showButtonPanel: true });
+    });
+</script>
 
 <script type="text/javascript">
 
@@ -132,20 +185,54 @@
         }
     }
 
+    function sumInput() {
+        $(document).ready(function () {
+            var myInput = $("#priceService");
+            var inputValue = myInput.val();
+
+            inputValue = inputValue.replace(/,\s?/g, "");
+            document.getElementById("finalpriceService").value =
+                inputValue;
+        });
+
+        $(document).ready(function () {
+            var myInput = $("#priceUnit");
+            var inputValue = myInput.val();
+
+            inputValue = inputValue.replace(/,\s?/g, "");
+            document.getElementById("finalpriceUnit").value =
+                inputValue;
+        });
+
+
+        var finalPrice = parseInt(document.getElementById('finalpriceService').value);
+        var discount = parseInt(document.getElementById('finalpriceUnit').value);
+
+        var m = finalPrice + discount;
+
+        var total = document.getElementById('price');
+
+        total.value = m;
+
+        var mm = separateNum(total.value, total);
+
+        total.value = mm.toString();
+    }
+
 
     $(document).ready(function () {
         var myButton = $("#btnSave");
         var myInput = $("#price");
         myButton.click(function () {
             var inputValue = myInput.val();
-
+            
             inputValue = inputValue.replace(/,\s?/g, "");
 
-            if (inputValue!=="") {
+            if (inputValue !== "") {
                 document.getElementById("finalprice").value =
                     inputValue;
             }
-            
+
         });
     });
 

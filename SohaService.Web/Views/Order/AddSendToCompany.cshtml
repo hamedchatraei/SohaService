@@ -17,7 +17,7 @@
                         </header>
                         <div class="inner form-layer">
                             <form asp-action="AddSendToCompany" method="post">
-                                <input type="hidden" asp-for="OrderId" value="@ViewData["OrderId"]"/>
+                                <input type="hidden" asp-for="OrderId" value="@ViewData["OrderId"]" />
                                 <div class="row">
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
@@ -27,7 +27,7 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
-                                            <input type="datetime" asp-for="SetDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                            <input type="datetime" asp-for="SetDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
@@ -37,8 +37,19 @@
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                                            <select class="form-control" asp-for="CompanyId" asp-items="@(ViewData["company"] as SelectList)"></select>
+                                            <span class="input-group-addon "><i class="zmdi zmdi-account"></i></span>
+                                            <select class="form-control sohaselect" asp-for="CompanyId" asp-items="@(ViewData["company"] as SelectList)" required></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">توضیحات</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon "><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" asp-for="Description"  required>
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
@@ -54,4 +65,13 @@
         </div>
     </div>
 </main>
+
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.min.js"></script>
+<script src="/BootstrapJalaliDatePicker/bootstrap-datepicker.fa.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type=datetime]').datepicker({ dateFormat: "yy/mm/dd", isRTL: true, showButtonPanel: true });
+    });
+</script>
 
