@@ -173,10 +173,10 @@
             });
         }
 
-        function printAccount(fDate = "",tDate = "",customerId=0) {
+        function printOrderAccount(fDate = "",tDate = "",customerId=0) {
             $.ajax({
                 type: "POST",
-                url: "@Url.Action("PrintAccount")",
+                url: "@Url.Action("PrintOrderAccount")",
                 dataType: "text",
                 data:
                 {
@@ -199,7 +199,7 @@
 
             console.log(fDate);
 
-            printAccount(fDate, tDate, customerId);
+            printOrderAccount(fDate, tDate, customerId);
 
         });
 

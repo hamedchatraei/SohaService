@@ -176,6 +176,30 @@ namespace SohaService.Web.Controllers
 
         #endregion
 
+        #region PrintOrderAccount
+
+        [Route("PrintOrderAccount")]
+        public IActionResult PrintOrderAccount(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            DebtorsViewModel order = _orderService.GetOrderDebtorsForPrint(fromDate, toDate, filterCustomerId);
+
+            return View(order);
+        }
+
+        #endregion
+
+        #region PrintRepairAccount
+
+        [Route("PrintRepairAccount")]
+        public IActionResult PrintRepairAccount(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            DebtorsViewModel order = _orderService.GetRepairDebtorsForPrint(fromDate, toDate, filterCustomerId);
+
+            return View(order);
+        }
+
+        #endregion
+
         #region ShowAllPays
 
         [Route("ShowAllPays")]

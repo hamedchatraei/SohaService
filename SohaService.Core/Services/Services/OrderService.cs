@@ -418,6 +418,88 @@ namespace SohaService.Core.Services.Services
             return list;
         }
 
+        public DebtorsViewModel GetOrderDebtorsForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IEnumerable<InformationDebtorsViewModel> information = ShowDebtors().Where(s => s.WitchOne == "Order");
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate && r.OrderChangeLevelDate.Date <= tDate);
+            }
+
+            if (filterCustomerId != 0)
+            {
+                information = information.Where(a => a.CustomerId == filterCustomerId);
+            }
+
+            DebtorsViewModel list = new DebtorsViewModel();
+            list.InformationDebtorsViewModels = information.OrderBy(u => u.OrderChangeLevelDate).ToList();
+
+            return list;
+        }
+
+        public DebtorsViewModel GetRepairDebtorsForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IEnumerable<InformationDebtorsViewModel> information = ShowDebtors().Where(s => s.WitchOne == "Repair");
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate && r.OrderChangeLevelDate.Date <= tDate);
+            }
+
+            if (filterCustomerId != 0)
+            {
+                information = information.Where(a => a.CustomerId == filterCustomerId);
+            }
+
+            DebtorsViewModel list = new DebtorsViewModel();
+            list.InformationDebtorsViewModels = information.OrderBy(u => u.OrderChangeLevelDate).ToList();
+
+            return list;
+        }
+
         public OrderViewModel GetCustomersOrder(int customerId, int pageId = 1, string fromDate = "", string toDate = "")
         {
             var fDate = DateTime.Now;
