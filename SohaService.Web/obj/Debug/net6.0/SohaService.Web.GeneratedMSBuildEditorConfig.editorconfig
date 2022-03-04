@@ -119,12 +119,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcmludE9yZGVyQWNjb3VudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Account/PrintOrderPays.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcmludE9yZGVyUGF5cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Account/PrintPays.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcmludFBheXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Account/PrintRepairAccount.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcmludFJlcGFpckFjY291bnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Account/PrintRepairPays.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcmludFJlcGFpclBheXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Phoenix/Desktop/New folder (2)/SohaService/SohaService/SohaService.Web/Views/Account/RepairAccounts.cshtml]

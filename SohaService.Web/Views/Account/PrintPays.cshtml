@@ -55,34 +55,34 @@
                                             <td>@customer.CustomerName @customer.CustomerFamily</td>
                                             <td>@customer.CustomerMobile</td>
                                             <td>
-                                                @if (item.OrderWitchOne == "Order")
-                                                {
+                                                @*@if (item.OrderWitchOne == "Order")
+                                                {*@
                                                     @item.OrderDoneDescription
-                                                }
+                                                @*}
                                                 else if (item.RepairWitchOne == "Repair")
                                                 {
                                                     @item.RepairDoneDescription
-                                                }
+                                                }*@
                                             </td>
                                             <td>
-                                                @if (item.OrderWitchOne == "Order")
-                                                {
+                                                @*@if (item.OrderWitchOne == "Order")
+                                                {*@
                                                     @item.OrderChangeLevelDate.ToShamsi()
-                                                }
+                                                @*}
                                                 else if (item.RepairWitchOne == "Repair")
                                                 {
                                                     @item.SendUnitDate.ToShamsi()
-                                                }
+                                                }*@
                                             </td>
                                             <td>
-                                                @if (item.OrderWitchOne == "Order")
-                                                {
+                                                @*@if (item.OrderWitchOne == "Order")
+                                                {*@
                                                     @item.OrderTotalCost.ToRial()
-                                                }
+                                                @*}
                                                 else if (item.RepairWitchOne == "Repair")
                                                 {
                                                     @item.RepairTotalCost.ToRial()
-                                                }
+                                                }*@
                                             </td>
                                             @if (item.Amount != 0)
                                             {

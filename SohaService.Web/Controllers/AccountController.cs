@@ -356,13 +356,25 @@ namespace SohaService.Web.Controllers
 
         #region PrintOrderPays
 
+        [Route("PrintOrderPays")]
+        public IActionResult PrintOrderPays(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            PayViewModel pay = _payService.GetOrderPaysForPrint(fromDate, toDate, filterCustomerId);
 
+            return View(pay);
+        }
 
         #endregion
 
         #region PrintRepairPays
 
-        
+        [Route("PrintRepairPays")]
+        public IActionResult PrintRepairPays(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            PayViewModel pay = _payService.GetRepairPaysForPrint(fromDate, toDate, filterCustomerId);
+
+            return View(pay);
+        }
 
         #endregion
 

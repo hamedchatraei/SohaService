@@ -221,10 +221,10 @@
             });
         }
 
-        function printPays(fDate = "",tDate = "",customerId=0) {
+        function printOrderPays(fDate = "",tDate = "",customerId=0) {
             $.ajax({
                 type: "POST",
-                url: "@Url.Action("PrintPays")",
+                url: "@Url.Action("PrintOrderPays")",
                 dataType: "text",
                 data:
                 {
@@ -247,7 +247,7 @@
 
             console.log(fDate);
 
-            printPays(fDate, tDate, customerId);
+            printOrderPays(fDate, tDate, customerId);
 
         });
 
