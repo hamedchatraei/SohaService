@@ -26,6 +26,8 @@ namespace SohaService.Web.Controllers
             _payService = payService;
         }
 
+        #region Account
+
         #region Accounts
 
         [Route("Accounts")]
@@ -200,6 +202,10 @@ namespace SohaService.Web.Controllers
 
         #endregion
 
+        #endregion
+
+        #region Pay
+
         #region ShowAllPays
 
         [Route("ShowAllPays")]
@@ -245,6 +251,97 @@ namespace SohaService.Web.Controllers
 
         #endregion
 
+        #region ShowOrderPays
+
+        [Route("ShowOrderPays")]
+        public IActionResult ShowOrderPays(int pageId = 1, int filterCustomerId = 0, string filterPayDate = "", string fromDate = "", string toDate = "")
+        {
+            if (filterPayDate == "today")
+            {
+                filterPayDate = DateTime.Now.ToString();
+
+            }
+
+            if (string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                fromDate = "";
+                toDate = "";
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                toDate = "";
+                filterPayDate = "";
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                fromDate = "";
+                filterPayDate = "";
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                filterPayDate = "";
+            }
+
+            PayViewModel pay = _payService.GetOrderPays(pageId, filterCustomerId, filterPayDate, fromDate, toDate);
+
+            List<SelectListItem> customers = new List<SelectListItem>()
+            {
+                new SelectListItem(){Text = "انتخاب مشتری",Value = ""}
+            };
+            customers.AddRange(_customerService.GetCustomerListItem());
+            ViewData["customers"] = new SelectList(customers, "Value", "Text", 0);
+
+            return View(pay);
+        }
+
+        #endregion
+
+        #region ShowRepairPays
+
+        [Route("ShowRepairPays")]
+        public IActionResult ShowRepairPays(int pageId = 1, int filterCustomerId = 0, string filterPayDate = "", string fromDate = "", string toDate = "")
+        {
+            if (filterPayDate == "today")
+            {
+                filterPayDate = DateTime.Now.ToString();
+
+            }
+
+            if (string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                fromDate = "";
+                toDate = "";
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                toDate = "";
+                filterPayDate = "";
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                fromDate = "";
+                filterPayDate = "";
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                filterPayDate = "";
+            }
+
+            PayViewModel pay = _payService.GetRepairPays(pageId, filterCustomerId, filterPayDate, fromDate, toDate);
+
+            List<SelectListItem> customers = new List<SelectListItem>()
+            {
+                new SelectListItem(){Text = "انتخاب مشتری",Value = ""}
+            };
+            customers.AddRange(_customerService.GetCustomerListItem());
+            ViewData["customers"] = new SelectList(customers, "Value", "Text", 0);
+
+            return View(pay);
+        }
+
+        #endregion
+
+
         #region PrintPays
 
         [Route("PrintPays")]
@@ -254,6 +351,20 @@ namespace SohaService.Web.Controllers
 
             return View(pay);
         }
+
+        #endregion
+
+        #region PrintOrderPays
+
+
+
+        #endregion
+
+        #region PrintRepairPays
+
+        
+
+        #endregion
 
         #endregion
 

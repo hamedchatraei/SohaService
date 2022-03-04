@@ -20,7 +20,11 @@ namespace SohaService.Core.Services.Interfaces
         int GetSumAmountPay(int orderId);
         int GetSumAmountRepairPay(int repairId);
         PayViewModel GetPays(int pageId=1,int filterCustomerId=0,string filterPayDate="",string fromDate="",string toDate="");
+        PayViewModel GetOrderPays(int pageId=1,int filterCustomerId=0,string filterPayDate="",string fromDate="",string toDate="");
+        PayViewModel GetRepairPays(int pageId=1,int filterCustomerId=0,string filterPayDate="",string fromDate="",string toDate="");
         PayViewModel GetPaysForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0);
+        PayViewModel GetOrderPaysForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0);
+        PayViewModel GetRepairPaysForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0);
         PayViewModel GetPayByCustomerId(int customerId, int pageId = 1, string fromDate = "", string toDate = "");
         List<InformationPayViewModel> ShowPays();
         List<InformationPayViewModel> ShowPayByCustomerId(int customerId);

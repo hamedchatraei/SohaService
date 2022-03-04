@@ -144,6 +144,130 @@ namespace SohaService.Core.Services.Services
             return list;
         }
 
+        public PayViewModel GetOrderPays(int pageId = 1, int filterCustomerId = 0, string filterPayDate = "", string fromDate = "",
+            string toDate = "")
+        {
+            var date = DateTime.Now;
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(filterPayDate))
+            {
+                date = Convert.ToDateTime(filterPayDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IEnumerable<InformationPayViewModel> information = ShowPays().Where(p=>p.OrderWitchOne=="Order");
+
+            if (!string.IsNullOrEmpty(filterPayDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date == date);
+            }
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.PayDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.PayDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.PayDate.Date >= fDate && r.PayDate.Date <= tDate);
+            }
+
+            if (filterCustomerId != 0)
+            {
+                information = information.Where(a => a.OrderCustomerId == filterCustomerId || a.RepairCustomerId == filterCustomerId);
+            }
+
+            int take = 10;
+            int skip = (pageId - 1) * take;
+
+            PayViewModel list = new PayViewModel();
+            list.CurrentPage = pageId;
+            list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
+
+            list.StartPage = (pageId - 2 <= 0) ? 1 : pageId - 2;
+            list.EndPage = (pageId + 9 > list.PageCount) ? list.PageCount : pageId + 9;
+
+            list.InformationPayViewModels = information.OrderByDescending(u => u.PayDate).Skip(skip).Take(take).ToList();
+
+            return list;
+        }
+
+        public PayViewModel GetRepairPays(int pageId = 1, int filterCustomerId = 0, string filterPayDate = "", string fromDate = "",
+            string toDate = "")
+        {
+            var date = DateTime.Now;
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(filterPayDate))
+            {
+                date = Convert.ToDateTime(filterPayDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IEnumerable<InformationPayViewModel> information = ShowPays().Where(p=>p.RepairWitchOne=="Repair");
+
+            if (!string.IsNullOrEmpty(filterPayDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date == date);
+            }
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.PayDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.PayDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.PayDate.Date >= fDate && r.PayDate.Date <= tDate);
+            }
+
+            if (filterCustomerId != 0)
+            {
+                information = information.Where(a => a.OrderCustomerId == filterCustomerId || a.RepairCustomerId == filterCustomerId);
+            }
+
+            int take = 10;
+            int skip = (pageId - 1) * take;
+
+            PayViewModel list = new PayViewModel();
+            list.CurrentPage = pageId;
+            list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
+
+            list.StartPage = (pageId - 2 <= 0) ? 1 : pageId - 2;
+            list.EndPage = (pageId + 9 > list.PageCount) ? list.PageCount : pageId + 9;
+
+            list.InformationPayViewModels = information.OrderByDescending(u => u.PayDate).Skip(skip).Take(take).ToList();
+
+            return list;
+        }
+
         public PayViewModel GetPaysForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0)
         {
             var fDate = DateTime.Now;
@@ -161,6 +285,90 @@ namespace SohaService.Core.Services.Services
 
             IEnumerable<InformationPayViewModel> information = ShowPays();
             
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.PayDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.PayDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.PayDate.Date >= fDate && r.PayDate.Date <= tDate);
+            }
+
+            if (filterCustomerId != 0)
+            {
+                information = information.Where(a => a.OrderCustomerId == filterCustomerId || a.RepairCustomerId == filterCustomerId);
+            }
+
+            PayViewModel list = new PayViewModel();
+            list.InformationPayViewModels = information.OrderByDescending(u => u.PayDate).ToList();
+
+            return list;
+        }
+
+        public PayViewModel GetOrderPaysForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IEnumerable<InformationPayViewModel> information = ShowPays().Where(p=>p.OrderWitchOne=="Order");
+
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.PayDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.PayDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.PayDate.Date >= fDate && r.PayDate.Date <= tDate);
+            }
+
+            if (filterCustomerId != 0)
+            {
+                information = information.Where(a => a.OrderCustomerId == filterCustomerId || a.RepairCustomerId == filterCustomerId);
+            }
+
+            PayViewModel list = new PayViewModel();
+            list.InformationPayViewModels = information.OrderByDescending(u => u.PayDate).ToList();
+
+            return list;
+        }
+
+        public PayViewModel GetRepairPaysForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0)
+        {
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IEnumerable<InformationPayViewModel> information = ShowPays().Where(p=>p.RepairWitchOne=="Repair");
+
 
             if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
             {

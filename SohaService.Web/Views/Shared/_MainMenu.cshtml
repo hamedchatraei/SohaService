@@ -120,12 +120,12 @@
                                     @if (!_permissionService.CheckPermission(1044, User.Identity.Name) || _permissionService.CheckPermission(1, User.Identity.Name))
                                     {
                                         <li><a class="sub-menu" href="/OrderAccounts">لیست بدهکاران خدمات</a></li>
-                                        <li><a class="sub-menu" href="/ShowAllPays">لیست پرداخت های خدمات</a></li>
+                                        <li><a class="sub-menu" href="/ShowOrderPays">لیست پرداخت های خدمات</a></li>
                                     }
                                     @if (_permissionService.CheckPermission(1044, User.Identity.Name) || _permissionService.CheckPermission(1, User.Identity.Name))
                                     {
                                         <li><a class="sub-menu" href="/RepairAccounts">لیست بدهکاران تعمیرات</a></li>
-                                        <li><a class="sub-menu" href="/ShowAllPays">لیست پرداخت های تعمیرات</a></li>
+                                        <li><a class="sub-menu" href="/ShowRepairPays">لیست پرداخت های تعمیرات</a></li>
                                     }
                                 </ul>
                             </div>
