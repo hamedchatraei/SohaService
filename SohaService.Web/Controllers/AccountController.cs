@@ -72,6 +72,98 @@ namespace SohaService.Web.Controllers
 
         #endregion
 
+        #region OrderAccount
+
+        [Route("OrderAccounts")]
+        public IActionResult OrderAccounts(int pageId = 1, int filterCustomerId = 0, string filterAmount = "", string filterDoneDate = "", string fromDate = "", string toDate = "")
+        {
+            if (filterDoneDate == "today")
+            {
+                filterDoneDate = DateTime.Now.ToString();
+
+            }
+
+            if (string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                fromDate = "";
+                toDate = "";
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                toDate = "";
+                filterDoneDate = "";
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                fromDate = "";
+                filterDoneDate = "";
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                filterDoneDate = "";
+            }
+
+            DebtorsViewModel order = _orderService.GetOrderDebtors(pageId, filterCustomerId, filterAmount,
+                filterDoneDate, fromDate, toDate);
+
+            List<SelectListItem> customers = new List<SelectListItem>()
+            {
+                new SelectListItem(){Text = "انتخاب مشتری",Value = ""}
+            };
+            customers.AddRange(_customerService.GetCustomerListItem());
+            ViewData["customers"] = new SelectList(customers, "Value", "Text", 0);
+
+            return View(order);
+        }
+
+        #endregion
+
+        #region RepairAccount
+
+        [Route("RepairAccounts")]
+        public IActionResult RepairAccounts(int pageId = 1, int filterCustomerId = 0, string filterAmount = "", string filterDoneDate = "", string fromDate = "", string toDate = "")
+        {
+            if (filterDoneDate == "today")
+            {
+                filterDoneDate = DateTime.Now.ToString();
+
+            }
+
+            if (string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                fromDate = "";
+                toDate = "";
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                toDate = "";
+                filterDoneDate = "";
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                fromDate = "";
+                filterDoneDate = "";
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                filterDoneDate = "";
+            }
+
+            DebtorsViewModel order = _orderService.GetRepairDebtors(pageId, filterCustomerId, filterAmount,
+                filterDoneDate, fromDate, toDate);
+
+            List<SelectListItem> customers = new List<SelectListItem>()
+            {
+                new SelectListItem(){Text = "انتخاب مشتری",Value = ""}
+            };
+            customers.AddRange(_customerService.GetCustomerListItem());
+            ViewData["customers"] = new SelectList(customers, "Value", "Text", 0);
+
+            return View(order);
+        }
+
+        #endregion
+
         #region PrintAccount
 
         [Route("PrintAccount")]

@@ -251,6 +251,132 @@ namespace SohaService.Core.Services.Services
             return list;
         }
 
+        public DebtorsViewModel GetOrderDebtors(int pageId = 1, int filterCustomerId = 0, string filterAmount = "", string filterDoneDate = "",
+            string fromDate = "", string toDate = "")
+        {
+            var date = DateTime.Now;
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(filterDoneDate))
+            {
+                date = Convert.ToDateTime(filterDoneDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IEnumerable<InformationDebtorsViewModel> information = ShowDebtors().Where(s=>s.WitchOne=="Order");
+
+            if (!string.IsNullOrEmpty(filterDoneDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date == date);
+            }
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate && r.OrderChangeLevelDate.Date <= tDate);
+            }
+
+            if (filterCustomerId != 0)
+            {
+                information = information.Where(a => a.CustomerId == filterCustomerId);
+            }
+
+            if (!string.IsNullOrEmpty(filterAmount))
+            {
+                information = information.Where(a => a.RemainingAmount.ToString().Contains(filterAmount));
+            }
+
+            int take = 10;
+            int skip = (pageId - 1) * take;
+
+            DebtorsViewModel list = new DebtorsViewModel();
+            list.CurrentPage = pageId;
+            list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
+            list.InformationDebtorsViewModels = information.OrderBy(u => u.OrderChangeLevelDate).Skip(skip).Take(take).ToList();
+
+            return list;
+        }
+
+        public DebtorsViewModel GetRepairDebtors(int pageId = 1, int filterCustomerId = 0, string filterAmount = "", string filterDoneDate = "",
+           string fromDate = "", string toDate = "")
+        {
+            var date = DateTime.Now;
+            var fDate = DateTime.Now;
+            var tDate = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(filterDoneDate))
+            {
+                date = Convert.ToDateTime(filterDoneDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                fDate = Convert.ToDateTime(fromDate).Date;
+            }
+
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                tDate = Convert.ToDateTime(toDate).Date;
+            }
+
+            IEnumerable<InformationDebtorsViewModel> information = ShowDebtors().Where(s => s.WitchOne == "Repair");
+
+            if (!string.IsNullOrEmpty(filterDoneDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date == date);
+            }
+
+            if (!string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate);
+            }
+            else if (!string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(fromDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date <= tDate);
+            }
+            else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+            {
+                information = information.Where(r => r.OrderChangeLevelDate.Date >= fDate && r.OrderChangeLevelDate.Date <= tDate);
+            }
+
+            if (filterCustomerId != 0)
+            {
+                information = information.Where(a => a.CustomerId == filterCustomerId);
+            }
+
+            if (!string.IsNullOrEmpty(filterAmount))
+            {
+                information = information.Where(a => a.RemainingAmount.ToString().Contains(filterAmount));
+            }
+
+            int take = 10;
+            int skip = (pageId - 1) * take;
+
+            DebtorsViewModel list = new DebtorsViewModel();
+            list.CurrentPage = pageId;
+            list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
+            list.InformationDebtorsViewModels = information.OrderBy(u => u.OrderChangeLevelDate).Skip(skip).Take(take).ToList();
+
+            return list;
+        }
+
         public DebtorsViewModel GetDebtorsForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0)
         {
             var fDate = DateTime.Now;

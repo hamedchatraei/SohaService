@@ -26,6 +26,8 @@ namespace SohaService.Core.Services.Interfaces
         OrderViewModel GetDeniedOrders(int pageId = 1, string estimatedTime = "", string fromDate = "", string toDate = "", int customerId = 0, int unitId = 0, string filterDamageDescription = "");
         OrderViewModel GetDeletedOrders(int pageId = 1, string estimatedTime = "", int customerId = 0, int unitId = 0, string filterCustomerMobile = "");
         DebtorsViewModel GetDebtors(int pageId = 1, int filterCustomerId = 0,string filterAmount="",string filterDoneDate="",string fromDate="",string toDate="");
+        DebtorsViewModel GetOrderDebtors(int pageId = 1, int filterCustomerId = 0,string filterAmount="",string filterDoneDate="",string fromDate="",string toDate="");
+        DebtorsViewModel GetRepairDebtors(int pageId = 1, int filterCustomerId = 0,string filterAmount="",string filterDoneDate="",string fromDate="",string toDate="");
         DebtorsViewModel GetDebtorsForPrint(string fromDate = "", string toDate = "", int filterCustomerId = 0);
         OrderViewModel GetCustomersOrder(int customerId, int pageId = 1, string fromDate = "", string toDate = "");
         OrderViewModel GetReadyOrderByDate(string date);

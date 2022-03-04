@@ -112,7 +112,15 @@
                             <a class="u-button-style u-nav-link u-text-active-custom-color-8 u-text-hover-custom-color-9" href="#" style="padding: 10px 20px;" href=""> مالی </a>
                             <div class="u-nav-popup">
                                 <ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
-                                    <li><a class="sub-menu" href="/Accounts">لیست بدهکاران</a></li>
+                                    @*<li><a class="sub-menu" href="/Accounts">لیست بدهکاران</a></li>*@
+                                    @if (!_permissionService.CheckPermission(1044, User.Identity.Name) || _permissionService.CheckPermission(1, User.Identity.Name))
+                                    {
+                                        <li><a class="sub-menu" href="/OrderAccounts">لیست بدهکاران خدمات</a></li>
+                                    }
+                                    @if (_permissionService.CheckPermission(1044, User.Identity.Name) || _permissionService.CheckPermission(1, User.Identity.Name))
+                                    {
+                                        <li><a class="sub-menu" href="/RepairAccounts">لیست بدهکاران تعمیرات</a></li>
+                                    }
                                     <li><a class="sub-menu" href="/ShowAllPays">لیست کل پرداخت ها</a></li>
                                 </ul>
                             </div>
