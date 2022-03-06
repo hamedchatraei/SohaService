@@ -343,7 +343,25 @@ namespace SohaService.Core.Senders
             Token tokenInstance = new Token();
             var token = tokenInstance.GetToken(userApiKey, secretKey);
 
-            string message = $"{customerName} گرامی\nدرخواست تعمیرات شما برای {unit} با موفقیت ثبت گردید.\nکارشناس ثبت تعمیرات : {userName}\nشرکت صنایع الکترونیک سها\nsohaeshop.com";
+            string message = $"جناب آقای/سرکار خانم {customerName} گرامی\nدرخواست تعمیرات شما برای {unit} با موفقیت ثبت گردید.\nکارشناس ثبت تعمیرات : {userName}\nمجموعه شرکت های صنایع الکترونیک سها\nsohaeshop.com";
+
+            MessageSend messageInstance = new MessageSend();
+            var res = messageInstance.Send(token, new MessageSendObject()
+            {
+                Messages = new List<string>() { message }.ToArray(),
+                MobileNumbers = new List<string>() { $"{customerMobile}" }.ToArray(),
+                LineNumber = "30004905",
+                SendDateTime = null,
+                CanContinueInCaseOfError = false
+            });
+        }
+
+        public void SendForAcceptRepair(string customerMobile, string customerName, string unit, string userName, string userApiKey, string secretKey)
+        {
+            Token tokenInstance = new Token();
+            var token = tokenInstance.GetToken(userApiKey, secretKey);
+
+            string message = $"جناب آقای/سرکار خانم {customerName} گرامی\nاحتراماً به اطلاع می رساند کالای شما هم اکنون تعمیر شده و آماده تحویل می باشد .\nکنترل کیفی : {userName}\nمجموعه شرکت های صنایع الکترونیک سها\nsohaeshop.com";
 
             MessageSend messageInstance = new MessageSend();
             var res = messageInstance.Send(token, new MessageSendObject()

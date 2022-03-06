@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3jPt8x9GYg3GYs4BY8RNazgx8WTWlfck1PujyCAGkwxbTpcoUPyhlef5xk06y949qod6J2aDfN8EOn5t45nzqA==",
+  "dgSpecHash": "vAt55ZUcbridEY0tCmncYZpaUN6TYyVxEE1V/a7m2rKSXzb52GJkoC/sqTjfqsFycLHjEbOITNrVGjgZLZuqww==",
   "success": true,
   "projectFilePath": "C:\\Users\\Phoenix\\Desktop\\New folder (2)\\SohaService\\SohaService\\SohaService.DataLayer\\SohaService.DataLayer.csproj",
   "expectedPackageFiles": [
@@ -46,10 +46,7 @@
     "C:\\Users\\Phoenix\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\Phoenix\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\Phoenix\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
-    "C:\\Users\\Phoenix\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
-    "C:\\Users\\Phoenix\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.2\\microsoft.aspnetcore.app.ref.6.0.2.nupkg.sha512",
-    "C:\\Users\\Phoenix\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.2\\microsoft.windowsdesktop.app.ref.6.0.2.nupkg.sha512",
-    "C:\\Users\\Phoenix\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.2\\microsoft.netcore.app.ref.6.0.2.nupkg.sha512"
+    "C:\\Users\\Phoenix\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

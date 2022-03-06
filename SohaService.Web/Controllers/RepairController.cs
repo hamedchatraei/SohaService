@@ -440,6 +440,19 @@ namespace SohaService.Web.Controllers
 
             int repairId = repair.RepairId;
 
+            Customer customer = _customerService.GetCustomerById(repair.CustomerId);
+
+            DataLayer.Entities.User.User user = _userService.GetUserByUserName(User.Identity.Name);
+
+
+            ApiKey apiKey = _smsService.ShowApiKey();
+            string userApiKey = apiKey.ApiKeyCode;
+            string secretCode = apiKey.SecurityCode;
+
+            //SendSMS.SendForRepair(customer.CustomerMobile,customer.CustomerName,repair.UnitName,user.UserAliasName);
+            SendSMS sms = new SendSMS();
+            sms.SendForAcceptRepair(customer.CustomerMobile, customer.CustomerName, repair.UnitName, user.UserAliasName, userApiKey, secretCode);
+
             return Redirect($"/InformationRepair/{repairId}");
         }
 
