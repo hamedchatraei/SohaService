@@ -39,7 +39,96 @@
                         <div class="inner form-layer">
                             <form asp-action="EditRepairedRepair" method="post">
                                 <input type="hidden" asp-for="RepairId" />
+                                <input type="hidden" asp-for="CustomerId" />
+                                <input type="hidden" asp-for="ConfirmationStatusId" />
+                                <input type="hidden" asp-for="registrant" />
+                                <input type="hidden" asp-for="IsReady" />
+                                <input type="hidden" asp-for="IsRepair" />
+                                <input type="hidden" asp-for="IsSend" />
+                                <input type="hidden" asp-for="SendUnitDate" />
+                                <input type="hidden" asp-for="ReceivedUnitDate" id="ReceivedUnitFullDateTime" />
+                                <input type="hidden" asp-for="RepairDate" id="RepairUnitFullDateTime" />
                                 <div class="row">
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تاریخ دریافت قطعه</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
+                                            <input type="datetime" id="ReceivedUnitPersianDateTime" onchange="changeHandler()" value="@Model.ReceivedUnitDate.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">ساعت دریافت قطعه</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
+                                            <input type="text" id="ReceivedUnitInputMinute" value="@Model.ReceivedUnitDate.Minute.ToString()" onchange="changeHandler()" class="form-control" style="text-align: center;width: 10%" autocomplete="off" tabindex="3" required>
+                                            <input type="text" id="ReceivedUnitInputHour" value="@Model.ReceivedUnitDate.Hour.ToString()" onchange="changeHandler()" class="form-control" style="text-align: center;width: 10%" autocomplete="off" tabindex="2" required>
+                                            <label style="width: 80%; padding: 3px; color: red;text-align: center">ساعت با قالب 24 ساعته وارد شود</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">قطعه</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" asp-for="UnitName" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">شرکت</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <select class="form-control sohaselect" asp-for="CompanyId" asp-items="@(ViewData["company"] as SelectList)"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">شرح خرابی</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <textarea class="form-control no-resiaze" rows="5" asp-for="DamageDescription" aria-describedby="username"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">هزینه برآورد شده</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" class="form-control" onkeyup="separateNum(this.value,this);" name="price" id="price" placeholder="@Model.EstimatedAmount.ToRial()" aria-describedby="username">
+                                            <input type="hidden" class="form-control" asp-for="EstimatedAmount" id="finalprice" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">تاریخ برآورد شده ارسال قطعه</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
+                                            <input type="datetime" asp-for="EstimatedToSendUnitDate" value="@Model.EstimatedToSendUnitDate.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                        </div>
+                                    </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">تاریخ تعمیر شدن</span>
@@ -48,7 +137,20 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
-                                            <input type="datetime" asp-for="RepairDate" value="@Model.RepairDate.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off">
+                                            <input type="datetime" id="RepairUnitPersianDateTime" value="@DateTime.Now.ToShamsi()" onchange="changeHandler()" class="form-control" style="text-align: right" autocomplete="off" tabindex="1" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">ساعت تعمیر شدن</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
+                                            <input type="text" id="RepairUnitInputMinute" value="@DateTime.Now.Minute.ToString()" onchange="changeHandler()" class="form-control" style="text-align: center; width: 10%" autocomplete="off" tabindex="3" required>
+                                            <input type="text" id="RepairUnitInputHour" value="@DateTime.Now.Hour.ToString()" onchange="changeHandler()" class="form-control" style="text-align: center; width: 10%" autocomplete="off" tabindex="2" required>
+                                            <label style="width: 80%; padding: 3px; color: red; text-align: center">ساعت با قالب 24 ساعته وارد شود</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
@@ -59,7 +161,7 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon "><i class="zmdi zmdi-account"></i></span>
-                                            <select class="form-control sohaselect" asp-for="UnitStatusId" asp-items="@(ViewData["unitStatus"] as SelectList)"></select>
+                                            <select class="form-control sohaselect" asp-for="UnitStatusId" asp-items="@(ViewData["unitStatus"] as SelectList)" required></select>
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
@@ -121,6 +223,43 @@
 
         });
     });
+
+    $(document).ready(function RepairDate(){
+
+        var receivedUnitInputDate = $("#ReceivedUnitPersianDateTime").val();
+        var receivedUnitInputHour = $("#ReceivedUnitInputHour").val();
+        var receivedUnitInputMinute = $("#ReceivedUnitInputMinute").val();
+
+        var receivedUnitFullDateTime = receivedUnitInputDate + ' ' + receivedUnitInputHour + ':' + receivedUnitInputMinute;
+
+        document.getElementById("ReceivedUnitFullDateTime").value = receivedUnitFullDateTime;
+
+        var repairUnitInputDate = $("#RepairUnitPersianDateTime").val();
+        var repairUnitInputHour = $("#RepairUnitInputHour").val();
+        var repairUnitInputMinute = $("#RepairUnitInputMinute").val();
+            
+        var repairUnitFullDateTime = repairUnitInputDate + ' ' + repairUnitInputHour + ':' + repairUnitInputMinute;
+
+        document.getElementById("RepairUnitFullDateTime").value = repairUnitFullDateTime;
+    });
+
+    function changeHandler() {
+        var receivedUnitInputDate = $("#ReceivedUnitPersianDateTime").val();
+        var receivedUnitInputHour = $("#ReceivedUnitInputHour").val();
+        var receivedUnitInputMinute = $("#ReceivedUnitInputMinute").val();
+
+        var receivedUnitFullDateTime = receivedUnitInputDate + ' ' + receivedUnitInputHour + ':' + receivedUnitInputMinute;
+
+        document.getElementById("ReceivedUnitFullDateTime").value = receivedUnitFullDateTime;
+
+        var repairUnitInputDate = $("#RepairUnitPersianDateTime").val();
+        var repairUnitInputHour = $("#RepairUnitInputHour").val();
+        var repairUnitInputMinute = $("#RepairUnitInputMinute").val();
+            
+        var repairUnitFullDateTime = repairUnitInputDate + ' ' + repairUnitInputHour + ':' + repairUnitInputMinute;
+
+        document.getElementById("RepairUnitFullDateTime").value = repairUnitFullDateTime;
+    }
 
 </script>
 

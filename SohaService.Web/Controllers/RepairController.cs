@@ -568,6 +568,13 @@ namespace SohaService.Web.Controllers
             unitStatus.AddRange(_unitService.GetUnitStatusListItem());
             ViewData["unitStatus"] = new SelectList(unitStatus, "Value", "Text", 0);
 
+            List<SelectListItem> company = new List<SelectListItem>()
+            {
+                new SelectListItem(){Text = "انتخاب شرکت",Value = ""}
+            };
+            company.AddRange(_companyService.GetCompanyListItem());
+            ViewData["company"] = new SelectList(company, "Value", "Text", 0);
+
             return View(repair);
         }
 
@@ -578,11 +585,7 @@ namespace SohaService.Web.Controllers
             if (!ModelState.IsValid)
                 return View(repair);
 
-            Repair editRepair = _repairService.GetRepairById(repair.RepairId);
-            editRepair.RepairDate = repair.RepairDate;
-            editRepair.UnitStatusId = repair.UnitStatusId;
-
-            _repairService.UpdateRepair(editRepair);
+            _repairService.EditDoneRepair(repair);
 
             int repairId = repair.RepairId;
             return Redirect($"/InformationRepair/{repairId}");

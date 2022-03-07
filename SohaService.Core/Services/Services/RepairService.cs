@@ -70,6 +70,13 @@ namespace SohaService.Core.Services.Services
             editRepair.IsRepair = repair.IsRepair;
             editRepair.IsSend = repair.IsSend;
             editRepair.ConfirmationStatusId = repair.ConfirmationStatusId;
+            editRepair.CustomerId = repair.CustomerId;
+            editRepair.CompanyId = repair.CompanyId;
+            editRepair.ReceivedUnitDate = repair.ReceivedUnitDate;
+            editRepair.EstimatedToSendUnitDate = repair.EstimatedToSendUnitDate;
+            editRepair.EstimatedAmount = repair.EstimatedAmount;
+            editRepair.DamageDescription = repair.DamageDescription;
+            editRepair.UnitName = repair.UnitName;
             UpdateRepair(editRepair);
         }
 
@@ -136,7 +143,7 @@ namespace SohaService.Core.Services.Services
             RepairViewModel list = new RepairViewModel();
             list.CurrentPage = pageId;
             list.PageCount = (int)Math.Ceiling((decimal)information.Count() / take);
-            list.InformationRepairViewModels = information.OrderByDescending(u => u.EstimatedToSendUnitDate).Skip(skip).Take(take).ToList();
+            list.InformationRepairViewModels = information.OrderByDescending(u => u.ReceivedUnitDate).Skip(skip).Take(take).ToList();
 
             return list;
         }
@@ -513,7 +520,10 @@ namespace SohaService.Core.Services.Services
                 RemainingAmount = r.RemainingAmount,
                 DoneDescription = r.DoneDescription,
                 UnitName = r.UnitName,
-                ConfirmationStatusId = r.ConfirmationStatusId
+                ConfirmationStatusId = r.ConfirmationStatusId,
+                IsReady = r.IsReady,
+                IsRepair = r.IsRepair,
+                IsSend = r.IsSend
             }).Single();
         }
 
