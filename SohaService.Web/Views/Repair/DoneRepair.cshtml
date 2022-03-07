@@ -18,9 +18,16 @@
                         <div class="inner form-layer">
                             <form asp-action="DoneRepair" method="post">
                                 <input type="hidden" asp-for="RepairId" />
+                                <input type="hidden" asp-for="CompanyId" />
+                                <input type="hidden" asp-for="CustomerId" />
                                 <input type="hidden" asp-for="UnitStatusId" />
                                 <input type="hidden" asp-for="EstimatedAmount" />
                                 <input type="hidden" asp-for="RepairDate" />
+                                <input type="hidden" asp-for="ReceivedUnitDate" />
+                                <input type="hidden" asp-for="EstimatedToSendUnitDate" />
+                                <input type="hidden" asp-for="UnitName" />
+                                <input type="hidden" asp-for="DamageDescription" />
+                                <input type="hidden" asp-for="UnitStatusId" />
                                 <div class="row">
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
