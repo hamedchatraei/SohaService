@@ -542,6 +542,14 @@ namespace SohaService.Web.Controllers
 
             int orderId = order.OrderId;
 
+            Customer customer = _customerService.GetCustomerById(order.CustomerId);
+            ApiKey apiKey = _smsService.ShowApiKey();
+            string userApiKey = apiKey.ApiKeyCode;
+            string secretCode = apiKey.SecurityCode;
+
+            SendSMS sms = new SendSMS();
+            sms.SendForSurvey(customer.CustomerMobile, userApiKey, secretCode);
+
             return Redirect($"/InformationOrder/{orderId}");
         }
 

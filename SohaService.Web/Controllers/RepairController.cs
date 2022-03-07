@@ -501,6 +501,14 @@ namespace SohaService.Web.Controllers
 
             int repairId = repair.RepairId;
 
+            Customer customer = _customerService.GetCustomerById(repair.CustomerId);
+            ApiKey apiKey = _smsService.ShowApiKey();
+            string userApiKey = apiKey.ApiKeyCode;
+            string secretCode = apiKey.SecurityCode;
+
+            SendSMS sms = new SendSMS();
+            sms.SendForSurvey(customer.CustomerMobile, userApiKey, secretCode);
+
             return Redirect($"/InformationRepair/{repairId}");
         }
 

@@ -373,5 +373,23 @@ namespace SohaService.Core.Senders
                 CanContinueInCaseOfError = false
             });
         }
+
+        public void SendForSurvey(string customerMobile, string userApiKey, string secretKey)
+        {
+            Token tokenInstance = new Token();
+            var token = tokenInstance.GetToken(userApiKey, secretKey);
+
+            string message = $"همراه گرامی\nاز اینکه سُها را برای خدمات خود انتخاب نموده اید سپاس گزاریم.\nبه جهت بهبود تجربه کاربری استفاده از محصولات و کیفیت خدمات، لطفا میزان رضایتمندی خود را با ارسال اعداد بین 1 تا 5 اعلام نمایید.\n\nعدد 5 : بیشترین میزان رضایت\nعدد 1 : کمترین میزان رضایت \n\nبا احترام - واحد رضایت سنجی مجموعه شرکت های صنایع الکترونیک سها\nsohaeshop.com";
+
+            MessageSend messageInstance = new MessageSend();
+            var res = messageInstance.Send(token, new MessageSendObject()
+            {
+                Messages = new List<string>() { message }.ToArray(),
+                MobileNumbers = new List<string>() { $"{customerMobile}" }.ToArray(),
+                LineNumber = "30004905",
+                SendDateTime = null,
+                CanContinueInCaseOfError = false
+            });
+        }
     }
 }
