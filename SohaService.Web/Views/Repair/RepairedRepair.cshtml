@@ -19,6 +19,8 @@
                             <form asp-action="RepairedRepair" method="post">
                                 <input type="hidden" asp-for="RepairId" />
                                 <input type="hidden" asp-for="SendUnitDate" />
+                                <input type="hidden" asp-for="CustomerId" />
+                                <input type="hidden" asp-for="RepairDate" id="FullDateTime" />
                                 <div class="row">
                                     <div class="col-md-3 col-sm-8 col-xs-12">
                                         <div class="input-group">
@@ -28,7 +30,20 @@
                                     <div class="col-md-7 col-sm-8 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
-                                            <input type="datetime" asp-for="RepairDate" value="@DateTime.Now.ToShamsi()" class="form-control" style="text-align: right" autocomplete="off" required>
+                                            <input type="datetime" id="PersianDateTime" value="@DateTime.Now.ToShamsi()" onchange="changeHandler()" class="form-control" style="text-align: right" autocomplete="off" tabindex="1" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">ساعت تعمیر شدن</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
+                                            <input type="text" id="InputMinute" value="@DateTime.Now.Minute.ToString()" onchange="changeHandler()" class="form-control" style="text-align: center;width: 10%" autocomplete="off" tabindex="3" required>
+                                            <input type="text" id="InputHour" value="@DateTime.Now.Hour.ToString()" onchange="changeHandler()" class="form-control" style="text-align: center;width: 10%" autocomplete="off" tabindex="2" required>
+                                            <label style="width: 80%; padding: 3px; color: red;text-align: center">ساعت با قالب 24 ساعته وارد شود</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-8 col-xs-12">
@@ -66,38 +81,27 @@
 </script>
 
 <script type="text/javascript">
+    
+    $(document).ready(function RepairDate(){
 
-    function separateNum(value, input) {
-        /* seprate number input 3 number */
-        var nStr = value + '';
-        nStr = nStr.replace(/\,/g, "");
-        x = nStr.split('.');
-        x1 = x[0];
-        x2 = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(x1)) {
-            x1 = x1.replace(rgx, '$1' + ',' + '$2');
-        }
-        if (input !== undefined) {
+        var inputDate = $("#PersianDateTime").val();
+        var inputHour = $("#InputHour").val();
+        var inputMinute = $("#InputMinute").val();
 
-            input.value = x1 + x2;
-        } else {
-            return x1 + x2;
-        }
-    }
+        var fullDateTime = inputDate + ' ' + inputHour + ':' + inputMinute;
 
-
-    $(document).ready(function () {
-        var myButton = $("#btnSave");
-        var myInput = $("#price");
-        myButton.click(function () {
-            var inputValue = myInput.val();
-
-            inputValue = inputValue.replace(/,\s?/g, "");
-            document.getElementById("finalprice").value =
-                inputValue;
-        });
+        document.getElementById("FullDateTime").value = fullDateTime;
     });
+
+    function changeHandler() {
+        var inputDate = $("#PersianDateTime").val();
+        var inputHour = $("#InputHour").val();
+        var inputMinute = $("#InputMinute").val();
+
+        var fullDateTime = inputDate + ' ' + inputHour + ':' + inputMinute;
+
+        document.getElementById("FullDateTime").value = fullDateTime;
+    }
 
 </script>
 

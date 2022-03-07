@@ -431,6 +431,7 @@ namespace SohaService.Web.Controllers
             if (!ModelState.IsValid)
                 return View(repair);
 
+
             repair.IsRepair = true;
             repair.IsReady = false;
             repair.IsSend = false;

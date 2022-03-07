@@ -72,7 +72,7 @@
                                             <td>@item.CustomerAddress</td>
                                             <td>@item.UnitName</td>
                                             <td>@item.DamageDescription</td>
-                                            <td>@item.ReceivedUnitDate.ToShamsi()</td>
+                                            <td>@item.ReceivedUnitDate.ToShamsi() <br/> ساعت  @item.ReceivedUnitDate.Hour.ToString():@item.ReceivedUnitDate.Minute.ToString()</td>
                                             <td>@item.EstimatedToSendUnitDate.ToShamsi()</td>
                                             <td>
                                                 <a href="/InformationRepair/@item.RepairId" class="btn btn-primary btn-sm">
