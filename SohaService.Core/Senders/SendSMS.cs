@@ -343,7 +343,7 @@ namespace SohaService.Core.Senders
             Token tokenInstance = new Token();
             var token = tokenInstance.GetToken(userApiKey, secretKey);
 
-            string message = $"جناب آقای/سرکار خانم {customerName} گرامی\nدرخواست تعمیرات شما برای {unit} با موفقیت ثبت گردید.\nکارشناس ثبت تعمیرات : {userName}\nمجموعه شرکت های صنایع الکترونیک سها\nsohaeshop.com";
+            string message = $"جناب آقای {customerName} \nدرخواست تعمیرات شما برای {unit} با موفقیت ثبت گردید.\nکارشناس ثبت تعمیرات : {userName}\nمجموعه شرکت های صنایع الکترونیک سها\nsohaeshop.com";
 
             MessageSend messageInstance = new MessageSend();
             var res = messageInstance.Send(token, new MessageSendObject()
@@ -361,7 +361,7 @@ namespace SohaService.Core.Senders
             Token tokenInstance = new Token();
             var token = tokenInstance.GetToken(userApiKey, secretKey);
 
-            string message = $"جناب آقای/سرکار خانم {customerName} گرامی\nاحتراماً به اطلاع می رساند کالای شما هم اکنون تعمیر شده و آماده تحویل می باشد .\nکنترل کیفی : {userName}\nمجموعه شرکت های صنایع الکترونیک سها\nsohaeshop.com";
+            string message = $"جناب آقای {customerName} \nاحتراماً به اطلاع می رساند کالای شما هم اکنون تعمیر شده و آماده تحویل می باشد .\nکنترل کیفی : {userName}\nمجموعه شرکت های صنایع الکترونیک سها\nsohaeshop.com";
 
             MessageSend messageInstance = new MessageSend();
             var res = messageInstance.Send(token, new MessageSendObject()

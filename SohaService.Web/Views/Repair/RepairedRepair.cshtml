@@ -24,7 +24,6 @@
                                 <input type="hidden" asp-for="ReceivedUnitDate" />
                                 <input type="hidden" asp-for="ConfirmationStatusId" />
                                 <input type="hidden" asp-for="UnitName" />
-                                <input type="hidden" asp-for="DamageDescription" />
                                 <input type="hidden" asp-for="registrant" />
                                 <input type="hidden" asp-for="EstimatedToSendUnitDate" />
                                 <input type="hidden" asp-for="RepairDate" id="FullDateTime" />
@@ -74,6 +73,17 @@
                                             <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
                                             <input type="text" class="form-control" onkeyup="separateNum(this.value,this);" name="price" id="price" placeholder="@Model.EstimatedAmount.ToRial()" aria-describedby="username">
                                             <input type="hidden" class="form-control" asp-for="EstimatedAmount" id="finalprice" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">شرح خرابی</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                                            <textarea class="form-control no-resiaze" rows="5" asp-for="DamageDescription" aria-describedby="username" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-sm-8 col-xs-12">
