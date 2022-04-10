@@ -424,6 +424,8 @@ namespace SohaService.Core.Services.Services
             RepairViewModel list = new RepairViewModel();
             list.CurrentPage = pageId;
             list.PageCount = (int)Math.Ceiling((decimal)result.Count() / take);
+            list.StartPage = (pageId - 2 <= 0) ? 1 : pageId - 2;
+            list.EndPage = (pageId + 9 > list.PageCount) ? list.PageCount : pageId + 9;
             list.InformationRepairViewModels = result.OrderBy(u => u.SendUnitDate).Skip(skip).Take(take).ToList();
 
             return list;

@@ -430,6 +430,8 @@ namespace SohaService.Core.Services.Services
             PayViewModel list = new PayViewModel();
             list.CurrentPage = pageId;
             list.PageCount = (int)Math.Ceiling((decimal)result.Count() / take);
+            list.StartPage = (pageId - 2 <= 0) ? 1 : pageId - 2;
+            list.EndPage = (pageId + 9 > list.PageCount) ? list.PageCount : pageId + 9;
             list.InformationPayViewModels = result.OrderBy(u => u.PayDate).Skip(skip).Take(take).ToList();
 
             return list;

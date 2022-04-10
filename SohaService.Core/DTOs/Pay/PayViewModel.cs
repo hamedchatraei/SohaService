@@ -57,6 +57,8 @@ namespace SohaService.Core.DTOs.Pay
         public bool IsSend { get; set; }
         public int RepairFinalAmount { get; set; }
         public int OrderFinalAmount { get; set; }
+        public string RepairUnitName { get; set; }
+        public string OrderUnitName { get; set; }
 
     }
 }

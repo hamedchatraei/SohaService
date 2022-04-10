@@ -427,22 +427,34 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
-                                        <ul class="pagination">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                                    <ul class="pagination">
+                                        @if (Model.CurrentPage > 1)
+                                        {
+                                            <a id="aFirstPage" href="" class="paginate_button">اولین صفحه</a>
+                                            <a id="aPreviousPage" href="" class="paginate_button">قبلی</a>
+                                        }
 
-                                            @for (int i = 1; i <= Model.PageCount; i++)
-                                            {
-                                                <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
-                                                    <a href="/CustomersOrder/@customerId/?PageId=@i">@i</a>
-                                                </li>
-                                            }
+                                        @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                                        {
+                                            <li class="paginate_button @((i == Model.CurrentPage) ? "active" : "")" aria-controls="dataTables-example" tabindex="0">
+                                                <a id="aPage" href="/Orders?PageId=@i">@i</a>
+                                            </li>
+                                        }
 
-                                        </ul>
-                                    </div>
+                                        @if (Model.CurrentPage < Model.PageCount)
+                                        {
+                                            <a id="aNextPage" href="" class="paginate_button">بعدی</a>
+                                            <a id="aLastPage" href="" class="paginate_button">آخرین صفحه</a>
+                                        }
+                                        <a id="pageCount" hidden>@Model.PageCount</a>
+                                        <a id="currentPage" hidden>@Model.CurrentPage</a>
+                                    </ul>
                                 </div>
                             </div>
+                        </div>
                         </div>
 
 
@@ -546,6 +558,36 @@
             var pageId = $(this).text();
             soha_ajax("", "", "", pageId);
 
+        });
+
+        $("body").on('click', '.pagination a#aFirstPage', function (e) {
+            e.preventDefault();
+            var pageId = '1';
+            console.log(pageId);
+            soha_ajax("", "", "", pageId);
+        });
+
+        $("body").on('click', '.pagination a#aPreviousPage', function (e) {
+            e.preventDefault();
+            var pageId = $('#currentPage').text();
+            var pageNum = Number(pageId) - 1;
+            console.log(pageId);
+            soha_ajax("", "", "", pageNum);
+        });
+
+        $("body").on('click', '.pagination a#aNextPage', function (e) {
+            e.preventDefault();
+            var pageId = $('#currentPage').text();
+            var pageNum = Number(pageId) + 1;
+            console.log(pageNum);
+            soha_ajax("", "", "", pageNum);
+        });
+
+        $("body").on('click', '.pagination a#aLastPage', function (e) {
+            e.preventDefault();
+            var pageId = $('#pageCount').text();
+            console.log(pageId);
+            soha_ajax("", "", "", pageId);
         });
 
         $('#ui-datepicker-div').on('click', '.ui-datepicker-calendar td a', function (e) {

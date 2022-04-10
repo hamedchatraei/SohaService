@@ -12,6 +12,8 @@ namespace SohaService.Core.DTOs.Repair
         public List<InformationRepairViewModel> InformationRepairViewModels { get; set; }
         public int CurrentPage { get; set; }
         public int PageCount { get; set; }
+        public int StartPage { get; set; }
+        public int EndPage { get; set; }
     }
 
     public class InformationRepairViewModel

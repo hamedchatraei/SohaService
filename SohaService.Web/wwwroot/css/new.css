@@ -71,6 +71,11 @@ p {
     src: url('/css/CustomCSS/iranyekanwebregular.woff2') format('woff2'), url('/css/CustomCSS/iranyekanwebregular.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'mmm';
+    src: url('/css/CustomCSS/iranyekanwebregularfanum.woff') format('woff');
+}
+
 html {
     font-family: 'sohafont';
     line-height: 1.15;

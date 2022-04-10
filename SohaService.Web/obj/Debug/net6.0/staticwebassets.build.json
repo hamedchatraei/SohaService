@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8nX8PVZi5vR60eUfLCIJ0EIMRLdUJ4zgf9llWYtz5Bo=",
+  "Hash": "6V03+CyZBHulKXFlHcTaU20BqsJMEARLu6kuiFgaSnU=",
   "Source": "SohaService.Web",
   "BasePath": "_content/SohaService.Web",
   "Mode": "Default",
@@ -1309,6 +1309,23 @@
       "OriginalItemSpec": "wwwroot\\css\\CustomCSS\\iranyekanwebregular.woff2"
     },
     {
+      "Identity": "C:\\Users\\Phoenix\\Desktop\\New folder (2)\\SohaService\\SohaService\\SohaService.Web\\wwwroot\\css\\CustomCSS\\iranyekanwebregularfanum.woff",
+      "SourceId": "SohaService.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Phoenix\\Desktop\\New folder (2)\\SohaService\\SohaService\\SohaService.Web\\wwwroot\\",
+      "BasePath": "_content/SohaService.Web",
+      "RelativePath": "css/CustomCSS/iranyekanwebregularfanum.woff",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\CustomCSS\\iranyekanwebregularfanum.woff"
+    },
+    {
       "Identity": "C:\\Users\\Phoenix\\Desktop\\New folder (2)\\SohaService\\SohaService\\SohaService.Web\\wwwroot\\css\\fonts\\BYekan-webfont.eot",
       "SourceId": "SohaService.Web",
       "SourceType": "Discovered",
@@ -2106,6 +2123,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\KeyDirectory\\key-85fb6a5a-ee10-44c0-a11b-18c50584b725.xml"
+    },
+    {
+      "Identity": "C:\\Users\\Phoenix\\Desktop\\New folder (2)\\SohaService\\SohaService\\SohaService.Web\\wwwroot\\KeyDirectory\\key-d0a12212-0b18-471b-a116-dba4b3b980a4.xml",
+      "SourceId": "SohaService.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Phoenix\\Desktop\\New folder (2)\\SohaService\\SohaService\\SohaService.Web\\wwwroot\\",
+      "BasePath": "_content/SohaService.Web",
+      "RelativePath": "KeyDirectory/key-d0a12212-0b18-471b-a116-dba4b3b980a4.xml",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\KeyDirectory\\key-d0a12212-0b18-471b-a116-dba4b3b980a4.xml"
     },
     {
       "Identity": "C:\\Users\\Phoenix\\Desktop\\New folder (2)\\SohaService\\SohaService\\SohaService.Web\\wwwroot\\KeyDirectory\\key-eee25ce2-fb0e-4f51-a963-b7053c6add47.xml",
